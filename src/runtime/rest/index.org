@@ -1,6 +1,6 @@
-#+TITLE: REST Interface for Continuous Integration Service
+#+TITLE: REST Interface for Mini Version of User Directory Application
 #+AUTHOR: VLEAD
-#+DATE: [2017-06-29 Thur]
+#+DATE: [2016-06-07 Tue]
 #+SETUPFILE: ../../org-templates/level-2.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate

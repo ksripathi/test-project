@@ -1,34 +1,30 @@
-#+TITLE: Continuous Integration
+#+TITLE: Building the lab-data-service
 #+AUTHOR: VLEAD
-#+DATE: [2017-06-07 Mon]
+#+DATE: [2016-12-04 Mon]
 #+SETUPFILE: ./org-templates/level-0.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
 
-* Purpose of Continuous Integration
-  - Currently a lab is defined as a set of related experiments and is
-    a web application.
-  - Each lab is a repository on github.
-  - To ensure evolution of software and solicit contribution from
-    folks across the world, continuous integration will be used around
-    each lab.
-  - This continuous integration tool automates the building, testing
-    and deploying of lab/service on varioius platforms.
-  - Projects created by a single individual or entire teams can use
-    this service to automate the integration process. 
-  - A cycle for integration  will involve building the code, running the unit test cases, hosting the
-    application and running the integration tests. 
-  - Each integration is verified by an automated build (including
-    test) to detect integration errors as quickly as possible. 
-  - Many teams find that this approach leads to significantly reduced
-    integration problems and allows a team to develop cohesive
-    software more rapidly.
-  
+* Application
+  The =lab-data-service= helps to get the meta data of all the labs
+  and various micro services at vlead/virtual-labs can use this
+  information.
 
 1. [[./requirements/index.org][Requirements]]
 
 2. [[./design/index.org][Design]]
 
-3. [[./deployment/index.org][Deployment]]
-       
+3. [[./data-model/index.org][Data Model]]
+
+4. [[./runtime/index.org][Runtime]]
+
+5. [[./deployment/index.org][Deployment]]
+
+
+
+   
+* Tangle                                       :boilerplate:
+#+BEGIN_SRC python :eval no :tangle __init__.py
+print "lab-data-service"
+#+END_SRC

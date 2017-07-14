@@ -1,0 +1,885 @@
+#+TITLE: Entities
+#+AUTHOR: VLEAD
+#+DATE: [2016-08-31 Wed]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+In the object implementation of the Lab data Service, 
+all entities are Objects.  In addition, there is an object 
+called =System= that holds the state of the application 
+(=user-set=, =session-set=, etc.).
+
+Each of the entities of the data model is implemented as
+an object. Each entity is defined via a class definition, a
+constructor and getter and setter methods that access and
+mutate the fields of the entity. 
+
+The main idea in the object model is that certain relations
+of the data model (those that are total functions) are
+implemented as /fields/. For example the =Lab= object has
+a field called =name= that holds an object of type =Name=.
+
+As a starting point, we do not implement all relations of the data
+model. For example, the relation =lab: Name > Lab?= is
+not implemented. It should be, if we desire to have an
+implementation that is /complete/ with respect to the data
+model. Which elements of the data model are implemented and
+which are not are decisions based on the end user
+requirements of the application.
+
+
+* Base Classes
+#+NAME: base_classes
+#+BEGIN_SRC python
+Lab = ClassTemplate.mk_class("Lab")
+Experiment = ClassTemplate.mk_class("Experiment")
+Discipline =  ClassTemplate.mk_class("Discipline")
+Session = ClassTemplate.mk_class("Session")
+Section = ClassTemplate.mk_class("Section")
+Name = ClassTemplate.mk_class("Name")
+Email = ClassTemplate.mk_class("Email")
+Developer = ClassTemplate.mk_class("Developer")
+Institute = ClassTemplate.mk_class("Institute")
+Asset = ClassTemplate.mk_class("Asset")
+AssetType = ClassTemplate.mk_class("AssetType")
+HostingInfo = ClassTemplate.mk_class("HostingInfo")
+IntegrationStatus = ClassTemplate.mk_class("IntegrationStatus")
+
+#+END_SRC
+
+
+* Type Predicates
+#+NAME: type_predicates
+#+BEGIN_SRC python
+is_session = is_inst(Session)
+check_session = check_pred(is_session)
+
+is_lab = is_inst(Lab)
+check_lab = check_pred(is_lab)
+
+is_section = is_inst(Section)
+check_section = check_pred(is_section)
+
+def are_labs(labs):
+    ret_val = True
+    if is_list(labs):
+        for lab in labs:
+            if not is_lab(lab):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_experiment = is_inst(Experiment)
+check_experiment = check_pred(is_experiment)
+
+is_email = is_inst(Email)
+check_email = check_pred(is_email)
+
+def are_experiments(experiments):
+    ret_val = True
+    if is_list(experiments):
+        for experiment in experiments:
+            if not is_experiment(experiment):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+def are_sections(sections):
+    ret_val = True
+    if is_list(sections):
+        for section in sections:
+            if not is_section(section):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_developer = is_inst(Developer)
+check_dev = check_pred(is_developer)
+
+def are_developers(devs):
+    ret_val = True
+    if is_list(devs):
+        for dev in devs:
+            if not is_developer(dev):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_institute = is_inst(Institute)
+check_institute = check_pred(is_institute)
+
+def are_institutes(institutes):
+    ret_val = True
+    if is_list(institutes):
+        for institute in institutes:
+            if not is_institute(institute):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_name = is_inst(Name)
+check_name = check_pred(is_name)
+
+def are_names(names):
+    ret_val = True
+    if is_list(names):
+        for name in names:
+            if not is_name(name):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_email = is_inst(Email)
+check_email = check_pred(is_email)
+
+def are_emails(emails):
+    ret_val = True
+    if is_list(emails):
+        for email in emails:
+            if not is_email(email):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_asset_type = is_inst(AssetType)
+check_asset_type = check_pred(is_asset_type)
+
+def are_asset_types(asset_types):
+    ret_val = True
+    if is_list(asset_types):
+        for asset_type in asset_types:
+            if not is_asset_type(asset_type):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_discipline = is_inst(Discipline)
+check_discipline = check_pred(is_discipline)
+
+def are_disciplines(disciplies):
+    ret_val = True
+    if is_list(disciplines):
+        for discipline in disciplies:
+            if not is_discipline(discipline):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+is_hosting_info = is_inst(HostingInfo)
+check_hosting_info = check_pred(is_hosting_info)
+
+is_integration_status = is_inst(IntegrationStatus)
+check_hosting_info = check_pred(is_integration_status)
+
+is_asset = is_inst(Asset)
+check_asset = check_pred(is_asset)
+
+def are_assets(assets):
+    ret_val = True
+    if is_list(assets):
+        for asset in assets:
+            if not is_asset(asset):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+def are_hosting_info(hosting_info):
+    ret_val = True
+    if is_list(hosting_info):
+        for hosting_info in hosting_info:
+            if not is_hosting_info(hosting_info):
+                ret_val = False
+    else:
+        ret_val = False
+
+    return ret_val
+
+#+END_SRC
+
+
+* Lab
+   =Lab= is an entity that has a field =name= and =lab_id= which are string
+#+NAME: class_Lab
+#+begin_src python
+Lab.add_attributes(lab_name=is_str,
+                    lab_id=is_str,
+                    overview=is_str,
+                    institute=is_institute,
+                    discipline=is_discipline,
+                    assets=are_assets,
+                    integration_status=is_integration_status,
+                    experiments=are_experiments,
+                    developers=are_developers,
+                    sections=are_sections,                    
+                    hosting_info=are_hosting_info)
+
+Lab.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("lab_name") == other.get("lab_name") and \
+                  self.get("lab_id") == other.get("lab_id") and \
+                  self.get("overview") == other.get("overview") and \
+                  self.get("institute") == other.get("institute") and \
+                  self.get("discipline") == other.get("discipline") and \
+                  self.get("assets") == other.get("assets") and \
+                  self.get("sections") == other.get("sections") and \
+                  self.get("integration_status") == other.get("integration_status") and \
+                  self.get("experiments") == other.get("experiments") and \
+                  self.get("developers") == other.get("developers") and \
+                  self.get("hosting_info") == other.get("hosting_info")
+
+#+end_src
+
+*** Test Lab
+#+NAME: class_TestLab
+#+BEGIN_SRC python
+class TestLab(TestCase):
+    TESTING = True
+    def test_object_lab(self):
+        print "test_object_lab"
+        exp_name = "Number Systems"
+        exp_id = "EE99777"
+        overview = "This is array exp"
+
+        asset_type = AssetType(asset_type="Image")
+        path = "vlabs.ac.in/images/static/logo.png"
+        asset = Asset(asset_type=asset_type, path=path)
+
+        institute_name = "IIIT Hyderabad"
+        institute_id = "IIIT-H"
+        inst = Institute(institute_name=institute_name,
+                             institute_id=institute_id, assets=[asset])
+
+        discipline_name = "IIT Kanpur"
+        discipline_id = "IITK"
+        discipline = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])
+
+        integration_level = 4
+        integration_status = IntegrationStatus(integration_level=\
+                                                   integration_level)
+
+        dev_name = Name(name="Mohit Tahiliani")
+        email_id = Email(email="mohit.tahiliani@gmail.com")
+        dev = Developer(name=dev_name, email=email_id)
+
+        hosting_status = "hosted"
+        hosted_url = "http://cse14-iiith.vlabs.ac.in"
+        hosted_on = "cloud"
+        host = HostingInfo(hosting_status=hosting_status,
+                               hosted_url=hosted_url, hosted_on=hosted_on)
+
+        experiment = Experiment(exp_name=exp_name, exp_id=exp_id, \
+                                overview=overview, sections=[],
+                                institute=inst, discipline=discipline,
+                                integration_status=integration_status,
+                                assets=[asset], developers=[dev],
+                                hosting_info=[host])
+
+        lab_name = "Computer Programming"
+        lab_id = "CSE01"
+        overview = "This is data structures lab which deals about array,stack"
+        "and ques..etc"
+        lab = Lab(lab_name=lab_name, lab_id=lab_id, overview=overview,
+                      institute=inst, discipline=discipline, assets=[asset],
+                      integration_status=integration_status, developers=[dev],
+                      hosting_info=[host], sections=[],
+                      experiments=[experiment])
+
+        self.assertEqual(lab.get("lab_name"), lab_name)
+        self.assertEqual(lab.get("lab_id"), lab_id)
+        self.assertEqual(lab.get("overview"), overview)
+        self.assertEqual(lab.get("institute").get("institute_name"), 
+                             inst.get("institute_name"))
+        self.assertEqual(lab.get("discipline").get("discipline_name"), 
+                             discipline.get("discipline_name"))
+        self.assertEqual(lab.get("assets")[0].get("asset_type").\
+                             get("asset_type"), 
+                             asset.get("asset_type").get("asset_type"))
+        self.assertEqual(lab.get("integration_status").\
+                             get("integration_level"), integration_status.\
+                             get("integration_level"))
+        self.assertEqual(lab.get("experiments")[0].get("exp_name"), 
+                             experiment.get("exp_name"))
+        self.assertEqual(lab.get("developers")[0].get("email").get("email"),
+                             email_id.get("email"))
+        self.assertEqual(lab.get("sections"), [])
+        self.assertEqual(lab.get("hosting_info")[0].get("hosting_status"), 
+                             host.get("hosting_status"))
+
+#+END_SRC
+
+
+* Institute
+   =Institute= is an entity that has a field =name= and =institute_id= which are string
+#+NAME: class_Institute
+#+begin_src python
+Institute.add_attributes(institute_name=is_str,
+                    institute_id=is_str,
+                    assets=are_assets)
+
+Institute.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("institute_name") == other.get("institute_name") and \
+                  self.get("institute_id") == other.get("institute_id") and \
+                  self.get("assets") == other.get("assets")                 
+#+end_src
+
+*** Test Institute
+#+NAME: class_TestInstitute
+#+BEGIN_SRC python
+class TestInstitute(TestCase):
+    TESTING = True
+    def test_object_institute(self):
+        print "test_object_institute"
+
+        asset_type = AssetType(asset_type="Image")
+        path = "vlabs.ac.in/images/static/logo.png"
+        asset = Asset(asset_type=asset_type, path=path)
+
+        institute_name = "IIIT Hyderabad"
+        institute_id = "IIIT-H"
+        institute = Institute(institute_name=institute_name,
+                                  institute_id=institute_id,
+                                  assets=[asset])
+                                              
+        self.assertEqual(institute.get("institute_name"), institute_name)
+        self.assertEqual(institute.get("institute_id"), institute_id)
+        self.assertEqual(institute.get("assets")[0].get("asset_type")\
+                             .get("asset_type"), 
+                             asset.get("asset_type").get("asset_type"))
+       
+#+END_SRC
+
+
+* Experiment
+   =Experiment= is an entity that has a field =exp_name= and =exp_id= which are string
+#+NAME: class_Experiment
+#+begin_src python
+Experiment.add_attributes(exp_name=is_str, 
+                          exp_id=is_str, overview=is_str, \
+                          sections=are_sections, 
+                          discipline=is_discipline,
+                          institute=is_institute,
+                          integration_status=is_integration_status,
+                          assets=are_assets,
+                          developers=are_developers,
+                          hosting_info=are_hosting_info)
+
+Experiment.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("exp_name") == other.get("exp_name") and \
+                  self.get("exp_id") == other.get("exp_id") and \
+                  self.get("overview") == other.get("overview") and \
+                  self.get("sections") == other.get("sections") and \
+                  self.get("discipline") == other.get("discipline") and \
+                  self.get("institute") == other.get("institute") and \
+                  self.get("integration_status") == other.\
+                  get("integration_status") and \
+                  self.get("assets") == other.get("assets") and \
+                  self.get("developers") == other.get("developers") and \
+                  self.get("hosting_info") == other.get("hosting_info")
+
+#+end_src
+
+*** Test Experiment
+#+NAME: class_TestExperiment
+#+BEGIN_SRC python
+class TestExperiment(TestCase):
+    TESTING = True
+
+    def test_object_experiment(self):
+        print "test_object_experiment"
+
+        asset_type = AssetType(asset_type="Image")
+        path = "vlabs.ac.in/images/static/logo.png"
+        asset = Asset(asset_type=asset_type, path=path)
+
+        institute_name = "IIIT Hyderabad"
+        institute_id = "IIIT-H"
+        inst = Institute(institute_name=institute_name,
+                             institute_id=institute_id, assets=[asset])
+
+        discipline_name = "IIT Kanpur"
+        discipline_id = "IITK"
+        discipline = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])  
+
+        exp_name = "Number Systems"
+        exp_id = "EE99777"
+        overview = "This is linked list experiment"
+
+        integration_level = 4
+        integration_status = IntegrationStatus(integration_level=\
+                                                   integration_level)
+
+        dev_name = Name(name="Mohit Tahiliani")
+        email_id = Email(email="mohit.tahiliani@gmail.com")
+        dev = Developer(name=dev_name, email=email_id)
+
+        hosting_status = "hosted"
+        hosted_url = "http://cse14-iiith.vlabs.ac.in"
+        hosted_on = "cloud"
+        host = HostingInfo(hosting_status=hosting_status,
+                               hosted_url=hosted_url, hosted_on=hosted_on)
+
+        experiment = Experiment(exp_name=exp_name, exp_id=exp_id, 
+                                institute=inst, discipline=discipline,     
+                                overview=overview,
+                                integration_status=integration_status, 
+                                sections=[], assets=[asset],
+                                developers=[dev], hosting_info=[host])
+
+        self.assertEqual(experiment.get("exp_name"), exp_name)
+        self.assertEqual(experiment.get("overview"), overview)
+        self.assertEqual(experiment.get("integration_status").\
+                             get("integration_level"), \
+                             integration_status.get("integration_level"))
+        self.assertEqual(experiment.get("assets")[0].get("asset_type")\
+                             .get("asset_type"), 
+                             asset.get("asset_type").get("asset_type"))       
+        self.assertEqual(experiment.get("exp_id"), exp_id)
+        self.assertEqual(experiment.get("sections"), [])
+        self.assertEqual(experiment.get("institute").get("institute_name"), 
+                             inst.get("institute_name"))
+        self.assertEqual(experiment.get("discipline").get("discipline_name"), 
+                             discipline.get("discipline_name"))
+        self.assertEqual(experiment.get("developers")[0].get("email").\
+                             get("email"), email_id.get("email"))
+        self.assertEqual(experiment.get("hosting_info")[0].\
+                             get("hosting_status"), host.get("hosting_status"))
+
+#+END_SRC
+
+
+* Section
+   =Section= is an entity that has a field =name= which are string
+#+NAME: class_Section
+#+begin_src python
+Section.add_attributes(name=is_str)
+
+Section.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("name") == other.get("name")
+
+#+end_src
+
+*** Test Section
+#+NAME: class_TestSection
+#+BEGIN_SRC python
+class TestSection(TestCase):
+    TESTING = True
+    def test_object_section(self):
+        print "test_object_section"
+        name = "Theory"
+        section = Section(name="Theory")
+
+        self.assertEqual(section.get("name"), name)
+
+#+END_SRC
+
+
+* Session
+   =Session= is an entity that has a field =key= which is a string
+#+NAME: class_Session
+#+begin_src python
+Session.add_attributes(key=is_str)
+Session.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("key") == other.get("key")
+
+#+end_src
+
+*** Test Session
+#+NAME: class_TestSession
+#+BEGIN_SRC python
+class TestSession(TestCase):
+    TESTING = True
+
+    def test_object_session(self):
+        print "test_object_session"
+        key = "dkjhfkjdhfkjadhfkjhdafkjh"
+        session = Session(key=key)
+        self.assertEqual(session.get("key"), key)
+
+#+END_SRC
+    
+
+
+* Name
+   =Name= is an entity that has a field =name= which is string
+#+NAME: class_Name
+#+begin_src python
+
+Name.add_attributes(name=is_alphabetic_str)
+
+Name.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("name") == other.get("name")
+#+end_src
+
+*** Test Name
+#+NAME: class_TestName
+#+BEGIN_SRC python
+class TestName(TestCase):
+    TESTING = True
+
+    def test_object_name(self):
+        print "test_object_name"
+        name1=Name(name="Jimi Hendrix")
+        self.assertEqual(is_name(Name(name="Jimi Hendrix")), True)
+        self.assertEqual(name1.get("name"), "Jimi Hendrix")
+        self.assertRaises(TypeError, Name, name="Jimi 123 Hendrix")
+
+#+END_SRC
+
+
+* Email
+   =Email= is an entity that has a field =email= with type =is_email=
+#+NAME: class_Email
+#+begin_src python
+
+Email.add_attributes(email=is_email_str)
+
+Email.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("email") == other.get("email")
+#+end_src
+
+*** Test Email
+#+NAME: class_TestEmail
+#+BEGIN_SRC python
+class TestEmail(TestCase):
+    TESTING = True
+
+    def test_instantiate_email(self):
+        print "test_instantiate_email"
+        self.assertEqual(is_email(Email(email="jimi@gnu.org")), True)
+        self.assertEqual(Email(email="jimi@gnu.org").get("email"),
+                         "jimi@gnu.org")
+        self.assertRaises(TypeError, Name, name="jimi@@gnu.org")
+
+    def test_object_email(self):
+        print "test_object_email"
+        email1 = Email(email="abc@gmail.com")
+
+        self.assertEqual(email1 == email1, True)
+
+        email2 = Email(email="xyz@gmail.com")
+        self.assertEqual(email1 == email2, False)
+
+#+END_SRC
+
+
+* Discipline
+   =Discipline= is an entity that has a field =discipline_name= and =discipline_id= which are string
+#+NAME: class_Discipline
+#+begin_src python
+
+Discipline.add_attributes(discipline_name=is_str, 
+                          discipline_id=is_str,
+                          assets=are_assets)
+Discipline.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("discipline_name") == other.get("discipline_name") and \
+                  self.get("discipline_id") == other.get("discipline_id") and \
+                  self.get("assets") == other.get("assets")
+                  
+
+#+end_src
+
+*** Test Discipline 
+#+NAME: class_TestDiscipline
+#+BEGIN_SRC python
+class TestDiscipline(TestCase):
+    TESTING = True
+    def test_object_discipline(self):
+        print "test_object_discipline"
+
+        asset_type = AssetType(asset_type="Image")
+        path = "vlabs.ac.in/images/static/logo.png"
+        asset = Asset(asset_type=asset_type, path=path)
+
+        discipline_name = "IIT Delhi"
+        discipline_id = "ECE08"
+        discipline = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])
+
+        self.assertEqual(discipline.get("discipline_name"), discipline_name)
+        self.assertEqual(discipline.get("discipline_id"), discipline_id)
+        self.assertEqual(discipline.get("assets")[0].get("asset_type").\
+                             get("asset_type"), 
+                             asset.get("asset_type").get("asset_type"))
+
+#+END_SRC
+
+
+* Developer
+  =Developer= is an entity that has a field =name= and =email= which are string
+#+NAME: class_Developer
+#+begin_src python
+
+Developer.add_attributes(name=is_name,
+                         email=is_email)
+
+Developer.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("name") == other.get("name") and\
+                  self.get("email") == other.get("email") 
+#+end_src
+
+*** Test Developer
+#+NAME: class_TestDeveloper
+#+BEGIN_SRC python
+class TestDev(TestCase):
+    TESTING = True
+    def test_object_dev(self):
+        print "test_object_dev"
+
+        dev_name = Name(name="Mohit Tahiliani")
+        email_id = Email(email="mohit.tahiliani@gmail.com")
+        dev = Developer(name=dev_name, email=email_id)
+
+        self.assertEqual(dev.get("name").get("name"), dev_name.get("name"))
+        self.assertEqual(dev.get("email").get("email"), email_id.get("email"))
+
+#+END_SRC
+
+
+* AssetType
+   =AssetType= is an entity that has a field =asset_type= with type =is_asset_type=
+#+NAME: class_AssetType
+#+begin_src python
+
+AssetType.add_attributes(asset_type=is_str)
+
+AssetType.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("asset_type") == other.get("asset_type")
+#+end_src
+
+*** Test AssetType
+#+NAME: class_TestAssetType
+#+BEGIN_SRC python
+class TestAssetType(TestCase):
+    TESTING = True
+
+    def test_instantiate_asset_type(self):
+        print "test_instantiate_asset_type"
+        self.assertEqual(is_asset_type(AssetType(asset_type="image")),
+                             True)
+        self.assertEqual(AssetType(asset_type="image").get("asset_type"),
+                         "image")
+        self.assertRaises(TypeError, AssetType, asset_type=123)
+
+    def test_object_asset_type(self):
+        print "test_object_asset_type"
+        asset_type1 = AssetType(asset_type="video")
+        self.assertEqual(asset_type1 == asset_type1, True)
+
+        asset_type2 = AssetType(asset_type="image")
+        self.assertEqual(asset_type1 == asset_type2, False)
+
+#+END_SRC
+
+
+* Asset
+   =Asset= is an entity that has a field =type= and =path= which are string
+#+NAME: class_Asset
+#+begin_src python
+Asset.add_attributes(path=is_str,
+                    asset_type=is_asset_type)
+
+Asset.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("path") == other.get("path") and \
+                  self.get("asset_type") == other.get("asset_type") 
+                               
+#+end_src
+
+*** Test Asset
+#+NAME: class_TestAsset
+#+BEGIN_SRC python
+class TestAsset(TestCase):
+    TESTING = True
+    def test_object_asset(self):
+        print "test_object_asset"
+
+        path = "vlabs.ac.in/static/images/logo.png"
+        asset_type1 = AssetType(asset_type="video")
+
+        asset = Asset(path=path, asset_type=asset_type1)
+                                              
+        self.assertEqual(asset.get("path"), path)
+        self.assertEqual(asset.get("asset_type").get("asset_type"),
+                             asset_type1.get("asset_type"))
+    
+#+end_src
+
+
+* HostingInfo
+   =HostingInfo= is an entity that has a field =hosting_status=, =hosted_url=
+   and =hosting_on= which are string
+#+NAME: class_HostingInfo
+#+begin_src python
+HostingInfo.add_attributes(hosting_status=is_str,
+                    hosted_url=is_url, hosted_on=is_str)
+
+HostingInfo.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("hosting_status") ==\
+                  other.get("hosting_status") and \
+                  self.get("hosted_url") == other.get("hosted_url") and \
+                  self.get("hosted_on") == other.get("hosted_on")
+#+end_src
+
+*** Test HostingInfo
+#+NAME: class_TestHostingInfo
+#+BEGIN_SRC python
+class TestHostingInfo(TestCase):
+    TESTING = True
+    def test_object_hosting_info(self):
+        print "test_object_hosting_info"
+        hosting_status = "hosted"
+        hosted_url = "http://cse14-iiith.vlabs.ac.in"
+        hosted_on = "cloud"
+        hosting_info = HostingInfo(hosting_status=hosting_status,
+                                       hosted_url=hosted_url,
+                                       hosted_on=hosted_on)
+                                              
+        self.assertEqual(hosting_info.get("hosting_status"), hosting_status)
+        self.assertEqual(hosting_info.get("hosted_url"), hosted_url)
+        self.assertEqual(hosting_info.get("hosted_on"), hosted_on)
+       
+#+END_SRC
+
+
+* IntegrationStatus
+   =IntegrationStatus= is an entity that has a field =integration_level= with type =is_int=
+#+NAME: class_IntegrationStatus
+#+begin_src python
+
+IntegrationStatus.add_attributes(integration_level=is_int)
+
+IntegrationStatus.__eq__ = lambda self, other: \
+                  isinstance(other, self.__class__) and \
+                  self.get("integration_level") == other.\
+                  get("integration_level")
+#+end_src
+
+*** Test IntegrationStatus
+#+NAME: class_TestIntegrationStatus
+#+BEGIN_SRC python
+class TestIntegrationStatus(TestCase):
+    TESTING = True
+
+    def test_object_integration_status(self):
+        print "test_object_integration_status"
+        integration_level = 4
+        integration_status = IntegrationStatus(integration_level=integration_level)
+
+        self.assertEqual(integration_status.get("integration_level"), integration_level)
+
+#+END_SRC
+
+
+* Infra                                                         :boilerplate:
+   
+** sources
+*** Imports 
+#+name: imports_for_sources
+#+BEGIN_SRC python
+# -*- coding: utf-8 -*-
+from runtime.utils.type_utils import *
+from runtime.utils.class_templates import *
+from runtime.exceptions.custom_exceptions import *
+
+#+end_src
+
+
+** Tests
+*** Imports 
+#+name: imports_for_tests
+#+BEGIN_SRC python
+# -*- coding: utf-8 -*-
+import unittest
+from unittest import TestCase
+from entities import *
+
+#+end_src
+
+*** Running tests
+#+NAME: run_test_cases
+#+BEGIN_SRC python
+if __name__ == '__main__':
+    unittest.main()
+
+#+END_SRC
+
+
+* Tangling                                                      :boilerplate:
+  
+** sources
+#+BEGIN_SRC python :tangle entities.py :eval no :noweb yes
+<<imports_for_sources>>
+<<base_classes>>
+<<type_predicates>>
+<<class_Session>>
+<<class_Lab>>
+<<class_Experiment>>
+<<class_Discipline>>
+<<class_Section>>
+<<class_Name>>
+<<class_Email>>
+<<class_Developer>>
+<<class_Institute>>
+<<class_AssetType>>
+<<class_Asset>>
+<<class_HostingInfo>>
+<<class_IntegrationStatus>>
+#+end_src
+
+
+** tests
+#+BEGIN_SRC python :tangle test_entities.py :eval no :noweb yes
+<<imports_for_tests>>
+<<class_TestSession>>
+<<class_TestLab>>
+<<class_TestExperiment>>
+<<class_TestDiscipline>>
+<<class_TestSection>>
+<<class_TestName>>
+<<class_TestEmail>>
+<<class_TestDeveloper>>
+<<class_TestInstitute>>
+<<class_TestAssetType>>
+<<class_TestAsset>>
+<<class_TestHostingInfo>>
+<<class_TestIntegrationStatus>>
+<<run_test_cases>>
+#+end_src

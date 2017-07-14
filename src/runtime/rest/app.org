@@ -7,35 +7,57 @@
 #+OPTIONS: ^:nil
 
 * Introduction
+  :PROPERTIES:
+  :CUSTOM_ID: introduction
+  :END: 
   The application that runs the FLASK web server
 
   
 * Flask Server
   :PROPERTIES:
-  :CUSTOM_ID: flask_server
-  :END:    
-
+  :CUSTOM_ID: application
+  :END: 
 #+NAME: application
 #+BEGIN_SRC python
 def create_app(config):
     # init our app
     app = Flask(__name__)
     app.secret_key = 'djfjsdkjXXS7979dfdfd'
-   
-    #cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
+    # load config values from the config file
+    app.config.from_object(config)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
+    # init sqlalchemy db instance
+    db.init_app(app)
+    db.app = app
     # register blueprints
     app.register_blueprint(api)
     configure_logging(app)
     configure_errorhandlers(app)
-    #  configure_cors(app)
+#    configure_cors(app)
     # all set; return app object
+    configure_system()
     return app
 
 #+END_SRC
 
 
+* Configure System
+  :PROPERTIES:
+  :CUSTOM_ID: configure_system
+  :END: 
+#+NAME: configure_system
+#+BEGIN_SRC python
+def configure_system():
+    SystemInterface.initialize(PersistenceDelegate)
+
+#+END_SRC
+
+
 * Configure Error Handlers
+  :PROPERTIES:
+  :CUSTOM_ID: configure_error_handlers
+  :END: 
 #+NAME: configure_error_handlers
 #+BEGIN_SRC python
 # custom error handlers to return JSON errors with appropiate status codes
@@ -92,7 +114,10 @@ def configure_errorhandlers(app):
 #+END_SRC
 
 
-* Configre Logging
+* Configure Logging
+  :PROPERTIES:
+  :CUSTOM_ID: configure_logging
+  :END: 
 #+NAME: configure_logging
 #+BEGIN_SRC python
 def configure_logging(app):
@@ -124,16 +149,20 @@ def configure_logging(app):
 
 
 * Run Server
+  :PROPERTIES:
+  :CUSTOM_ID: src_python
+  :END: 
 #+BEGIN_SRC python
 #+NAME: run_server
 if __name__ == "__main__":
     app = create_app(config)
-    app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=True, host='0.0.0.0', threaded=True)
 
 #+END_SRC
 
 
 * Imports                                                       :boilerplate:
+ 
 #+NAME: imports
 #+BEGIN_SRC python
 # -*- coding: utf-8 -*-
@@ -142,7 +171,10 @@ import os
 from flask import Flask, jsonify, make_response
 from flask_cors import CORS
 
+from runtime.utils.class_persistence_template import db
 from runtime.rest.api import api
+from runtime.system.system_interface import SystemInterface
+from runtime.system.persistence_delegate import PersistenceDelegate
 
 # import config file
 from runtime.config import flask_app_config as config

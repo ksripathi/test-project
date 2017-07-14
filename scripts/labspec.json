@@ -1,8 +1,8 @@
 {
   "lab": {
     "description": {
-      "name": "Continuous Integration",
-      "id": "continuous-integration",
+      "name": "Lab data service",
+      "id": "lab-data-service",
       "status": "working code",
       "discipline": [],
       "type": "",
@@ -10,45 +10,45 @@
       "integration_level": 6,
       "developer": [
         {
-          "name": "Srikar Pakala",
+          "name": "Sripathi Kammari",
           "title": "",
-          "role": "Intern",
+          "role": "Project Engineer",
           "organization": "VLEAD",
           "institute": "IIIT Hyderabad",
           "web": "",
           "department": "Software Engg Research Lab (SERL)",
           "contact": {
-            "email": "srikanth15193@mechyd.ac.in",
+            "email": "sripathi@vlabs.ac.in",
             "alternate_email": "",
             "mobile_number": "",
             "office_number": ""
           }
         },
 	{
-          "name": "Srikar",
+          "name": "Sripathi",
           "title": "",
-          "role": "Intern",
+          "role": "Software Engineer",
           "organization": "VLEAD",
           "institute": "IIIT Hyderabad",
           "web": "",
           "department": "Software Engg Research Lab (SERL)",
           "contact": {
-            "email": "srikanth15193@mechyd.ac.in",
+            "email": "sripathi@vlabs.ac.in",
             "alternate_email": "",
             "mobile_number": "",
             "office_number": ""
           }
         },
         {
-          "name": "",
+          "name": "Madhavi Puliraju",
           "title": "",
-          "role": "",
-          "organization": "",
-          "institute": "",
+          "role": "Software Engineer",
+          "organization": "VLEAD",
+          "institute": "IIIT Hyderabad",
           "web": "",
-          "department": "",
+          "department": "Software Engg Research Lab (SERL)",
           "contact": {
-            "email": "",
+            "email": "madhavi@vlabs.ac.in",
 	    "alternate_email": "",
             "mobile_number": "",
             "office_number": ""
@@ -59,7 +59,7 @@
     "build_requirements": {
       "platform": {
         "os": "ubuntu",
-        "osVersion": "14.04",
+        "osVersion": "12",
         "arch": "x64",
         "service_pack": "",
         "installer": [
@@ -68,13 +68,13 @@
           "configure": [],
           "pre_build": [],
           "build": [
-              "cd ../;make build"
+            "cd ../;make build"
           ],
           "post_build": [
-	      "cp -R ../build/code/* /var/www/",
-              "chmod -R 755 /var/www",
-              "mkdir /var/www/logs",
-              "chmod -R 777 /var/www/logs"
+            "cp -R ../build/code/* /var/www/",
+            "chmod -R 755 /var/www",
+            "mkdir /var/www/logs",
+            "chmod -R 777 /var/www/logs"
           ],
           "status": []
         }
@@ -83,7 +83,7 @@
     "runtime_requirements": {
       "platform": {
         "os": "ubuntu",
-        "osVersion": "14.04",
+        "osVersion": "12",
         "arch": "x64",
         "servicepack": "",
         "hosting": "dedicated",
@@ -95,9 +95,10 @@
           "min_required": "10gb"
         },
         "installer": [
-	    "bash /var/www/deployment/setup.sh",
-	    "python /var/www/deployment/setup.py install",
-            "bash /var/www/deployment/configure.sh"
+          "bash /var/www/deployment/setup.sh",
+          "python /var/www/deployment/setup.py install",
+          "bash /var/www/deployment/configure.sh",
+          "PYTHONPATH=/var/www python /var/www/deployment/db_setup.py"
         ],
         "lab_actions": {
           "init"    : [],

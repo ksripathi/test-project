@@ -1,61 +1,80 @@
-#+TITLE: VLEAD Continuous Integration Service
+#+TITLE: Lab Data Service
 #+AUTHOR: VLEAD
-#+DATE: [2017-06-29 Thur]
+#+DATE: [2016-11-30 Wed]
 #+PROPERTY: results output
 #+PROPERTY: exports code
 #+SETUPFILE: ../org-templates/level-1.org
 #+options: ^:nil
 #+LATEX: Literal LaTeX code for export
 
-* Introduction
+* Introduction 
   :PROPERTIES:
   :CUSTOM_ID: introduction
   :END: 
-
-  This document briefly explains the requirements of Contineous
-  Integration Service project
-
-* Functional Requirements
-   :PROPERTIES:
-   :CUSTOM_ID: requirements
-   :END: 
+  This document describes all the requirements of =lab-data-service=.
+* Requirements
+  :PROPERTIES:
+  :CUSTOM_ID: requirements
+  :END: 
 ** Req1
-   :PROPERTIES:
-   :CUSTOM_ID: req1
-   :END: 
+  :PROPERTIES:
+  :CUSTOM_ID: req1
+  :END: 
+   - Ability to store & retrieve the data about labs based on lab and
+     experiment specifications.
 
-   - Build the sources of github repository for every new release/tag
-     made
-   -  [[../runtime/rest/api.org::#build_repository][Implementation]]
-** Req2
-   :PROPERTIES:
-   :CUSTOM_ID: req2
-   :END: 
+** Req2 
+  :PROPERTIES:
+  :CUSTOM_ID: req2
+  :END: 
+   - Ability to query the data about the lab information with all possible
+     queries.
 
-   - Run the unit test cases for every a new release/tag made on github
-     reposiotry.
-   - [[../runtime/rest/api.org::#build_repository][Implementation]]
 ** Req3
-   :PROPERTIES:
-   :CUSTOM_ID: req3
-   :END: 
-   - Report the errors generated incase certain test cases failed to
-     run by means of creating issues and assigning labels to it on
-     respective github repository
-   - [[../runtime/rest/api.org::#git_issue][Implementation]]
-** Req4
-   :PROPERTIES:
-   :CUSTOM_ID: req4
-   :END: 
+  :PROPERTIES:
+  :CUSTOM_ID: req3
+  :END: 
+   - Ability to get resource ids of experiments and labs.
 
-   - Host the literate version documentation of a lab/service into document
-     server (on staging environment)
-   - [[../runtime/rest/api.org::#ci_hook][Implementation]]
+** Req4
+  :PROPERTIES:
+  :CUSTOM_ID: req4
+  :END: 
+  - Footer need to be served from Lab Data Service. All the portals like
+    OpenedX, Outreach Portal, and Feedback should be able to use the footer.
+
 ** Req5
    :PROPERTIES:
    :CUSTOM_ID: req5
-   :END: 
+   :END:
+  - Ability to provide information about experiment, lab, institute and
+    discipline Assets.
 
-   - Deploy the lab/service on staging environment for every github
-     release/tag made.
-   - [[../runtime/rest/api.org::#ci_hook_api][Implementation]]
+** Req6
+   :PROPERTIES:
+   :CUSTOM_ID: req6
+   :END:
+  - Ability to provide Hosting Information of lab and experiment.
+
+** Req7
+   :PROPERTIES:
+   :CUSTOM_ID: req7
+   :END:
+  - Ability to provide the lab and experiment Integration status.
+
+** Req8
+   :PROPERTIES:
+   :CUSTOM_ID: req8
+   :END:
+  - Lab Data Service should generate National Digital Library specification. Issue [[https://github.com/vlead/lab-data-service/issues/45][#45]]
+** Req9
+   :PROPERTIES:
+   :CUSTOM_ID: req9
+   :END:
+  - Ability to search about labs using all possible 'keywords'. Issue [[https://github.com/vlead/lab-data-service/issues/46][#46]]
+** Req10
+   :PROPERTIES:
+   :CUSTOM_ID: req10
+   :END:
+  - LDS need to capture the metadata for google crawling. Issue [[https://github.com/vlead/lab-data-service/issues/47][#47]]
+

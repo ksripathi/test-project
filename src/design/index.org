@@ -1,26 +1,236 @@
-#+TITLE: Design of Continuous Integration Service
+#+TITLE: Design of lab-data-service
 #+AUTHOR: VLEAD
-#+DATE: [2017-06-29 Thur]
+#+DATE: [2017-05-01 Friday]
 #+SETUPFILE: ../org-templates/level-1.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
 
+
 * Introduction 
-  The =design= of the =Continuous Integration Service= is captured here.
-  
-* Design diagram & Service interplay
+  The =design= of the =lab-data-service= is captured here.
+
+
+* Application Programming Interface
   :PROPERTIES:
-  :CUSTOM_ID: design
+  :CUSTOM_ID: api
+  :END: 
+  Please refer to [[../runtime/rest/api.org][API Documentation]] Section.
+    
+
+* Specification
+  Every experiment and a lab has a specification. The specification provides a
+  unique ID, name, contents of an experiment and other meta information of
+  either a lab or experiment. This information includes: developer details, the
+  organization a lab belongs to, discipline details, hosting information
+  i.e. on which platform the lab/experiments are hosted, integration status of
+  labs and the assets associated with a lab/experiment. This specification is
+  different from the deployment specification of an experiment.
+
+** Experiment Specification
+   An experiment is a basic functional unit of virtual labs. An experiment is a
+   combination of static content and simulation. Each experiment is identified
+   by a unique id, name, institute, discipline, developer, hosting information,
+   integration status, assets etc.
+
+
+#+begin_example
+{
+  "experiment": {
+    "id": "e100",
+    "name": "Parallel and distributed processing",
+    "discipline_id": "CSE",
+    "institute_id": "IIITH",
+    "developers": [
+      {
+        "name": "Dinesh Malviya",
+        "email": "xyz@gmail.com"
+      },
+      {
+        "name": "Ashish Ahuja",
+        "email": "abc@gmail.com"
+      }
+    ],
+    "hosting_info": [
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "cloud",
+        "hosted_url": "http://cse14-iiith.vlabs.ac.in"
+      },
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "college-cloud",
+        "hosted_url": "http://cse14-iiith.ac.in"
+      }
+    ],
+    "integration_level": 4,
+    "overview": "This experiments describes about parallel and distributed processing",
+    "assets": [
+      {
+        "asset_type": "image",
+        "path": "vlabs.ac.in/images/static/logo.png"
+      },
+      {
+        "asset_type": "video",
+        "path": "vlabs.ac.in/video/abc.mkv"
+      }
+    ],
+    "sections": [
+      "Introduction",
+      "Objective",
+      "Tutorial",
+      "Illustration",
+      "Procedure",
+      "Experiment",
+      "Observations",
+      "Assignment",
+      "References"
+    ]
+  }
+}
+#+end_example
+
+** Lab Specification
+   A lab is collation of experiments. A lab is identified by a unique id. The
+   lab specification contains this identifier along with name, name of the
+   organization, discipline, developer, hosting information, integration
+   status, assets etc. The experiments in a lab are specified by including
+   their respective ids.
+
+#+begin_example
+{
+  "lab": {
+    "id": "cse02",
+    "name": "Computer Programming",
+    "discipline_id": "CSE",
+    "institute_id": "IIITH",
+    "developers": [
+      {
+        "name": "Dinesh Malviya",
+        "email": "xyz@gmail.com"
+      },
+      {
+        "name": "Ashish Ahuja",
+        "email": "abc@gmail.com"
+      }
+    ],
+    "hosting_info": [
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "cloud",
+        "hosted_url": "http://cse14-iiith.vlabs.ac.in"
+      },
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "college-cloud",
+        "hosted_url": "http://cse14-iiith.ac.in"
+      }
+    ],
+    "integration_level": 4,
+    "overview": "This lab explains about computer programming",
+    "assets": [
+      {
+        "asset_type": "image",
+        "path": "vlabs.ac.in/images/static/logo.png"
+      },
+      {
+        "asset_type": "video",
+        "path": "vlabs.ac.in/video/abc.mkv"
+      }
+    ],
+    "sections": [
+       {
+        "name": "Introduction"
+       },
+      {
+        "experiments": [
+          "e100"
+        ]
+      }
+    ]
+  }
+}
+#+end_example
+
+** Institute Specification
+   Each =Institute= is identified by a unique =institute_id=. 
+
+#+BEGIN_EXAMPLE
+[
+  {
+    "institute_id": "IIITH",
+    "institute_name": "IIIT Hyderabad"
+  }
+]
+
+#+END_EXAMPLE
+
+** Discipline Specification
+   Each =Discipline= is identified by a unique =discipline_id=. 
+
+#+BEGIN_EXAMPLE 
+[
+  {
+    "discipline_id": "CSE",
+    "discipline_name": "Computer Science and Engineering"
+  }
+]
+#+END_EXAMPLE
+
+
+
+* Design diagram
+  :PROPERTIES:
+  :CUSTOM_ID: design_diagram
   :END:    
 
-  Below image briefly describes the process of continuous integration
-  and its integration with other micro services.
-
 #+BEGIN_HTML
-<img src="https://docs.google.com/drawings/d/1tJ_wL-rEhKK6rND6nXCTQKxIHXJEICOXjUC4C2Xa5aw/pub?w=960&h=720">
-<p align="center"> Continuous Integration </p>
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ-WiohgmhaseluocCU0TBOoIUSWctv6raQ03gPO_-jhRkgtQbxH2DX0924ux3O7Hfz3zwKGJnt7r1Z/pub?w=960&h=720">
+<p align="center"> lab data service design diagram </p>
 #+END_HTML
 
- [[https://docs.google.com/drawings/d/1tJ_wL-rEhKK6rND6nXCTQKxIHXJEICOXjUC4C2Xa5aw/edit?ts=59548cc1][Click here]] to edit the design diagram
+ [[https://docs.google.com/drawings/d/1TAaHpf0UiCLvLRP_XfBBQki7pU624oWXRduxyz6e1NA/edit?ts=58415ec0][click here]] to edit the diagram
+** Process
+*** Get the lab's meta data
+   :PROPERTIES:
+   :CUSTOM_ID: lab_meta_data
+   :END: 
+
+   - Get all the labs meta data which includes lab id, experiment id,
+     institutes, disciplines and developers details.
+
+*** Construct lab spec with lab's meta data in json format 
+   :PROPERTIES:
+   :CUSTOM_ID: construct_lab_spec
+   :END: 
+   
+   - Lab spec should be filled up with consistant naming convention of
+     lab id, experiment id, institutes, disciplines and developers
+     details in =json= format
+
+*** Version controll lab spec file 
+   :PROPERTIES:
+   :CUSTOM_ID: version_lab_specs
+   :END: 
+   
+   - All the lab spec files has to be checked into the single git
+     repository.
+
+*** Parse lab spec files checked into git repo 
+   :PROPERTIES:
+   :CUSTOM_ID: parse_lab_specs
+   :END: 
+
+   - A =web-hook= from Github repository will invoke the
+     =lab-data-service= when changes made to lab specs.
+   - =lab-data-service= has to parse the lab spec files and stored the
+     data into the database.
+   
+*** All lab spec files in git repo are read only  
+   :PROPERTIES:
+   :CUSTOM_ID: lab_spec_read_only
+   :END: 
+
+   - Only admin or group of authorized users of git repository has
+     access to modify the lab spec files.
 

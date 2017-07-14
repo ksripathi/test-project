@@ -1,6 +1,6 @@
 #+TITLE: Deploying the application on a server
 #+AUTHOR: VLEAD
-#+DATE: [2017-07-07 Mon]
+#+DATE: [2016-06-07 Tue]
 #+SETUPFILE: ../org-templates/level-1.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
@@ -19,17 +19,280 @@ from setuptools import setup
 
 requires = [
     'flask',
+    'Flask-SQLAlchemy',
+    'oursql',
     'flask-cors',
     'flask-testing',
     'requests',
-    'pyyaml',
+    'pyyaml'
 ]
 
 setup(
-    name='ci-service',
-    version='1.0',
+    name='lds',
+    version='2.0',
     install_requires=requires
 )
+
+#+END_SRC
+
+* Program to set up the database
+#+BEGIN_SRC python :tangle db_setup.py :eval no
+
+from runtime.rest.app import create_app
+from runtime.config import flask_app_config as config
+from runtime.utils.class_persistence_template import db
+from runtime.system.system import System
+from runtime.config.system_config import KEY
+
+def populate():
+    session_cls = System.delegate.entities['session']
+    institute_cls = System.delegate.entities['institute']
+    discipline_cls = System.delegate.entities['discipline']
+    integration_status_cls = System.delegate.entities['integration_status']
+
+    inst1 = institute_cls(institute_name="Amrita University", institute_id="amrita",
+                              assets=[])
+    inst1.save()
+    inst2 = institute_cls(institute_name="College of Engineering, Pune",
+                              institute_id="coep", assets=[])
+    inst2.save()
+    inst3 = institute_cls(institute_name="Dayalbagh Educational institute_cls",
+                          institute_id="dei", assets=[])
+    inst3.save()
+    inst4 = institute_cls(institute_name="IIT Bombay", institute_id="iitb", assets=[])
+    inst4.save()
+    inst5 = institute_cls(institute_name="IIT Delhi", institute_id="iitd", assets=[])
+    inst5.save()
+    inst6 = institute_cls(institute_name="IIT Guwahati", institute_id="iitg", assets=[])
+    inst6.save()
+    inst7 = institute_cls(institute_name="IIIT Hyderabad", institute_id="iiith",
+                              assets=[])
+    inst7.save()
+    inst8 = institute_cls(institute_name="IIT Kanpur", institute_id="iitk", assets=[])
+    inst8.save()
+    inst9 = institute_cls(institute_name="IIT Kharagpur", institute_id="iitkgp",
+                              assets=[])
+    inst9.save()
+    inst10 = institute_cls(institute_name="IIT Madras", institute_id="iitm", assets=[])
+    inst10.save()
+    inst11 = institute_cls(institute_name="IIT Roorkee", institute_id="iitr", assets=[])
+    inst11.save()
+    inst12 = institute_cls(institute_name="NIT Surathkal", institute_id="nitk",
+                               assets=[])
+    inst12.save()
+
+    dis1 = discipline_cls(discipline_name="Aerospace Engineering", discipline_id="aero",
+                              assets=[])
+    dis1.save()
+    dis2 = discipline_cls(discipline_name="Biotechnology and Biomedical Engineering",
+                          discipline_id="biotech", assets=[])
+    dis2.save()
+    dis3 = discipline_cls(discipline_name="Chemical Engineering",
+                              discipline_id="chem-engg", assets=[])
+    dis3.save()
+    dis4 = discipline_cls(discipline_name="Chemical Sciences",
+                              discipline_id="chem", assets=[])
+    dis4.save()
+    dis5 = discipline_cls(discipline_name="Civil Engineering",
+                              discipline_id="civil", assets=[])
+    dis5.save()
+    dis6 = discipline_cls(discipline_name="Computer Science and Engineering",
+                          discipline_id="cse", assets=[])
+    dis6.save()
+    dis7 = discipline_cls(discipline_name="Electrical Engineering",
+                              discipline_id="ee", assets=[])
+    dis7.save()
+    dis8 = discipline_cls(discipline_name="Electronics and Communication",
+                              discipline_id="ece", assets=[])
+    dis8.save()
+    dis9 = discipline_cls(discipline_name="Humanities", discipline_id="hmt", assets=[])
+    dis9.save()
+    dis10 = discipline_cls(discipline_name="Mechanical Engineering",
+                               discipline_id="mech", assets=[])
+    dis10.save()
+    dis11 = discipline_cls(discipline_name="Physical Sciences",
+                               discipline_id="phy-sc", assets=[])
+    dis11.save()
+    dis12 = discipline_cls(discipline_name="Textile Engineering",
+                               discipline_id="tex-engg", assets=[])
+    dis12.save()
+    dis13 = discipline_cls(discipline_name="Design Engineering",
+                               discipline_id="dsgn-engg", assets=[])
+    dis13.save()
+    dis14 = discipline_cls(discipline_name="Material Sciences",
+                               discipline_id="mat-sc", assets=[])
+    dis14.save()
+
+    dis15 = discipline_cls(discipline_name="Metallurgical and Materials Engineering",
+                               discipline_id="mm-engg", assets=[])
+    dis15.save()
+
+    dis16 = discipline_cls(discipline_name="Mining Engineering",
+                               discipline_id="mine-engg", assets=[])
+    dis16.save()
+
+    dis17 = discipline_cls(discipline_name="Industrial and Systems Engineering",
+                               discipline_id="is-engg", assets=[])
+    dis17.save()
+
+    integration_status0 = integration_status_cls(integration_level=0)
+    integration_status0.save()
+
+    integration_status1 = integration_status_cls(integration_level=1)
+    integration_status1.save()
+
+    integration_status2 = integration_status_cls(integration_level=2)
+    integration_status2.save()
+
+    integration_status3 = integration_status_cls(integration_level=3)
+    integration_status3.save()
+
+    integration_status4 = integration_status_cls(integration_level=4)
+    integration_status4.save()
+
+    integration_status5 = integration_status_cls(integration_level=5)
+    integration_status5.save()
+
+    integration_status6 = integration_status_cls(integration_level=6)
+    integration_status6.save()
+
+if __name__ == "__main__":
+    db.create_all(app=create_app(config))
+    populate()
+
+#+END_SRC
+
+* Program to populate lab and experiment data from lab spects 
+#+BEGIN_SRC python :tangle dump_json_to_lds.py :eval no 
+import os
+import os.path
+import json
+import requests
+import glob
+
+URL= 'http://localhost:5000'
+json_path_list = []
+
+def post_lab_spec(file_path):
+
+    with open(file_path) as json_file:
+        print file_path
+        data = json.load(json_file)
+        if 'lab' in data.keys():
+            end_point = "/labs"
+        if 'experiment' in data.keys():
+            end_point = "/experiments"
+
+        data['key'] = 'defaultkey'
+        APP_URL = URL + end_point
+        headers = {'Content-Type': 'application/json'}
+        try:
+            response = requests.post(APP_URL, data = json.dumps(data),
+                                     headers=headers)
+            if response.status_code == 200:
+                print "Added json data : " + file_path
+            else:
+                print "Errore in adding json file " + file_path + " due to " + response.text
+        except Exception as e:
+            print str(e)
+try:
+    exp_file_list = glob.glob(os.getcwd() + "/e9*.json")
+    lab_file_list = glob.glob(os.getcwd() + "/[!e9]*.json")
+
+    for filename in exp_file_list:
+        json_path_list.append(filename)
+except Exception as e:
+    print str(e)
+
+for file_path in json_path_list:
+    post_lab_spec(file_path)
+post_lab_spec(lab_file_list[0])
+
+#+END_SRC
+
+
+* Install all dependencies and setup the software
+  Install all dependencies, including the OS related packages, Python packages,
+  setup the database, configure the webserver, and finally deploy the
+  application.
+
+#+BEGIN_SRC sh :tangle setup.sh :eval no
+#!/bin/bash
+# Shell script to install deb package dependencies as well as python package
+# dependencies for dataservice.
+
+# if any proxy server
+#PROXY=""
+# file to store the generated password
+DB_PASS_FILE="db_pass.txt"
+
+if [[ `id -u` -ne 0 ]]; then
+  echo "You have to execute this script as super user!"
+  exit 1;
+fi
+
+# Update the packages
+echo "Updating package cache.."
+apt-get -y update
+if [[ $? -ne 0 ]]; then
+  echo "Updating package cache failed!"
+  exit 1;
+fi
+
+echo "Installing MySQL database.."
+if [ ! -f $DB_PASS_FILE ]; then
+  # generate a random password for the database and store it in the $DB_PASS_FILE
+  # file
+#  DBPASS=$(date +%s | sha256sum | head -c 32)
+  DBPASS="root"
+  echo $DBPASS > $DB_PASS_FILE
+fi
+
+# Install MySQL Server in a Non-Interactive mode.
+echo "mysql-server mysql-server/root_password password $DBPASS" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password $DBPASS" | sudo debconf-set-selections
+apt-get install -y mysql-server
+if [[ $? -ne 0 ]]; then
+  echo "FATAL: MySQL installation failed!"
+  exit 1;
+fi
+
+# Install pre-requsite dependencies: python-dev, mysqld-dev, setuptools,
+# apache, mod_wsgi etc.
+echo "Installing pre-requisite dependencies.."
+apt-get install -y python-dev libmysqld-dev python-setuptools apache2 libapache2-mod-wsgi
+if [[ $? -ne 0 ]]; then
+  echo "FATAL: Installing pre-requisite dependencies failed!"
+  exit 1;
+fi
+
+echo "Enabling the mod WSGI on apache"
+a2enmod wsgi
+if [[ $? -ne 0 ]]; then
+  echo "FATAL: Unable to enable mod wsgi!"
+  exit 1;
+fi
+
+# Installing python dependencies
+echo "Installing dependencies.."
+#export http_proxy=$PROXY
+#export https_proxy=$PROXY
+#python setup.py install
+mkdir -p build/oursql
+cd build/oursql
+wget https://pypi.python.org/packages/8c/88/9f53a314a2af6f56c0a1249c5673ee384b85dc791bac5c1228772ced3502/oursql-0.9.3.2.tar.gz#md5=ade5959a6571b1626966d47f3ab2d315
+tar xvf oursql-0.9.3.2.tar.gz
+cd oursql-0.9.3.2
+python setup.py install
+
+pip install Flask Flask-SQLAlchemy oursql requests flask-cors flask-testing
+
+if [[ $? -ne 0 ]]; then
+  echo "FATAL: Installation failed!"
+  exit 1;
+fi
+
+exit 0
 
 #+END_SRC
 
@@ -52,16 +315,75 @@ fi
 
 ABS_PATH_DS=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
+update_app_config () {
+  CONFIG_FILE="../runtime/config/flask_app_config.py"
+  DB_USER="root"
+  DB_PASS=$(cat db_pass.txt)
+  DB_NAME="lds"
+  DB_SERVER="localhost"
+
+  # the list of white-listed IPs for POST/PUT requests to data service
+  WHITELIST_IPS="['127.0.0.1']"
+
+  # the list of allowed domains for CORS
+  ALLOWED_ORIGINS="['*']"
+
+  echo "Updating config.py.."
+  # Update parts of the DB URI
+  sed -i "s/<userid>/$DB_USER/" $ABS_PATH_DS/$CONFIG_FILE
+  sed -i "s/<password>/$DB_PASS/" $ABS_PATH_DS/$CONFIG_FILE
+  sed -i "s/<servername>/$DB_SERVER/" $ABS_PATH_DS/$CONFIG_FILE
+  sed -i "s/<db_name>/$DB_NAME/" $ABS_PATH_DS/$CONFIG_FILE
+  # update SQLALCHEMY_ECHO
+  sed -i "s/^SQLALCHEMY_ECHO.*$/SQLALCHEMY_ECHO = False/" $ABS_PATH_DS/$CONFIG_FILE
+  # update WHITELIST_IPS
+  #sed -i "s/^WHITELIST_IPS.*$/WHITELIST_IPS = $WHITELIST_IPS/" $CONFIG_FILE
+  # update ALLOWED_ORIGINS
+  #sed -i "s/^ALLOWED_ORIGINS.*$/ALLOWED_ORIGINS = $ALLOWED_ORIGINS/" $CONFIG_FILE
+
+  # NOTE: this is hardcoded now..somehow the log file when dynamically created
+  # is owned by root. then the app fails to run.. hence the following is
+  # necessary
+}
+
 update_apache_config() {
-  WSGI_SCRIPT="ci-service.wsgi"
-  APACHE_VHOST_FILE="/etc/apache2/sites-available/000-default.conf"
+  PROC_NAME="lds"
+  WSGI_SCRIPT="lds.wsgi"
+  APACHE_VHOST_FILE="/etc/apache2/sites-available/default"
 
   sed -i "/<\/VirtualHost>/i \
     WSGIScriptAlias / $ABS_PATH_DS/$WSGI_SCRIPT
   " $APACHE_VHOST_FILE
 
+  #sed -i '/<\/VirtualHost>/i \
+  #  WSGIDaemonProcess $PROC_NAME user=www-data group=www-data threads=5
+  #  WSGIScriptAlias / $ABS_PATH_DS/$WSGI_SCRIPT
+
+  #  <Directory $ABS_PATH_DS>
+  #    WSGIProcessGroup $PROC_NAME
+  #    WSGIApplicationGroup %{GLOBAL}
+  #    Order deny,allow
+  #    Allow from all
+  #  </Directory>
+  #' $APACHE_VHOST_FILE
+
 }
 
+setup_db() {
+  echo "Creating database: $DB_NAME"
+  mysql -u $DB_USER -p$DB_PASS -Bse "create database $DB_NAME;"
+  if [[ $? -ne 0 ]]; then
+    echo "Failed to create database $DB_NAME"
+    exit 1;
+  fi
+
+}
+
+update_app_config
+if [[ $? -ne 0 ]]; then
+  echo "FATAL: Failed to update application flask_app_config.py"
+  exit 1;
+fi
 update_apache_config
 if [[ $? -ne 0 ]]; then
   echo "FATAL: Failed to update apache config"
@@ -69,69 +391,22 @@ if [[ $? -ne 0 ]]; then
 fi
 
 service apache2 restart
+export PYTHONPATH="/var/www"
+setup_db
 exit 0;
-#+END_SRC
-
-* Install all dependencies and setup the software
-  Install all dependencies, including the OS related packages, Python packages,
-  setup the database, configure the webserver, and finally deploy the
-  application.
-
-#+BEGIN_SRC sh :tangle setup.sh :eval no
-#!/bin/bash
-# Shell script to install deb package dependencies as well as python package
-# dependencies for dataservice.
-
-# if any proxy server
-#PROXY=""
-# Update the packages
-echo "Updating package cache.."
-apt-get -y update
-if [[ $? -ne 0 ]]; then
-  echo "Updating package cache failed!"
-  exit 1;
-fi
-
-# apache, mod_wsgi etc.
-echo "Installing pre-requisite dependencies.."
-apt-get install -y python-dev libmysqld-dev python-setuptools apache2 libapache2-mod-wsgi libffi-dev
-if [[ $? -ne 0 ]]; then
-  echo "FATAL: Installing pre-requisite dependencies failed!"
-  exit 1;
-fi
-
-echo "Enabling the mod WSGI on apache"
-a2enmod wsgi
-if [[ $? -ne 0 ]]; then
-  echo "FATAL: Unable to enable mod wsgi!"
-  exit 1;
-fi
-
-# Installing python dependencies
-echo "Installing dependencies.."
-#export http_proxy=$PROXY
-#export https_proxy=$PROXY
-#python setup.py install
-pip install Flask Flask-SQLAlchemy requests flask-cors flask-testing pyyaml
-
-if [[ $? -ne 0 ]]; then
-  echo "FATAL: Installation failed!"
-  exit 1;
-fi
-
-exit 0
-
 #+END_SRC
 
 * Deploying the application
 
-#+BEGIN_SRC python :tangle ci-service.wsgi :eval no
+#+BEGIN_SRC python :tangle lds.wsgi :eval no
 
 import sys, os
+
 BASE_DIR = BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 #sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, "/var/www")
+
 from runtime.rest.app import create_app
 from runtime.config import flask_app_config as config
 

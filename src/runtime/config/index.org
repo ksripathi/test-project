@@ -6,7 +6,7 @@
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
 
- The =config= package holds multiple configuration packages.
+The =config= package holds multiple configuration packages.
 
  - [[./config.org][=config=]]  
 
