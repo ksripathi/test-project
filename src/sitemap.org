@@ -1,0 +1,27 @@
+#+TITLE: Sitemap for project org-docs
+
+   + deployment
+     + [[file:deployment/index.org][Deploying the application on a server]]
+   + design
+     + [[file:design/index.org][Design of Continuous Integration Service]]
+   + org-templates
+     + [[file:org-templates/level-0.org][level-0]]
+     + [[file:org-templates/level-1.org][level-1]]
+     + [[file:org-templates/level-2.org][level-2]]
+     + [[file:org-templates/level-3.org][level-3]]
+   + requirements
+     + [[file:requirements/index.org][VLEAD Continuous Integration Service]]
+   + runtime
+     + config
+       + [[file:runtime/config/config.org][Configuration of CI service]]
+       + [[file:runtime/config/index.org][The =config= Package]]
+     + rest
+       + [[file:runtime/rest/notifiy.org][Feature To Notify Status of Tests]]
+       + [[file:runtime/rest/index.org][REST Interface for Continuous Integration Service]]
+       + [[file:runtime/rest/app.org][The Flask Web Server]]
+       + [[file:runtime/rest/api.org][The REST API]]
+     + websockets
+       + [[file:runtime/websockets/backend.org][Backend Code]]
+       + [[file:runtime/websockets/frontend.org][Front end code]]
+     + [[file:runtime/index.org][RUNTIME Interface for Continuous Integration Service]]
+   + [[file:index.org][Continuous Integration]]

@@ -1,0 +1,102 @@
+#+TITLE: Configuration of CI service
+#+AUTHOR: VLEAD
+#+DATE: [2017-06-29 Thur]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+
+  This document holds the application's configuration parameters
+
+
+* Flask Application Configuration
+  :PROPERTIES:
+  :CUSTOM_ID: flask_config
+  :END:    
+
+  Configuration for the flask server application.
+#+NAME: flask_app_config
+#+BEGIN_SRC python
+
+# List of allowed origins for CORS
+ALLOWED_ORIGINS = "['*']"
+
+# List of allowed IPs
+WHITELIST_IPS = ["127.0.0.1"]
+
+# Configure your log paths
+LOG_FILE_DIRECTORY = 'logs'
+LOG_FILE = 'continuous-integration.log'
+
+# Log level for the application
+#10=DEBUG, 20=INFO, 30=WARNING, 40=ERROR, 50=CRITICAL",
+LOG_LEVEL = 10
+
+#+END_SRC
+
+
+* Git repository configuration
+  :PROPERTIES:
+  :CUSTOM_ID: git_configuration
+  :END:    
+
+  Configuration for the github credentials
+#+NAME: git_config
+#+BEGIN_SRC python
+
+# Authentication for user filing issue (must have read/write access to                                                                                                   
+# repository to add issue to)                                                                                                                                            
+USERNAME = 'uname'
+PASSWORD = 'pswd'
+
+#Git REST API to create issues
+GIT_API = "https://api.github.com/repos"
+
+# Doc server location path
+DEST_DIR = '/var/www'
+
+# Doc server ip_address
+IP_ADDRESS = "root@ipaddress"
+
+# Git repository branch name to be tested/deployed
+
+GIT_BRANCH = "develop"
+
+#+END_SRC
+  
+
+* ADS Configuration
+  :PROPERTIES:
+  :CUSTOM_ID: ads_configuration
+  :END:    
+
+  Configuration for the =ADS= service
+#+NAME: ads_config
+#+BEGIN_SRC python
+
+# Authentication for ADS service
+
+ADS_URL = 'http://localhost:5000'
+ADS_SECRET_KEY = "defaultkey"
+
+#+END_SRC
+  
+
+* Tangling                                                      :boilerplate:
+  
+** flask_app_config
+#+BEGIN_SRC python :tangle flask_app_config.py :eval no :noweb yes
+<<flask_app_config>>
+#+end_src
+
+** git_config
+#+BEGIN_SRC python :tangle git_config.py :eval no :noweb yes
+<<git_config>>
+#+end_src
+
+** ads_config
+#+BEGIN_SRC python :tangle ads_config.py :eval no :noweb yes
+<<ads_config>>
+#+end_src

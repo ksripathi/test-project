@@ -1,0 +1,40 @@
+#+TITLE: Feature To Notify Status of Tests
+#+AUTHOR: VLEAD
+#+DATE: [2016-07-26 Tue]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This feature notifies the developer using the CI APIs whether his unit tests and integration tests have passed or not.
+  It also points out specifically which tests did not go through.
+  
+#+BEGIN_SRC python
+
+def sendmail(from_who, to, msg):
+    s = smtplib.SMTP('IP')
+    s.sendmail(from_who, [to], msg)
+    s.quit()
+
+class TestR(unittest.TestResult):
+
+    def addError(self, test, err):
+        super(TestResults, self).addError(test, err)  
+        error = self._exc_info_to_string(err, test)
+        sendmail(from_who, to, err_desc)
+
+    def addFailure(self, test, err):
+        super(TestResults, self).addFailure(test, err)
+        error = self._exc_info_to_string(err, test)
+        sendmail(from_who, to, err_desc)
+
+if __name__ == '__main__':
+
+    suite = unittest.TestSuite(
+        unittest.TestLoader().discover('tests')
+    )
+    results = TestResults()
+    suite.run(results)
+    
+    #+END_SRC

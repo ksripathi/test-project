@@ -1,0 +1,26 @@
+#+TITLE: Design of Continuous Integration Service
+#+AUTHOR: VLEAD
+#+DATE: [2017-06-29 Thur]
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction 
+  The =design= of the =Continuous Integration Service= is captured here.
+  
+* Design diagram & Service interplay
+  :PROPERTIES:
+  :CUSTOM_ID: design
+  :END:    
+
+  Below image briefly describes the process of continuous integration
+  and its integration with other micro services.
+
+#+BEGIN_HTML
+<img src="https://docs.google.com/drawings/d/1tJ_wL-rEhKK6rND6nXCTQKxIHXJEICOXjUC4C2Xa5aw/pub?w=960&h=720">
+<p align="center"> Continuous Integration </p>
+#+END_HTML
+
+ [[https://docs.google.com/drawings/d/1tJ_wL-rEhKK6rND6nXCTQKxIHXJEICOXjUC4C2Xa5aw/edit?ts=59548cc1][Click here]] to edit the design diagram
+

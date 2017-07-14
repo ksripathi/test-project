@@ -1,0 +1,91 @@
+* Continuous Integration Service
+** Run CI service on development environment
+- Install pip and nginx
+#+BEGIN_EXAMPLE
+sudo apt-get update
+sudo apt-get install python-pip python-dev nginx
+#+END_EXAMPLE
+
+- Install =virtualenv= package
+
+#+BEGIN_EXAMPLE
+sudo pip install virtualenv
+#+END_EXAMPLE
+
+- Create a virtual environment for python
+
+#+BEGIN_EXAMPLE
+virtualenv ci-service
+#+END_EXAMPLE
+
+- Activate the virtual environment
+#+BEGIN_EXAMPLE
+source ci-service/bin/activate
+#+END_EXAMPLE
+- Clone the repository
+#+BEGIN_EXAMPLE
+git clone https://github.com/vlead/continuous-integration.git
+#+END_EXAMPLE
+- Build the sources
+#+BEGIN_EXAMPLE
+cd continuous-integration
+make
+#+END_EXAMPLE
+- Install pre-requisites inside virutal environment
+#+BEGIN_EXAMPLE
+cd build/code/deployment
+python setup.py install
+#+END_EXAMPLE
+
+- export =PYTHONPATH=
+#+BEGIN_EXAMPLE
+cd build/code
+export PYTHONPATH=$(pwd)
+#+END_EXAMPLE 
+- Configure =GIT= credentials and =doc-server= IP Address in =runtime/config/git_config.py= file
+#+BEGIN_EXAMPLE
+
+USERNAME = "uname"
+PASSWORD = "pswd"
+GIT_BRANCH = "develop
+
+#Doc server ip/domain name
+IP_ADDRESS = "root@ipaddress"
+
+#+END_EXAMPLE
+- Configure =ADS= credentials in =runtime/config/ads_config.py= file
+#+BEGIN_EXAMPLE
+ADS_URL = 'http://localhost:5000'
+ADS_SECRET_KEY = "defaultkey"
+
+#+END_EXAMPLE
+- Run flask application server
+#+BEGIN_EXAMPLE
+cd build/code/runtime/rest
+python app.py
+#+END_EXAMPLE
+- Access application on browser
+
+#+BEGIN_EXAMPLE
+firefox http://localhost:5000
+#+END_EXAMPLE
+** Steps to add a webhook to =GIT= repository
+
+- Sign in to http://github.com, then select the related repository you own.
+
+- Click on "Settings" on the right panel.
+
+- Then click on "Webhooks & Services" on the left panel.
+
+- Click on the "Add WebHook" Button.
+
+- Refer to [[https://github.com/vlead/continuous-integration/blob/develop/src/runtime/rest/api.org#rest-api-to-build-the-souces-of-github-repository][API_Documentation]] and paste the respective =REST API= in
+  the URL form field.
+
+- Select "application/json" as the content type.
+
+- Select "Let me select individual events" and check "Issues".
+
+- Leave the "Active" checkbox checked.
+
+- Click on "Add webhook" to save the webhook.

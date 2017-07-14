@@ -1,0 +1,61 @@
+#+TITLE: VLEAD Continuous Integration Service
+#+AUTHOR: VLEAD
+#+DATE: [2017-06-29 Thur]
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+SETUPFILE: ../org-templates/level-1.org
+#+options: ^:nil
+#+LATEX: Literal LaTeX code for export
+
+* Introduction
+  :PROPERTIES:
+  :CUSTOM_ID: introduction
+  :END: 
+
+  This document briefly explains the requirements of Contineous
+  Integration Service project
+
+* Functional Requirements
+   :PROPERTIES:
+   :CUSTOM_ID: requirements
+   :END: 
+** Req1
+   :PROPERTIES:
+   :CUSTOM_ID: req1
+   :END: 
+
+   - Build the sources of github repository for every new release/tag
+     made
+   -  [[../runtime/rest/api.org::#build_repository][Implementation]]
+** Req2
+   :PROPERTIES:
+   :CUSTOM_ID: req2
+   :END: 
+
+   - Run the unit test cases for every a new release/tag made on github
+     reposiotry.
+   - [[../runtime/rest/api.org::#build_repository][Implementation]]
+** Req3
+   :PROPERTIES:
+   :CUSTOM_ID: req3
+   :END: 
+   - Report the errors generated incase certain test cases failed to
+     run by means of creating issues and assigning labels to it on
+     respective github repository
+   - [[../runtime/rest/api.org::#git_issue][Implementation]]
+** Req4
+   :PROPERTIES:
+   :CUSTOM_ID: req4
+   :END: 
+
+   - Host the literate version documentation of a lab/service into document
+     server (on staging environment)
+   - [[../runtime/rest/api.org::#ci_hook][Implementation]]
+** Req5
+   :PROPERTIES:
+   :CUSTOM_ID: req5
+   :END: 
+
+   - Deploy the lab/service on staging environment for every github
+     release/tag made.
+   - [[../runtime/rest/api.org::#ci_hook_api][Implementation]]
