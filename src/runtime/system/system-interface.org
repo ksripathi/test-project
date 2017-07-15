@@ -9175,7 +9175,7 @@ if __name__ == '__main__':
 #+BEGIN_SRC python :tangle test_system_interface.py :eval no :noweb yes
 <<imports_for_tests>>
 
-<<test_class_add_lab>>
+#<<test_class_add_lab>>
 <<test_class_add_experiment>>
 <<test_class_add_institute>>
 <<test_class_add_discipline>>
