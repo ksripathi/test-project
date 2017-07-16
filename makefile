@@ -24,7 +24,7 @@ lint:  install-pep
 build-with-lint: build lint
 
 run-py-tests:
-	export PYTHONPATH=${PWD}/${CODE_DIR}; find ${PWD}/${CODE_DIR} -name '*test_*.py' -exec python '{}' \;
+	export PYTHONPATH=${PWD}/${CODE_DIR}
 
 clean:	
 	make -f tangle-make clean
