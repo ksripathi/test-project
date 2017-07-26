@@ -18,7 +18,7 @@
 from setuptools import setup
 
 requires = [
-    'flask',
+    'Flask',
     'Flask-SQLAlchemy',
     'oursql',
     'flask-cors',
