@@ -1,6 +1,7 @@
 
 * Lab Data Service
 
+
 ** Run application on developement environment
    Use [[./src/deployment/run-lds-in-development-environment.org][Documentation]] to setup and run the application on
    local/development environment.
