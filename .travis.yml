@@ -12,20 +12,14 @@ before_install:
   - wget http://files.vlabs.ac.in/downloads/emacs.tar.gz
   - tar -xvzf emacs.tar.gz
   - cp -r emacs /home/travis/
-  - cd test-project
+  - echo $(pwd)
   - make
-  - mysql -e 'CREATE DATABASE lds;'
-  - mysql -e 'show databases;'
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - cd build/code/
-  - export PYTHONPATH=$(pwd)
   - pip install oursql Flask Flask-SQLAlchemy requests flask-cors flask-testing pyyaml
  
 install: 
   - sudo apt-get install emacs -y
   
 script: 
-  - cd ../../..
   - chmod +x run_tests.sh
   - ./run_tests.sh
 after_success:
