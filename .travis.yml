@@ -22,3 +22,10 @@ script:
   - cd ../../
   - chmod +x run_tests.sh
   - ./run_tests.sh
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: pA7aqGz1wmURCZJ5ov9g # Set in travis-ci.org dashboard
+  on:
+    branch: master
+
