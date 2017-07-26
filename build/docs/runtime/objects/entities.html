@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Entities</title>
+<!-- 2017-07-26 Wed 17:11 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Entities</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Base Classes</a></li>
+<li><a href="#sec-3">3. Type Predicates</a></li>
+<li><a href="#sec-4">4. Lab</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-4-0-1">4.0.1. Test Lab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Institute</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-5-0-1">5.0.1. Test Institute</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Experiment</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-6-0-1">6.0.1. Test Experiment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Section</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-7-0-1">7.0.1. Test Section</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-8">8. Session</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-8-0-1">8.0.1. Test Session</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Name</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-9-0-1">9.0.1. Test Name</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-10">10. Email</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-10-0-1">10.0.1. Test Email</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-11">11. Discipline</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-11-0-1">11.0.1. Test Discipline</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-12">12. Developer</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-12-0-1">12.0.1. Test Developer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-13">13. AssetType</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-13-0-1">13.0.1. Test AssetType</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-14">14. Asset</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-14-0-1">14.0.1. Test Asset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-15">15. HostingInfo</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-15-0-1">15.0.1. Test HostingInfo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-16">16. IntegrationStatus</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-16-0-1">16.0.1. Test IntegrationStatus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In the object implementation of the Lab data Service, 
+all entities are Objects.  In addition, there is an object 
+called <code>System</code> that holds the state of the application 
+(<code>user-set</code>, <code>session-set</code>, etc.).
+</p>
+
+<p>
+Each of the entities of the data model is implemented as
+an object. Each entity is defined via a class definition, a
+constructor and getter and setter methods that access and
+mutate the fields of the entity. 
+</p>
+
+<p>
+The main idea in the object model is that certain relations
+of the data model (those that are total functions) are
+implemented as <i>fields</i>. For example the <code>Lab</code> object has
+a field called <code>name</code> that holds an object of type <code>Name</code>.
+</p>
+
+<p>
+As a starting point, we do not implement all relations of the data
+model. For example, the relation <code>lab: Name &gt; Lab?</code> is
+not implemented. It should be, if we desire to have an
+implementation that is <i>complete</i> with respect to the data
+model. Which elements of the data model are implemented and
+which are not are decisions based on the end user
+requirements of the application.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Base Classes</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="base_classes"><span style="font-weight: bold; font-style: italic;">Lab</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Lab"</span>)
+<span style="font-weight: bold; font-style: italic;">Experiment</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Experiment"</span>)
+<span style="font-weight: bold; font-style: italic;">Discipline</span> =  ClassTemplate.mk_class(<span style="font-style: italic;">"Discipline"</span>)
+<span style="font-weight: bold; font-style: italic;">Session</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Session"</span>)
+<span style="font-weight: bold; font-style: italic;">Section</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Section"</span>)
+<span style="font-weight: bold; font-style: italic;">Name</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Name"</span>)
+<span style="font-weight: bold; font-style: italic;">Email</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Email"</span>)
+<span style="font-weight: bold; font-style: italic;">Developer</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Developer"</span>)
+<span style="font-weight: bold; font-style: italic;">Institute</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Institute"</span>)
+<span style="font-weight: bold; font-style: italic;">Asset</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"Asset"</span>)
+<span style="font-weight: bold; font-style: italic;">AssetType</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"AssetType"</span>)
+<span style="font-weight: bold; font-style: italic;">HostingInfo</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"HostingInfo"</span>)
+<span style="font-weight: bold; font-style: italic;">IntegrationStatus</span> = ClassTemplate.mk_class(<span style="font-style: italic;">"IntegrationStatus"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Type Predicates</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-python" id="type_predicates"><span style="font-weight: bold; font-style: italic;">is_session</span> = is_inst(Session)
+<span style="font-weight: bold; font-style: italic;">check_session</span> = check_pred(is_session)
+
+<span style="font-weight: bold; font-style: italic;">is_lab</span> = is_inst(Lab)
+<span style="font-weight: bold; font-style: italic;">check_lab</span> = check_pred(is_lab)
+
+<span style="font-weight: bold; font-style: italic;">is_section</span> = is_inst(Section)
+<span style="font-weight: bold; font-style: italic;">check_section</span> = check_pred(is_section)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_labs</span>(labs):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(labs):
+        <span style="font-weight: bold;">for</span> lab <span style="font-weight: bold;">in</span> labs:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_lab(lab):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_experiment</span> = is_inst(Experiment)
+<span style="font-weight: bold; font-style: italic;">check_experiment</span> = check_pred(is_experiment)
+
+<span style="font-weight: bold; font-style: italic;">is_email</span> = is_inst(Email)
+<span style="font-weight: bold; font-style: italic;">check_email</span> = check_pred(is_email)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_experiments</span>(experiments):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(experiments):
+        <span style="font-weight: bold;">for</span> experiment <span style="font-weight: bold;">in</span> experiments:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_experiment(experiment):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_sections</span>(sections):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(sections):
+        <span style="font-weight: bold;">for</span> section <span style="font-weight: bold;">in</span> sections:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_section(section):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_developer</span> = is_inst(Developer)
+<span style="font-weight: bold; font-style: italic;">check_dev</span> = check_pred(is_developer)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_developers</span>(devs):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(devs):
+        <span style="font-weight: bold;">for</span> dev <span style="font-weight: bold;">in</span> devs:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_developer(dev):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_institute</span> = is_inst(Institute)
+<span style="font-weight: bold; font-style: italic;">check_institute</span> = check_pred(is_institute)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_institutes</span>(institutes):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(institutes):
+        <span style="font-weight: bold;">for</span> institute <span style="font-weight: bold;">in</span> institutes:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_institute(institute):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_name</span> = is_inst(Name)
+<span style="font-weight: bold; font-style: italic;">check_name</span> = check_pred(is_name)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_names</span>(names):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(names):
+        <span style="font-weight: bold;">for</span> name <span style="font-weight: bold;">in</span> names:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_name(name):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_email</span> = is_inst(Email)
+<span style="font-weight: bold; font-style: italic;">check_email</span> = check_pred(is_email)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_emails</span>(emails):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(emails):
+        <span style="font-weight: bold;">for</span> email <span style="font-weight: bold;">in</span> emails:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_email(email):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_asset_type</span> = is_inst(AssetType)
+<span style="font-weight: bold; font-style: italic;">check_asset_type</span> = check_pred(is_asset_type)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_asset_types</span>(asset_types):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(asset_types):
+        <span style="font-weight: bold;">for</span> asset_type <span style="font-weight: bold;">in</span> asset_types:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_asset_type(asset_type):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_discipline</span> = is_inst(Discipline)
+<span style="font-weight: bold; font-style: italic;">check_discipline</span> = check_pred(is_discipline)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_disciplines</span>(disciplies):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(disciplines):
+        <span style="font-weight: bold;">for</span> discipline <span style="font-weight: bold;">in</span> disciplies:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_discipline(discipline):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold; font-style: italic;">is_hosting_info</span> = is_inst(HostingInfo)
+<span style="font-weight: bold; font-style: italic;">check_hosting_info</span> = check_pred(is_hosting_info)
+
+<span style="font-weight: bold; font-style: italic;">is_integration_status</span> = is_inst(IntegrationStatus)
+<span style="font-weight: bold; font-style: italic;">check_hosting_info</span> = check_pred(is_integration_status)
+
+<span style="font-weight: bold; font-style: italic;">is_asset</span> = is_inst(Asset)
+<span style="font-weight: bold; font-style: italic;">check_asset</span> = check_pred(is_asset)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_assets</span>(assets):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(assets):
+        <span style="font-weight: bold;">for</span> asset <span style="font-weight: bold;">in</span> assets:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_asset(asset):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">are_hosting_info</span>(hosting_info):
+    <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">if</span> is_list(hosting_info):
+        <span style="font-weight: bold;">for</span> hosting_info <span style="font-weight: bold;">in</span> hosting_info:
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> is_hosting_info(hosting_info):
+                <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">ret_val</span> = <span style="font-weight: bold; text-decoration: underline;">False</span>
+
+    <span style="font-weight: bold;">return</span> ret_val
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Lab</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<code>Lab</code> is an entity that has a field <code>name</code> and <code>lab_id</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Lab">Lab.add_attributes(lab_name=is_str,
+                    lab_id=is_str,
+                    overview=is_str,
+                    institute=is_institute,
+                    discipline=is_discipline,
+                    assets=are_assets,
+                    integration_status=is_integration_status,
+                    experiments=are_experiments,
+                    developers=are_developers,
+                    sections=are_sections,                    
+                    hosting_info=are_hosting_info)
+
+<span style="font-weight: bold; font-style: italic;">Lab.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"lab_name"</span>) == other.get(<span style="font-style: italic;">"lab_name"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"lab_id"</span>) == other.get(<span style="font-style: italic;">"lab_id"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"overview"</span>) == other.get(<span style="font-style: italic;">"overview"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"institute"</span>) == other.get(<span style="font-style: italic;">"institute"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"discipline"</span>) == other.get(<span style="font-style: italic;">"discipline"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"assets"</span>) == other.get(<span style="font-style: italic;">"assets"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"sections"</span>) == other.get(<span style="font-style: italic;">"sections"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"integration_status"</span>) == other.get(<span style="font-style: italic;">"integration_status"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"experiments"</span>) == other.get(<span style="font-style: italic;">"experiments"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"developers"</span>) == other.get(<span style="font-style: italic;">"developers"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"hosting_info"</span>) == other.get(<span style="font-style: italic;">"hosting_info"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-0-1" class="outline-4">
+<h4 id="sec-4-0-1"><span class="section-number-4">4.0.1</span> Test Lab</h4>
+<div class="outline-text-4" id="text-4-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestLab"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestLab</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_lab</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_lab"</span>
+        <span style="font-weight: bold; font-style: italic;">exp_name</span> = <span style="font-style: italic;">"Number Systems"</span>
+        <span style="font-weight: bold; font-style: italic;">exp_id</span> = <span style="font-style: italic;">"EE99777"</span>
+        <span style="font-weight: bold; font-style: italic;">overview</span> = <span style="font-style: italic;">"This is array exp"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type</span> = AssetType(asset_type=<span style="font-style: italic;">"Image"</span>)
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/images/static/logo.png"</span>
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(asset_type=asset_type, path=path)
+
+        <span style="font-weight: bold; font-style: italic;">institute_name</span> = <span style="font-style: italic;">"IIIT Hyderabad"</span>
+        <span style="font-weight: bold; font-style: italic;">institute_id</span> = <span style="font-style: italic;">"IIIT-H"</span>
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(institute_name=institute_name,
+                             institute_id=institute_id, assets=[asset])
+
+        <span style="font-weight: bold; font-style: italic;">discipline_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline</span> = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])
+
+        <span style="font-weight: bold; font-style: italic;">integration_level</span> = 4
+        <span style="font-weight: bold; font-style: italic;">integration_status</span> = IntegrationStatus(integration_level=\
+                                                   integration_level)
+
+        <span style="font-weight: bold; font-style: italic;">dev_name</span> = Name(name=<span style="font-style: italic;">"Mohit Tahiliani"</span>)
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = Email(email=<span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer(name=dev_name, email=email_id)
+
+        <span style="font-weight: bold; font-style: italic;">hosting_status</span> = <span style="font-style: italic;">"hosted"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_url</span> = <span style="font-style: italic;">"http://cse14-iiith.vlabs.ac.in"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_on</span> = <span style="font-style: italic;">"cloud"</span>
+        <span style="font-weight: bold; font-style: italic;">host</span> = HostingInfo(hosting_status=hosting_status,
+                               hosted_url=hosted_url, hosted_on=hosted_on)
+
+        <span style="font-weight: bold; font-style: italic;">experiment</span> = Experiment(exp_name=exp_name, exp_id=exp_id, \
+                                overview=overview, sections=[],
+                                institute=inst, discipline=discipline,
+                                integration_status=integration_status,
+                                assets=[asset], developers=[dev],
+                                hosting_info=[host])
+
+        <span style="font-weight: bold; font-style: italic;">lab_name</span> = <span style="font-style: italic;">"Computer Programming"</span>
+        <span style="font-weight: bold; font-style: italic;">lab_id</span> = <span style="font-style: italic;">"CSE01"</span>
+        <span style="font-weight: bold; font-style: italic;">overview</span> = <span style="font-style: italic;">"This is data structures lab which deals about array,stack"</span>
+        <span style="font-style: italic;">"and ques..etc"</span>
+        <span style="font-weight: bold; font-style: italic;">lab</span> = Lab(lab_name=lab_name, lab_id=lab_id, overview=overview,
+                      institute=inst, discipline=discipline, assets=[asset],
+                      integration_status=integration_status, developers=[dev],
+                      hosting_info=[host], sections=[],
+                      experiments=[experiment])
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"lab_name"</span>), lab_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"lab_id"</span>), lab_id)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"overview"</span>), overview)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"institute_name"</span>), 
+                             inst.get(<span style="font-style: italic;">"institute_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"discipline"</span>).get(<span style="font-style: italic;">"discipline_name"</span>), 
+                             discipline.get(<span style="font-style: italic;">"discipline_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>).\
+                             get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"integration_status"</span>).\
+                             get(<span style="font-style: italic;">"integration_level"</span>), integration_status.\
+                             get(<span style="font-style: italic;">"integration_level"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"experiments"</span>)[0].get(<span style="font-style: italic;">"exp_name"</span>), 
+                             experiment.get(<span style="font-style: italic;">"exp_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"developers"</span>)[0].get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>),
+                             email_id.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"sections"</span>), [])
+        <span style="font-weight: bold;">self</span>.assertEqual(lab.get(<span style="font-style: italic;">"hosting_info"</span>)[0].get(<span style="font-style: italic;">"hosting_status"</span>), 
+                             host.get(<span style="font-style: italic;">"hosting_status"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Institute</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<code>Institute</code> is an entity that has a field <code>name</code> and <code>institute_id</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Institute">Institute.add_attributes(institute_name=is_str,
+                    institute_id=is_str,
+                    assets=are_assets)
+
+<span style="font-weight: bold; font-style: italic;">Institute.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"institute_name"</span>) == other.get(<span style="font-style: italic;">"institute_name"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"institute_id"</span>) == other.get(<span style="font-style: italic;">"institute_id"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"assets"</span>) == other.get(<span style="font-style: italic;">"assets"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-5-0-1" class="outline-4">
+<h4 id="sec-5-0-1"><span class="section-number-4">5.0.1</span> Test Institute</h4>
+<div class="outline-text-4" id="text-5-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestInstitute"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestInstitute</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_institute</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_institute"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type</span> = AssetType(asset_type=<span style="font-style: italic;">"Image"</span>)
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/images/static/logo.png"</span>
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(asset_type=asset_type, path=path)
+
+        <span style="font-weight: bold; font-style: italic;">institute_name</span> = <span style="font-style: italic;">"IIIT Hyderabad"</span>
+        <span style="font-weight: bold; font-style: italic;">institute_id</span> = <span style="font-style: italic;">"IIIT-H"</span>
+        <span style="font-weight: bold; font-style: italic;">institute</span> = Institute(institute_name=institute_name,
+                                  institute_id=institute_id,
+                                  assets=[asset])
+                                              
+        <span style="font-weight: bold;">self</span>.assertEqual(institute.get(<span style="font-style: italic;">"institute_name"</span>), institute_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(institute.get(<span style="font-style: italic;">"institute_id"</span>), institute_id)
+        <span style="font-weight: bold;">self</span>.assertEqual(institute.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>)\
+                             .get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Experiment</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<code>Experiment</code> is an entity that has a field <code>exp_name</code> and <code>exp_id</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Experiment">Experiment.add_attributes(exp_name=is_str, 
+                          exp_id=is_str, overview=is_str, \
+                          sections=are_sections, 
+                          discipline=is_discipline,
+                          institute=is_institute,
+                          integration_status=is_integration_status,
+                          assets=are_assets,
+                          developers=are_developers,
+                          hosting_info=are_hosting_info)
+
+<span style="font-weight: bold; font-style: italic;">Experiment.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"exp_name"</span>) == other.get(<span style="font-style: italic;">"exp_name"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"exp_id"</span>) == other.get(<span style="font-style: italic;">"exp_id"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"overview"</span>) == other.get(<span style="font-style: italic;">"overview"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"sections"</span>) == other.get(<span style="font-style: italic;">"sections"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"discipline"</span>) == other.get(<span style="font-style: italic;">"discipline"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"institute"</span>) == other.get(<span style="font-style: italic;">"institute"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"integration_status"</span>) == other.\
+                  get(<span style="font-style: italic;">"integration_status"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"assets"</span>) == other.get(<span style="font-style: italic;">"assets"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"developers"</span>) == other.get(<span style="font-style: italic;">"developers"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"hosting_info"</span>) == other.get(<span style="font-style: italic;">"hosting_info"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-6-0-1" class="outline-4">
+<h4 id="sec-6-0-1"><span class="section-number-4">6.0.1</span> Test Experiment</h4>
+<div class="outline-text-4" id="text-6-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestExperiment"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestExperiment</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_experiment</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_experiment"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type</span> = AssetType(asset_type=<span style="font-style: italic;">"Image"</span>)
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/images/static/logo.png"</span>
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(asset_type=asset_type, path=path)
+
+        <span style="font-weight: bold; font-style: italic;">institute_name</span> = <span style="font-style: italic;">"IIIT Hyderabad"</span>
+        <span style="font-weight: bold; font-style: italic;">institute_id</span> = <span style="font-style: italic;">"IIIT-H"</span>
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(institute_name=institute_name,
+                             institute_id=institute_id, assets=[asset])
+
+        <span style="font-weight: bold; font-style: italic;">discipline_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline</span> = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])  
+
+        <span style="font-weight: bold; font-style: italic;">exp_name</span> = <span style="font-style: italic;">"Number Systems"</span>
+        <span style="font-weight: bold; font-style: italic;">exp_id</span> = <span style="font-style: italic;">"EE99777"</span>
+        <span style="font-weight: bold; font-style: italic;">overview</span> = <span style="font-style: italic;">"This is linked list experiment"</span>
+
+        <span style="font-weight: bold; font-style: italic;">integration_level</span> = 4
+        <span style="font-weight: bold; font-style: italic;">integration_status</span> = IntegrationStatus(integration_level=\
+                                                   integration_level)
+
+        <span style="font-weight: bold; font-style: italic;">dev_name</span> = Name(name=<span style="font-style: italic;">"Mohit Tahiliani"</span>)
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = Email(email=<span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer(name=dev_name, email=email_id)
+
+        <span style="font-weight: bold; font-style: italic;">hosting_status</span> = <span style="font-style: italic;">"hosted"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_url</span> = <span style="font-style: italic;">"http://cse14-iiith.vlabs.ac.in"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_on</span> = <span style="font-style: italic;">"cloud"</span>
+        <span style="font-weight: bold; font-style: italic;">host</span> = HostingInfo(hosting_status=hosting_status,
+                               hosted_url=hosted_url, hosted_on=hosted_on)
+
+        <span style="font-weight: bold; font-style: italic;">experiment</span> = Experiment(exp_name=exp_name, exp_id=exp_id, 
+                                institute=inst, discipline=discipline,     
+                                overview=overview,
+                                integration_status=integration_status, 
+                                sections=[], assets=[asset],
+                                developers=[dev], hosting_info=[host])
+
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"exp_name"</span>), exp_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"overview"</span>), overview)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"integration_status"</span>).\
+                             get(<span style="font-style: italic;">"integration_level"</span>), \
+                             integration_status.get(<span style="font-style: italic;">"integration_level"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>)\
+                             .get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))       
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"exp_id"</span>), exp_id)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"sections"</span>), [])
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"institute_name"</span>), 
+                             inst.get(<span style="font-style: italic;">"institute_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"discipline"</span>).get(<span style="font-style: italic;">"discipline_name"</span>), 
+                             discipline.get(<span style="font-style: italic;">"discipline_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"developers"</span>)[0].get(<span style="font-style: italic;">"email"</span>).\
+                             get(<span style="font-style: italic;">"email"</span>), email_id.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"hosting_info"</span>)[0].\
+                             get(<span style="font-style: italic;">"hosting_status"</span>), host.get(<span style="font-style: italic;">"hosting_status"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Section</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<code>Section</code> is an entity that has a field <code>name</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Section">Section.add_attributes(name=is_str)
+
+<span style="font-weight: bold; font-style: italic;">Section.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"name"</span>) == other.get(<span style="font-style: italic;">"name"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-7-0-1" class="outline-4">
+<h4 id="sec-7-0-1"><span class="section-number-4">7.0.1</span> Test Section</h4>
+<div class="outline-text-4" id="text-7-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestSection"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestSection</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_section</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_section"</span>
+        <span style="font-weight: bold; font-style: italic;">name</span> = <span style="font-style: italic;">"Theory"</span>
+        <span style="font-weight: bold; font-style: italic;">section</span> = Section(name=<span style="font-style: italic;">"Theory"</span>)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(section.get(<span style="font-style: italic;">"name"</span>), name)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Session</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<code>Session</code> is an entity that has a field <code>key</code> which is a string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Session">Session.add_attributes(key=is_str)
+<span style="font-weight: bold; font-style: italic;">Session.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"key"</span>) == other.get(<span style="font-style: italic;">"key"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-8-0-1" class="outline-4">
+<h4 id="sec-8-0-1"><span class="section-number-4">8.0.1</span> Test Session</h4>
+<div class="outline-text-4" id="text-8-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestSession"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestSession</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_session</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_session"</span>
+        <span style="font-weight: bold; font-style: italic;">key</span> = <span style="font-style: italic;">"dkjhfkjdhfkjadhfkjhdafkjh"</span>
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(key=key)
+        <span style="font-weight: bold;">self</span>.assertEqual(session.get(<span style="font-style: italic;">"key"</span>), key)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Name</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+<code>Name</code> is an entity that has a field <code>name</code> which is string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Name">Name.add_attributes(name=is_alphabetic_str)
+
+<span style="font-weight: bold; font-style: italic;">Name.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"name"</span>) == other.get(<span style="font-style: italic;">"name"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-9-0-1" class="outline-4">
+<h4 id="sec-9-0-1"><span class="section-number-4">9.0.1</span> Test Name</h4>
+<div class="outline-text-4" id="text-9-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestName"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestName</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_name"</span>
+        <span style="font-weight: bold; font-style: italic;">name1</span>=Name(name=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(is_name(Name(name=<span style="font-style: italic;">"Jimi Hendrix"</span>)), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(name1.get(<span style="font-style: italic;">"name"</span>), <span style="font-style: italic;">"Jimi Hendrix"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, Name, name=<span style="font-style: italic;">"Jimi 123 Hendrix"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Email</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+<code>Email</code> is an entity that has a field <code>email</code> with type <code>is_email</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Email">Email.add_attributes(email=is_email_str)
+
+<span style="font-weight: bold; font-style: italic;">Email.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"email"</span>) == other.get(<span style="font-style: italic;">"email"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-10-0-1" class="outline-4">
+<h4 id="sec-10-0-1"><span class="section-number-4">10.0.1</span> Test Email</h4>
+<div class="outline-text-4" id="text-10-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestEmail"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestEmail</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_instantiate_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_instantiate_email"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(is_email(Email(email=<span style="font-style: italic;">"jimi@gnu.org"</span>)), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(Email(email=<span style="font-style: italic;">"jimi@gnu.org"</span>).get(<span style="font-style: italic;">"email"</span>),
+                         <span style="font-style: italic;">"jimi@gnu.org"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, Name, name=<span style="font-style: italic;">"jimi@@gnu.org"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_email"</span>
+        <span style="font-weight: bold; font-style: italic;">email1</span> = Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(email1 == email1, <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+        <span style="font-weight: bold; font-style: italic;">email2</span> = Email(email=<span style="font-style: italic;">"xyz@gmail.com"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(email1 == email2, <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Discipline</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<code>Discipline</code> is an entity that has a field <code>discipline_name</code> and <code>discipline_id</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Discipline">Discipline.add_attributes(discipline_name=is_str, 
+                          discipline_id=is_str,
+                          assets=are_assets)
+<span style="font-weight: bold; font-style: italic;">Discipline.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"discipline_name"</span>) == other.get(<span style="font-style: italic;">"discipline_name"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"discipline_id"</span>) == other.get(<span style="font-style: italic;">"discipline_id"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"assets"</span>) == other.get(<span style="font-style: italic;">"assets"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-11-0-1" class="outline-4">
+<h4 id="sec-11-0-1"><span class="section-number-4">11.0.1</span> Test Discipline</h4>
+<div class="outline-text-4" id="text-11-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestDiscipline"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestDiscipline</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_discipline</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_discipline"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type</span> = AssetType(asset_type=<span style="font-style: italic;">"Image"</span>)
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/images/static/logo.png"</span>
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(asset_type=asset_type, path=path)
+
+        <span style="font-weight: bold; font-style: italic;">discipline_name</span> = <span style="font-style: italic;">"IIT Delhi"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline_id</span> = <span style="font-style: italic;">"ECE08"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline</span> = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])
+
+        <span style="font-weight: bold;">self</span>.assertEqual(discipline.get(<span style="font-style: italic;">"discipline_name"</span>), discipline_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(discipline.get(<span style="font-style: italic;">"discipline_id"</span>), discipline_id)
+        <span style="font-weight: bold;">self</span>.assertEqual(discipline.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>).\
+                             get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Developer</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+<code>Developer</code> is an entity that has a field <code>name</code> and <code>email</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Developer">Developer.add_attributes(name=is_name,
+                         email=is_email)
+
+<span style="font-weight: bold; font-style: italic;">Developer.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"name"</span>) == other.get(<span style="font-style: italic;">"name"</span>) <span style="font-weight: bold;">and</span>\
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"email"</span>) == other.get(<span style="font-style: italic;">"email"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-12-0-1" class="outline-4">
+<h4 id="sec-12-0-1"><span class="section-number-4">12.0.1</span> Test Developer</h4>
+<div class="outline-text-4" id="text-12-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestDeveloper"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestDev</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_dev</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_dev"</span>
+
+        <span style="font-weight: bold; font-style: italic;">dev_name</span> = Name(name=<span style="font-style: italic;">"Mohit Tahiliani"</span>)
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = Email(email=<span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer(name=dev_name, email=email_id)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(dev.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>), dev_name.get(<span style="font-style: italic;">"name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(dev.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>), email_id.get(<span style="font-style: italic;">"email"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> AssetType</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+<code>AssetType</code> is an entity that has a field <code>asset_type</code> with type <code>is_asset_type</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_AssetType">AssetType.add_attributes(asset_type=is_str)
+
+<span style="font-weight: bold; font-style: italic;">AssetType.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"asset_type"</span>) == other.get(<span style="font-style: italic;">"asset_type"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-13-0-1" class="outline-4">
+<h4 id="sec-13-0-1"><span class="section-number-4">13.0.1</span> Test AssetType</h4>
+<div class="outline-text-4" id="text-13-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestAssetType"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestAssetType</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_instantiate_asset_type</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_instantiate_asset_type"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(is_asset_type(AssetType(asset_type=<span style="font-style: italic;">"image"</span>)),
+                             <span style="font-weight: bold; text-decoration: underline;">True</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(AssetType(asset_type=<span style="font-style: italic;">"image"</span>).get(<span style="font-style: italic;">"asset_type"</span>),
+                         <span style="font-style: italic;">"image"</span>)
+        <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>, AssetType, asset_type=123)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_asset_type</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_asset_type"</span>
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(asset_type1 == asset_type1, <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+        <span style="font-weight: bold; font-style: italic;">asset_type2</span> = AssetType(asset_type=<span style="font-style: italic;">"image"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(asset_type1 == asset_type2, <span style="font-weight: bold; text-decoration: underline;">False</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Asset</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+<code>Asset</code> is an entity that has a field <code>type</code> and <code>path</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Asset">Asset.add_attributes(path=is_str,
+                    asset_type=is_asset_type)
+
+<span style="font-weight: bold; font-style: italic;">Asset.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"path"</span>) == other.get(<span style="font-style: italic;">"path"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"asset_type"</span>) == other.get(<span style="font-style: italic;">"asset_type"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-14-0-1" class="outline-4">
+<h4 id="sec-14-0-1"><span class="section-number-4">14.0.1</span> Test Asset</h4>
+<div class="outline-text-4" id="text-14-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestAsset"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestAsset</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_asset</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_asset"</span>
+
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/static/images/logo.png"</span>
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(path=path, asset_type=asset_type1)
+                                              
+        <span style="font-weight: bold;">self</span>.assertEqual(asset.get(<span style="font-style: italic;">"path"</span>), path)
+        <span style="font-weight: bold;">self</span>.assertEqual(asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>),
+                             asset_type1.get(<span style="font-style: italic;">"asset_type"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> HostingInfo</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+<code>HostingInfo</code> is an entity that has a field <code>hosting_status</code>, <code>hosted_url</code>
+and <code>hosting_on</code> which are string
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_HostingInfo">HostingInfo.add_attributes(hosting_status=is_str,
+                    hosted_url=is_url, hosted_on=is_str)
+
+<span style="font-weight: bold; font-style: italic;">HostingInfo.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"hosting_status"</span>) ==\
+                  other.get(<span style="font-style: italic;">"hosting_status"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"hosted_url"</span>) == other.get(<span style="font-style: italic;">"hosted_url"</span>) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"hosted_on"</span>) == other.get(<span style="font-style: italic;">"hosted_on"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-15-0-1" class="outline-4">
+<h4 id="sec-15-0-1"><span class="section-number-4">15.0.1</span> Test HostingInfo</h4>
+<div class="outline-text-4" id="text-15-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestHostingInfo"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestHostingInfo</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_hosting_info</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_hosting_info"</span>
+        <span style="font-weight: bold; font-style: italic;">hosting_status</span> = <span style="font-style: italic;">"hosted"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_url</span> = <span style="font-style: italic;">"http://cse14-iiith.vlabs.ac.in"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_on</span> = <span style="font-style: italic;">"cloud"</span>
+        <span style="font-weight: bold; font-style: italic;">hosting_info</span> = HostingInfo(hosting_status=hosting_status,
+                                       hosted_url=hosted_url,
+                                       hosted_on=hosted_on)
+                                              
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info.get(<span style="font-style: italic;">"hosting_status"</span>), hosting_status)
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info.get(<span style="font-style: italic;">"hosted_url"</span>), hosted_url)
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info.get(<span style="font-style: italic;">"hosted_on"</span>), hosted_on)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> IntegrationStatus</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+<code>IntegrationStatus</code> is an entity that has a field <code>integration_level</code> with type <code>is_int</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_IntegrationStatus">IntegrationStatus.add_attributes(integration_level=is_int)
+
+<span style="font-weight: bold; font-style: italic;">IntegrationStatus.__eq__</span> = <span style="font-weight: bold;">lambda</span> <span style="font-weight: bold;">self</span>, other: \
+                  <span style="font-weight: bold;">isinstance</span>(other, <span style="font-weight: bold;">self</span>.__class__) <span style="font-weight: bold;">and</span> \
+                  <span style="font-weight: bold;">self</span>.get(<span style="font-style: italic;">"integration_level"</span>) == other.\
+                  get(<span style="font-style: italic;">"integration_level"</span>)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-16-0-1" class="outline-4">
+<h4 id="sec-16-0-1"><span class="section-number-4">16.0.1</span> Test IntegrationStatus</h4>
+<div class="outline-text-4" id="text-16-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestIntegrationStatus"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestIntegrationStatus</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_object_integration_status</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_object_integration_status"</span>
+        <span style="font-weight: bold; font-style: italic;">integration_level</span> = 4
+        <span style="font-weight: bold; font-style: italic;">integration_status</span> = IntegrationStatus(integration_level=integration_level)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(integration_status.get(<span style="font-style: italic;">"integration_level"</span>), integration_level)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-08-31 Wed]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-07-26 Wed 17:11</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

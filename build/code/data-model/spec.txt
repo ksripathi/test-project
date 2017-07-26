@@ -1,0 +1,403 @@
+
+;;; Entity Types
+TYPE Lab
+
+;;; Entity Types
+TYPE Experiment
+
+;;; Entity Types
+TYPE Institute
+
+;;; Entity Types
+TYPE Discipline
+
+;;; Entity Types
+TYPE Developer
+
+;;; Entity Types
+TYPE Section
+
+;;; Entity Types
+TYPE Name
+
+;;; Entity Types
+TYPE Email
+
+;;; Entity Types
+TYPE HostingInfo
+
+;;; Entity Types
+TYPE Asset
+
+;;; Entity Types
+TYPE IntegrationStatus
+
+;;; Relations with cardinality constraints
+
+[developer, lab]                 : Developer +  > Lab +
+[discipline, lab]                : Discipline +  > Lab +
+[institute, lab]                 : Institute !  > Lab +
+[experiment, lab]                : Experiment +  > Lab !
+[hostinginfo, lab]               : HostingInfo + > Lab !
+[asset, lab]                     : Asset + > Lab !
+[integrationstatus, lab]         : IntegrationStatus ! > Lab *
+
+[discipline, experiment]         : Discipline + > Experiment +
+[institute, experiment]          : Institute ! > Experiment +
+[experiment, section]            : Experiment ! > Section +
+[experiment, developer]          : Experiment + > Developer +
+[experiment, hostinginfo]        : Experiment ! > HostingInfo +
+[asset, experiment]              : Asset + > Experiment !
+[experiment, integrationstatus]  : Experiment *  > IntegrationStatus !
+
+[developer, name]                : Developer + > Name !
+[developer, email]               : Developer ! > Email !
+[developer, discipline]          : Developer + > Discipline +
+[developer, institute]           : Developer + > Institute !
+
+[asset, discipline]              : Asset + > Discipline +
+[asset, institute]               : Asset + > Institute !
+
+;;; Primary state variables
+Sets
+  lab-set  : set[Lab]  ; set of all labs in the system
+
+  experiment-set         : lab-set.experiment         ; set of experiments in the system
+  institute-set          : lab-set.institute          ; set of institutes in the system
+  discipline-set         : lab-set.discipline         ; set of disciplines in the system
+  developer-set          : lab-set.developer          ; set of developers in the system
+  hostinginfo-set        : lab-set.hostinginfo        ; set of hosting information in the system
+  asset-set              : lab-set.asset              ; set of assets in the system
+  integrationstatus-set  : lab-set.integrationstatus  ; set of integration status in the system
+
+  name-set        : developer-set.name         ; set of all names of developers in the system
+  email-set       : developer-set.email        ; set of all emails of developers in the system
+  lab-name-set    : lab-set.lab_name           ; set of all lab-names in the system
+  lab-id-set      : lab-set.lab_id             ; set of all lab_ids in the system
+  exp-name-set    : experiment-set.exp_name    ; set of all exp-names in the system
+  exp-id-set      : experiment-set.exp_id      ; set of all exp_ids in the system
+  section-set     : experiment-set.section     ; set of all sections in the system
+  inst-name-set   : institute-set.inst_name    ; set of all inst-names in the system
+  inst-id-set     : institute-set.inst_id      ; set of all inst_ids in the system
+  disc-name-set   : discipline-set.disc_name   ; set of all disc-names in the system
+  disc-id-set     : discipline-set.disc_id     ; set of all disc_ids in the system
+  hosting-status-set : hostinginfo-set.hosting_status ; set of all hosting_status in the system
+  hosted-url-set  : hostinginfo-set.hosted_url ; set of all hosted_urls in the system
+  hosted_on-set   : hostinginfo-set.hosted_on  ; set of sll hosted_on in the system
+  asset-type-set  : asset-set.asset_type       ; set of all assets_types in the system
+  asset-path-set  : asset-set.asset_path       ; set of all assets_paths in the system
+  integration-status-set : integrationstatus-set.level ; set of all levels in the system
+
+[developers, labs]                :  lab-set + > developer-set + 
+[discipline, labs]                :  lab-set + > discipline-set +
+[institute, labs]                 :  lab-set + > institute-set !
+[experiments, labs]               :  lab-set ! > experiment-set +
+[hostinginfo, labs]               :  lab-set + > hostinginfo-set +
+[asset, labs]                     :  lab-set ! > asset-set +
+[integrationstatus, labs]         :  lab-set * > integrationstatus-set !
+[discipline, experiments]         :  experiment-set + > discipline-set +
+[institute, experiments]          :  experiment-set + > institute-set !
+[experiments, sections]           :  section-set + > experiment-set !
+[experiments, developers]         :  developer-set + > experiment-set +
+[experiments, hostinginfos]       :  hostinginfo-set + > experiment-set !
+[asset, experiments]              :  experiment-set ! > asset-set +
+[experiments, integrationstatus]  :  integrationstatus-set !  > experiment-set *
+[developer, name]                 :  name-set ! > developer-set +
+[developer, email]                :  email-set ! > developer-set !
+[developer, discipline]           :  discipline-set + > developer-set +
+[developers, institutes]          :  institute-set ! > developer-set + 
+[asset, discipline]               :  discipline-set + > asset-set +
+[asset, institute]                :  institute-set ! > asset-set +
+
+    l: Lab, s: Session
+
+    s.key == system configured key
+
+    l: ~lab-set
+
+    l = new lab
+    lab-set = lab-set U {l}
+
+    e: Experimet, s: Session
+
+    s.key == system configured key
+
+    e: ~experiment-set
+
+    e = new experiment
+    experiment-set = experiment-set U {e}
+
+    i: Institute, s: Session
+
+    s.key == system configured key
+
+    i: ~institute-set
+
+    i = new institute
+    institute-set = institute-set U {i}
+
+    d: Discipline, s: Session
+
+    s.key == system configured key
+
+    d: ~discipline-set
+
+    d = new discipline
+    discipline-set = discipline-set U {d}
+
+    sec: Section, s: Session
+
+    s.key == system configured key
+
+    sec: ~section-set
+
+    sec = new section
+    section-set = section-set U {sec}
+
+    n: Name, s: Session
+
+    s.key == system configured key
+
+    l: ~lab-set
+
+    n = new name
+    name-set = name-set U {n}
+
+    e: Email, s: Session
+
+    s.key == system configured key
+
+    e: ~email-set
+
+    e = new email
+    email-set = email-set U {e}
+
+    r: Developer, s: Session
+
+    s.key == system configured key
+
+    r: ~developer-set
+
+    r = new developer
+    developer-set = developer-set U {r}
+
+    h: HostingInfo, s: Session
+
+    s.key == system configured key
+
+    h : ~hostinginfo-set
+
+    h = new hostinginfo
+    hostinginfo-set = hostinginfo-set U {h}
+
+    a: Asset, s: Session
+
+    s.key == system configured key
+
+    a: ~asset-set
+
+    a = new asset    
+   asset-set = asset-set U {a}
+
+   i: IntegrationStatus, s: Session
+
+    s.key == system configured key
+
+    i: ~integrationstatus-set
+
+   i = new integrationstatus
+   integrationstatus-set = integrationstatus-set U {i}
+
+    n: lab_name, lid: lab_id, l: Lab, e: Experiment, i: Institute, d: Discipline, r: Developer, h: HostingInfo, a: Asset, is: IntegrationStatu, s: Session
+
+    s.key == system configured key
+
+    l   : lab-set
+    s   : session-set
+    n   : lab-name-set
+    lid : ~lab-id-set
+    e   : experiment-set
+    i   : institute-set
+    d   : discipline-set
+    r   : developer-set
+    h   : hostinginfo-set
+    a   : asset-set
+    i   : integrationstatus-set
+
+    The lab details are updated.
+
+    n: exp_name, eid: exp_id, e: Experiment, i: Institute, d: Discipline, r: Developer, h: HostingInfo, a: Asset, is: IntegrationStatu, s: Session
+
+    s.key == system configured key
+
+    e   : experiment-set
+    s   : session-set
+    n   : ~exp-name-set
+    eid : ~exp-id-set
+    i   : institute-set
+    d   : discipline-set
+    r   : developer-set
+    h   : hostinginfo-set
+    a   : asset-set
+    is  : integrationstatus-set
+
+    The experiment details are updated.
+
+    n: inst_name, iid: inst_id, i: Institute, a: Asset, s: Session
+
+    s.key == system configured key
+
+    i   : institute-set
+    s   : session-set
+    n   : inst-name-set
+    iid : ~inst-id-set
+    a   : asset-set
+
+    The institute details are updated.
+
+    n: disc_name, did: disc_id, d: Discipline, a: Asset, s: Session
+
+    s.key == system configured key
+
+    d  : discipline-set
+    s  : session-set
+    n  : disc-name-set
+    did: ~disc-id-set
+    a  : asset-set
+
+    The discipline details are updated.
+
+    n: name, e: email_id, r: Developer, i: Institute, d: Discipline, s: Session
+
+    s.key == system configured key
+
+    r   : developer-set
+    n   : name-set
+    e   :~email-set
+    i   : institute-set
+    d   : discipline-set
+
+    The developer details are updated.
+
+   hs: hosting_status, hu: hosted_url, ho: hosted_on, h: HostingInfo , s: Session
+
+    s.key == system configured key
+
+    h  : hostinginfo-set
+    s  : session-set
+    hs : hosting-status-set
+    hu : ~hosted-url-set
+    ho : hosted-on-set
+
+    The HostingInfo details are updated.
+
+    at: asset_type, ap: asset_path, a: Asset, s: Session
+
+    s.key == system configured key
+
+    a : asset-set
+    s : session-set
+    at: asset-type-set
+    ap: ~asset-path-set
+
+    The Asset details are updated.
+
+    l: Lab, s: Session
+
+    s.key == system configured key
+
+    l : lab-set
+    s : session-set
+
+    lab-set = lab-set - {l}
+
+    e: Experiment, s: Session
+
+    s.key == system configured key
+
+    e : experiment-set
+    s : session-set
+
+    experiment-set = experiment-set - {e}
+
+    i: Institute, s: Session
+
+    s.key == system configured key
+
+    i : institute-set
+    s : session-set
+
+    institute-set = institute-set - {i}
+
+    d: Discipline, s: Session
+
+    s.key == system configured key
+
+    d : discipline-set
+    s : session-set
+
+    discipline-set = discipline-set - {d}
+
+    sec: Section, s: Session
+
+    s.key == system configured key
+
+    sec : section-set
+    s : session-set
+
+    section-set = section-set - {sec}
+
+    n: Name, s: Session
+
+    s.key == system configured key
+
+    n : name-set
+    s : session-set
+
+    name-set = name-set - {n}
+
+    e: Email, s: Session
+
+    s.key == system configured key
+
+    e : email-set
+    s : session-set
+
+    email-set = email-set - {e}
+
+    r: Developer, s: Session
+
+    s.key == system configured key
+
+    r : developer-set
+    s : session-set
+
+    developer-set = developer-set - {r}
+
+    h: HostingInfo, s: Session
+
+    s.key == system configured key
+
+    h : hostinginfo-set
+    s : session-set
+
+    hostinginfo-set = hostinginfo-set - {h}
+    
+
+    a: Asset, s: Session
+
+    s.key == system configured key
+
+    a : asset-set
+    s : session-set
+
+    asset-set = asset-set - {a}
+
+    is: IntegrationStatus, s: Session
+
+    s.key == system configured key
+
+    is : integrationstatus-set
+    s : session-set
+
+    integrationstatus-set = integrationstatus-set - {i}

@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Plan for April Meeting - Lab Data Service</title>
+<!-- 2017-07-26 Wed 17:10 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Plan for April Meeting - Lab Data Service</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Design</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Implemented and working APIs for Lab Data Service</a></li>
+</ul>
+</li>
+<li><a href="#plan">3. Plan (Feb, 2017 Milestone 1)</a></li>
+<li><a href="#plan">4. Plan (Feb, 2017 Milestone 2)</a></li>
+<li><a href="#plan">5. Plan (Feb, 2017 Milestone 3)</a></li>
+<li><a href="#cc_realization">6. Realization</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>This document briefly explains plan for <code>April-delhi</code> meeting.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Design</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Implemented and working APIs for Lab Data Service</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The <a href="https://github.com/vlead/lab-data-service/blob/develop/src/design/index.org">APIs</a> for the lab data service have been implemented which enables us to
+search the labs with experiments,institutes,developers and discipline. The
+operations allowed for the admin user are adding labs, updating labs,
+searching labs etc which follows similarly for operations in
+experiments,institutes, developers and disciplines as well.
+</p>
+
+<p>
+The following APIs are being implemented. We are expecting a release on 15th
+Feb, 2017 with the following entitites :
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-labs-and-get-lab">Lab</a>
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-experiments-and-get-experiment">Experiment</a>
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-institutes-and-get-institute">Institute</a>
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-developers-and-get-developer">Developer</a>
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-disciplines-and-get-discipline">Discipline</a>
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-assets-and-get-asset">Asset</a> - In progress
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-hostinginfos-and-get-hostinginfo">Hosting Information</a> - In progress
+</li>
+<li><a href="https://github.com/vlead/lab-data-service/blob/develop/src/runtime/rest/api.org#get-integrationstatuss-and-get-integrationstatus">Integration Status</a> - In progress
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-plan" class="outline-2">
+<h2 id="plan"><a id="sec-3" name="sec-3"></a><span class="section-number-2">3</span> Plan (Feb, 2017 <a href="https://github.com/vlead/lab-data-service/milestone/1">Milestone 1</a>)</h2>
+<div class="outline-text-2" id="text-plan">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">S.NO</th>
+<th scope="col" class="left">Tasks</th>
+<th scope="col" class="left">Github Issues</th>
+<th scope="col" class="left">Expected Effort</th>
+<th scope="col" class="left">Actual Effort</th>
+<th scope="col" class="left">Status</th>
+<th scope="col" class="left">Assignee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">1.</td>
+<td class="left">Requirements Gathering</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/1">#1</a></td>
+<td class="left">1 Week</td>
+<td class="left">10 Days</td>
+<td class="left">Done</td>
+<td class="left">Sripathi,Balamma</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">2.</td>
+<td class="left">Data Model Design</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/3">#3</a></td>
+<td class="left">1 Week</td>
+<td class="left">10 Days</td>
+<td class="left">Done</td>
+<td class="left">Sanchita,Reena,Mrudhvika</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">3.</td>
+<td class="left">Implementation</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/5">#5</a>,<a href="https://github.com/vlead/lab-data-service/issues/6">#6</a>,<a href="https://github.com/vlead/lab-data-service/issues/7">#7</a>,<a href="https://github.com/vlead/lab-data-service/issues/9">#9</a>,<a href="https://github.com/vlead/lab-data-service/issues/10">#10</a></td>
+<td class="left">1.5 Months</td>
+<td class="left">2 Months</td>
+<td class="left">Done</td>
+<td class="left">Development Team</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.1. Lab</td>
+<td class="left">&#xa0;</td>
+<td class="left">3 Days</td>
+<td class="left">4 Days</td>
+<td class="left">Done</td>
+<td class="left">Sripathi,Madhavi</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.2. Experiment</td>
+<td class="left">&#xa0;</td>
+<td class="left">3 Days</td>
+<td class="left">3 Days</td>
+<td class="left">Done</td>
+<td class="left">Sripathi,Madhavi</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.3. Discipline</td>
+<td class="left">&#xa0;</td>
+<td class="left">5 Days</td>
+<td class="left">7 Days</td>
+<td class="left">Done</td>
+<td class="left">Balamma</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.4. Developer</td>
+<td class="left">&#xa0;</td>
+<td class="left">7 Days</td>
+<td class="left">10 Days</td>
+<td class="left">Done</td>
+<td class="left">Reena</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.5. Institute</td>
+<td class="left">&#xa0;</td>
+<td class="left">4 Days</td>
+<td class="left">7 Days</td>
+<td class="left">Done</td>
+<td class="left">Sanchita</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.6. Asset</td>
+<td class="left">&#xa0;</td>
+<td class="left">3 Days</td>
+<td class="left">4 Days</td>
+<td class="left">Done</td>
+<td class="left">Sanchita,Mrudhvika</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.7. Hosting Information</td>
+<td class="left">&#xa0;</td>
+<td class="left">3 Days</td>
+<td class="left">3 Days</td>
+<td class="left">Done</td>
+<td class="left">Reena</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.8. Integration Status</td>
+<td class="left">&#xa0;</td>
+<td class="left">3 Days</td>
+<td class="left">3 Days</td>
+<td class="left">Done</td>
+<td class="left">Reena</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">4.</td>
+<td class="left">Data Model Review</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/12">#12</a></td>
+<td class="left">1 Day</td>
+<td class="left">1 Day</td>
+<td class="left">Done</td>
+<td class="left">Thirumal, Sripathi, Madhavi</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">5.</td>
+<td class="left">Implementation Review</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/12">#12</a></td>
+<td class="left">3 Days</td>
+<td class="left">2 Days</td>
+<td class="left">Done</td>
+<td class="left">Thirumal, Sripathi, Madhavi</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">6.</td>
+<td class="left">Testing and Deployment</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/20">#20</a></td>
+<td class="left">3 Days</td>
+<td class="left">2.5 Days</td>
+<td class="left">Done</td>
+<td class="left">Madhavi</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Implementation includes end to end implementation across all layers, CRUD
+operations (Objects,persistence,system,REST), unit test cases, integration
+of Lab with other entities.
+</li>
+<li>Expected and actual efforts are calculated in person hours. 
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-plan" class="outline-2">
+<h2 id="plan"><a id="sec-4" name="sec-4"></a><span class="section-number-2">4</span> Plan (Feb, 2017 <a href="https://github.com/vlead/lab-data-service/milestone/2">Milestone 2</a>)</h2>
+<div class="outline-text-2" id="text-plan">
+<p>
+This milestone describes the task of lab specification creation for the lab
+metadata across all the 180+ labs hosted on different Virtual-Labs
+platforms. The lab specifications would consist all the information 
+related to a lab/experiment as per the design of Lab Data Service. The task
+has been given to the Research Assistants team comprising of 3 members.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">S.NO</th>
+<th scope="col" class="left">Tasks</th>
+<th scope="col" class="left">Github Issues</th>
+<th scope="col" class="left">Expected Effort</th>
+<th scope="col" class="left">Actual Effort</th>
+<th scope="col" class="left">Status</th>
+<th scope="col" class="left">Assignee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">1.</td>
+<td class="left">Requirements</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">Done</td>
+<td class="left">RA Team</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">2.</td>
+<td class="left">Data Model Design</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">Done</td>
+<td class="left">RA Team</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">3.</td>
+<td class="left">Implementation</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">In Progress</td>
+<td class="left">RA Team</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">4.</td>
+<td class="left">Data Model Review</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">Not started</td>
+<td class="left">Thirumal</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">5.</td>
+<td class="left">Implementation Review</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">In Progress</td>
+<td class="left">Thirumal</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Implementation includes end to end implementation, unit test cases, testing
+of service with test data.
+</li>
+<li>Expected and actual efforts are calculated in person hours. 
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-plan" class="outline-2">
+<h2 id="plan"><a id="sec-5" name="sec-5"></a><span class="section-number-2">5</span> Plan (Feb, 2017 <a href="https://github.com/vlead/lab-data-service/milestone/3">Milestone 3</a>)</h2>
+<div class="outline-text-2" id="text-plan">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">S.NO</th>
+<th scope="col" class="left">Tasks</th>
+<th scope="col" class="left">Github Issues</th>
+<th scope="col" class="left">Expected Effort</th>
+<th scope="col" class="left">Actual Effort</th>
+<th scope="col" class="left">Status</th>
+<th scope="col" class="left">Assignee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">1.</td>
+<td class="left">Requirements Gathering</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/1">#1</a></td>
+<td class="left">1 Day</td>
+<td class="left">1 Day</td>
+<td class="left">Done</td>
+<td class="left">Madhavi,Sanchita</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">2.</td>
+<td class="left">Data Model Design</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/3">#3</a></td>
+<td class="left">1 Day</td>
+<td class="left">1 Day</td>
+<td class="left">Done</td>
+<td class="left">Mrudhvika,Sanchita</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">3.</td>
+<td class="left">API Design</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/13">#13</a></td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Development Team</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">4.</td>
+<td class="left">Implementation</td>
+<td class="left">&#xa0;</td>
+<td class="left">2 Weeks</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Development Team</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.1. Lab</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/21">#21</a> <a href="https://github.com/vlead/lab-data-service/issues/34">#34</a> <a href="https://github.com/vlead/lab-data-service/issues/35">#35</a> <a href="https://github.com/vlead/lab-data-service/issues/36">#36</a> <a href="https://github.com/vlead/lab-data-service/issues/40">#40</a> <a href="https://github.com/vlead/lab-data-service/issues/46">#46</a></td>
+<td class="left">5 Days</td>
+<td class="left">Done</td>
+<td class="left">Done</td>
+<td class="left">Madhavi, Reena</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.2. Experiment</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/37">#37</a> <a href="https://github.com/vlead/lab-data-service/issues/38">#38</a> <a href="https://github.com/vlead/lab-data-service/issues/15">#39</a> <a href="https://github.com/vlead/lab-data-service/issues/41">#41</a> <a href="https://github.com/vlead/lab-data-service/issues/46">#46</a></td>
+<td class="left">5 Days</td>
+<td class="left">Done</td>
+<td class="left">Done</td>
+<td class="left">Mrudhvika</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.3. Institute</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/18">#18</a> <a href="https://github.com/vlead/lab-data-service/issues/42">#42</a></td>
+<td class="left">5 Days</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Sanchita</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.4. Asset</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/15">#15</a> <a href="https://github.com/vlead/lab-data-service/issues/22">#22</a> <a href="https://github.com/vlead/lab-data-service/issues/27">#27</a> <a href="https://github.com/vlead/lab-data-service/issues/28">#28</a></td>
+<td class="left">4 Days</td>
+<td class="left">Done</td>
+<td class="left">4 Days</td>
+<td class="left">Sanchita</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.5. Hosting Information</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/17">#17</a> <a href="https://github.com/vlead/lab-data-service/issues/33">#33</a></td>
+<td class="left">3 Days</td>
+<td class="left">Done</td>
+<td class="left">2 Days</td>
+<td class="left">Reena, Mrudhvika</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.6. Integration Status</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/14">#14</a> <a href="https://github.com/vlead/lab-data-service/issues/33">#33</a></td>
+<td class="left">3 Days</td>
+<td class="left">Done</td>
+<td class="left">2 Days</td>
+<td class="left">Mrudhvika</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.7. Discipline</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/19">#19</a> <a href="https://github.com/vlead/lab-data-service/issues/43">#43</a></td>
+<td class="left">3 Days</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Sanchita</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.8. Developer</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/16">#16</a> <a href="https://github.com/vlead/lab-data-service/issues/25">#25</a> <a href="https://github.com/vlead/lab-data-service/issues/26">#26</a> <a href="https://github.com/vlead/lab-data-service/issues/44">#44</a></td>
+<td class="left">4 Days</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Reena</td>
+</tr>
+
+<tr>
+<td class="right">&#xa0;</td>
+<td class="left">3.9. LDS Database Population</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/31">#31</a></td>
+<td class="left">3 Days</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Madhavi</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">5.</td>
+<td class="left">Data Model Review</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/12">#12</a></td>
+<td class="left">1 Day</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Madhavi</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">6.</td>
+<td class="left">Implementation Review</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/12">#12</a></td>
+<td class="left">4 Days</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Madhavi</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">7.</td>
+<td class="left">Testing and Deployment</td>
+<td class="left"><a href="https://github.com/vlead/lab-data-service/issues/20">#20</a> <a href="https://github.com/vlead/lab-data-service/issues/29">#29</a> <a href="https://github.com/vlead/lab-data-service/issues/32">#32</a></td>
+<td class="left">5 Days</td>
+<td class="left">In Progress</td>
+<td class="left">In Progress</td>
+<td class="left">Madhavi, Mrudhvika</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Implementation includes end to end implementation across all layers, CRUD
+operations (Objects,persistence,system,REST), unit test cases, integration
+of Experiment Entity with other entities.
+</li>
+<li>Expected and actual efforts are calculated in person hours. 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-cc_realization" class="outline-2">
+<h2 id="cc_realization"><a id="sec-6" name="sec-6"></a><span class="section-number-2">6</span> Realization</h2>
+<div class="outline-text-2" id="text-cc_realization">
+
+<p>
+Implementing the above plan will result into the following -
+</p>
+<ul class="org-ul">
+<li>Labs and experiments as services. <a href="https://github.com/vlead/lab-data-service/blob/master/src/index.org">Github repository</a> link for the same.
+</li>
+<li>Able to search and get the updated info about any lab by
+experiments,institutes,developers etc.
+</li>
+<li>The APIs could be served to other services for resource IDs and fetching
+information about labs.
+</li>
+<li>Dynamic serving of the lab data using content server on any hosting
+platform like Open Edx, Moodle etc.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2017-02-13 Mon]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-07-26 Wed 17:10</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

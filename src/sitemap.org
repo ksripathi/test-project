@@ -1,0 +1,53 @@
+#+TITLE: Sitemap for project org-docs
+
+   + data-model
+     + [[file:data-model/index.org][Data Model for Lab Data Service]]
+   + deployment
+     + [[file:deployment/index.org][Deploying the application on a server]]
+     + [[file:deployment/run-lds-in-development-environment.org][Running Lab Data Service on Developement Environment]]
+   + design
+     + [[file:design/index.org][Design of lab-data-service]]
+   + org-templates
+     + [[file:org-templates/level-0.org][level-0]]
+     + [[file:org-templates/level-1.org][level-1]]
+     + [[file:org-templates/level-2.org][level-2]]
+     + [[file:org-templates/level-3.org][level-3]]
+     + [[file:org-templates/level-4.org][level-4]]
+     + [[file:org-templates/level-5.org][level-5]]
+     + [[file:org-templates/tex-macros.org][tex-macros]]
+   + requirements
+     + [[file:requirements/index.org][Lab Data Service]]
+   + runtime
+     + config
+       + [[file:runtime/config/config.org][Configuration]]
+       + [[file:runtime/config/index.org][The =config= Package]]
+     + exceptions
+       + [[file:runtime/exceptions/custom_exceptions.org][Custom Exceptions]]
+       + [[file:runtime/exceptions/index.org][The =exceptions= Package]]
+     + objects
+       + [[file:runtime/objects/entities.org][Entities]]
+       + [[file:runtime/objects/index.org][The =objects= Package]]
+     + persistence
+       + [[file:runtime/persistence/entities.org][Persistent Entities]]
+       + [[file:runtime/persistence/index.org][The =persistence= Package]]
+     + rest
+       + [[file:runtime/rest/index.org][REST Interface for Mini Version of User Directory Application]]
+       + [[file:runtime/rest/app.org][The Flask Web Server]]
+       + [[file:runtime/rest/api.org][The REST API]]
+     + system
+       + [[file:runtime/system/object-delegate.org][Object Delegate for the System]]
+       + [[file:runtime/system/persistence-delegate.org][Persistence Delegate for the System]]
+       + [[file:runtime/system/system-interface.org][System Interface implementation for LDS]]
+       + [[file:runtime/system/system.org][System implementation for LDS]]
+       + [[file:runtime/system/system-with-persistence.org][Test System with Persistence]]
+       + [[file:runtime/system/system-with-object.org][Test System with object implementation for OutReach Portal 3.0]]
+       + [[file:runtime/system/index.org][The =objects= Package]]
+     + utils
+       + [[file:runtime/utils/class-persistence.org][Class Persistence]]
+       + [[file:runtime/utils/class-templates.org][Class Templates]]
+       + [[file:runtime/utils/index.org][The =utils= Package]]
+       + [[file:runtime/utils/type-utils.org][Type Predicates and Checks]]
+     + [[file:runtime/index.org][Runtime of Application]]
+   + [[file:index.org][Building the lab-data-service]]
+   + [[file:plan-for-april.org][Plan for April Meeting - Lab Data Service]]
+   + [[file:review.org][Review Comments]]

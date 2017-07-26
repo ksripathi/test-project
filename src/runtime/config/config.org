@@ -1,0 +1,67 @@
+#+TITLE: Configuration
+#+AUTHOR: VLEAD
+#+DATE: [2016-08-31 Wed]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+
+This holds the application's configuration parameters.
+
+
+* Flask Application Configuration
+  Configuration for the flask application. 
+#+NAME: flask_app_config
+#+BEGIN_SRC python
+# DB URI
+# example DB URI:
+# mysql+oursql://scott:tiger@localhost/mydatabase
+# postgresql+psycopg2://scott:tiger@localhost/mydatabase
+#SQLALCHEMY_DATABASE_URI = 'mysql+oursql://<userid>:<password>@<servername>/<db_name>'
+# example
+SQLALCHEMY_DATABASE_URI = 'mysql+oursql://root:root@localhost/lds'
+
+# Debug from SQLAlchemy
+# Turn this to False on production
+SQLALCHEMY_ECHO = False
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+# List of allowed origins for CORS
+ALLOWED_ORIGINS = "['*']"
+
+# List of allowed IPs
+WHITELIST_IPS = ["127.0.0.1"]
+
+# Configure your log paths
+LOG_FILE_DIRECTORY = 'logs'
+LOG_FILE = 'lds.log'
+
+# Log level for the application
+#10=DEBUG, 20=INFO, 30=WARNING, 40=ERROR, 50=CRITICAL",
+LOG_LEVEL = 10
+
+#+END_SRC
+
+
+* System Config
+#+NAME: system_config
+#+BEGIN_SRC python
+#Fill the value during deployment.  Generate the key. 
+KEY="defaultkey"
+
+#+END_SRC
+
+
+* Tangling                                                      :boilerplate:
+** flask_app_config
+#+BEGIN_SRC python :tangle flask_app_config.py :eval no :noweb yes
+<<flask_app_config>>
+#+end_src
+
+
+** system_config
+#+BEGIN_SRC python :tangle system_config.py :eval no :noweb yes
+<<system_config>>
+#+end_src

@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Design of lab-data-service</title>
+<!-- 2017-07-26 Wed 17:11 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../style/css/override.css" />
+<link rel="icon" type="image/png" href="../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../style/js/org-info.js">
+/**
+ *
+ * @source: ../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Design of lab-data-service</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#api">2. Application Programming Interface</a></li>
+<li><a href="#sec-3">3. Specification</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Experiment Specification</a></li>
+<li><a href="#sec-3-2">3.2. Lab Specification</a></li>
+<li><a href="#sec-3-3">3.3. Institute Specification</a></li>
+<li><a href="#sec-3-4">3.4. Discipline Specification</a></li>
+</ul>
+</li>
+<li><a href="#design_diagram">4. Design diagram</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Process</a>
+<ul>
+<li><a href="#lab_meta_data">4.1.1. Get the lab's meta data</a></li>
+<li><a href="#construct_lab_spec">4.1.2. Construct lab spec with lab's meta data in json format</a></li>
+<li><a href="#version_lab_specs">4.1.3. Version controll lab spec file</a></li>
+<li><a href="#parse_lab_specs">4.1.4. Parse lab spec files checked into git repo</a></li>
+<li><a href="#lab_spec_read_only">4.1.5. All lab spec files in git repo are read only</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The <code>design</code> of the <code>lab-data-service</code> is captured here.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-api" class="outline-2">
+<h2 id="api"><a id="sec-2" name="sec-2"></a><span class="section-number-2">2</span> Application Programming Interface</h2>
+<div class="outline-text-2" id="text-api">
+<p>
+Please refer to <a href="../runtime/rest/api.html">API Documentation</a> Section.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Specification</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Every experiment and a lab has a specification. The specification provides a
+unique ID, name, contents of an experiment and other meta information of
+either a lab or experiment. This information includes: developer details, the
+organization a lab belongs to, discipline details, hosting information
+i.e. on which platform the lab/experiments are hosted, integration status of
+labs and the assets associated with a lab/experiment. This specification is
+different from the deployment specification of an experiment.
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Experiment Specification</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+An experiment is a basic functional unit of virtual labs. An experiment is a
+combination of static content and simulation. Each experiment is identified
+by a unique id, name, institute, discipline, developer, hosting information,
+integration status, assets etc.
+</p>
+
+
+<pre class="example">
+{
+  "experiment": {
+    "id": "e100",
+    "name": "Parallel and distributed processing",
+    "discipline_id": "CSE",
+    "institute_id": "IIITH",
+    "developers": [
+      {
+        "name": "Dinesh Malviya",
+        "email": "xyz@gmail.com"
+      },
+      {
+        "name": "Ashish Ahuja",
+        "email": "abc@gmail.com"
+      }
+    ],
+    "hosting_info": [
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "cloud",
+        "hosted_url": "http://cse14-iiith.vlabs.ac.in"
+      },
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "college-cloud",
+        "hosted_url": "http://cse14-iiith.ac.in"
+      }
+    ],
+    "integration_level": 4,
+    "overview": "This experiments describes about parallel and distributed processing",
+    "assets": [
+      {
+        "asset_type": "image",
+        "path": "vlabs.ac.in/images/static/logo.png"
+      },
+      {
+        "asset_type": "video",
+        "path": "vlabs.ac.in/video/abc.mkv"
+      }
+    ],
+    "sections": [
+      "Introduction",
+      "Objective",
+      "Tutorial",
+      "Illustration",
+      "Procedure",
+      "Experiment",
+      "Observations",
+      "Assignment",
+      "References"
+    ]
+  }
+}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Lab Specification</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+A lab is collation of experiments. A lab is identified by a unique id. The
+lab specification contains this identifier along with name, name of the
+organization, discipline, developer, hosting information, integration
+status, assets etc. The experiments in a lab are specified by including
+their respective ids.
+</p>
+
+<pre class="example">
+{
+  "lab": {
+    "id": "cse02",
+    "name": "Computer Programming",
+    "discipline_id": "CSE",
+    "institute_id": "IIITH",
+    "developers": [
+      {
+        "name": "Dinesh Malviya",
+        "email": "xyz@gmail.com"
+      },
+      {
+        "name": "Ashish Ahuja",
+        "email": "abc@gmail.com"
+      }
+    ],
+    "hosting_info": [
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "cloud",
+        "hosted_url": "http://cse14-iiith.vlabs.ac.in"
+      },
+      {
+        "hosting_status": "hosted",
+        "hosted_on": "college-cloud",
+        "hosted_url": "http://cse14-iiith.ac.in"
+      }
+    ],
+    "integration_level": 4,
+    "overview": "This lab explains about computer programming",
+    "assets": [
+      {
+        "asset_type": "image",
+        "path": "vlabs.ac.in/images/static/logo.png"
+      },
+      {
+        "asset_type": "video",
+        "path": "vlabs.ac.in/video/abc.mkv"
+      }
+    ],
+    "sections": [
+       {
+        "name": "Introduction"
+       },
+      {
+        "experiments": [
+          "e100"
+        ]
+      }
+    ]
+  }
+}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Institute Specification</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Each <code>Institute</code> is identified by a unique <code>institute_id</code>. 
+</p>
+
+<pre class="example">
+[
+  {
+    "institute_id": "IIITH",
+    "institute_name": "IIIT Hyderabad"
+  }
+]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Discipline Specification</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Each <code>Discipline</code> is identified by a unique <code>discipline_id</code>. 
+</p>
+
+<pre class="example">
+[
+  {
+    "discipline_id": "CSE",
+    "discipline_name": "Computer Science and Engineering"
+  }
+]
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-design_diagram" class="outline-2">
+<h2 id="design_diagram"><a id="sec-4" name="sec-4"></a><span class="section-number-2">4</span> Design diagram</h2>
+<div class="outline-text-2" id="text-design_diagram">
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ-WiohgmhaseluocCU0TBOoIUSWctv6raQ03gPO_-jhRkgtQbxH2DX0924ux3O7Hfz3zwKGJnt7r1Z/pub?w=960&h=720">
+<p align="center"> lab data service design diagram </p>
+
+<p>
+<a href="https://docs.google.com/drawings/d/1TAaHpf0UiCLvLRP_XfBBQki7pU624oWXRduxyz6e1NA/edit?ts=58415ec0">click here</a> to edit the diagram
+</p>
+</div>
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Process</h3>
+<div class="outline-text-3" id="text-4-1">
+</div><div id="outline-container-lab_meta_data" class="outline-4">
+<h4 id="lab_meta_data"><a id="sec-4-1-1" name="sec-4-1-1"></a><span class="section-number-4">4.1.1</span> Get the lab's meta data</h4>
+<div class="outline-text-4" id="text-lab_meta_data">
+
+<ul class="org-ul">
+<li>Get all the labs meta data which includes lab id, experiment id,
+institutes, disciplines and developers details.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-construct_lab_spec" class="outline-4">
+<h4 id="construct_lab_spec"><a id="sec-4-1-2" name="sec-4-1-2"></a><span class="section-number-4">4.1.2</span> Construct lab spec with lab's meta data in json format</h4>
+<div class="outline-text-4" id="text-construct_lab_spec">
+
+<ul class="org-ul">
+<li>Lab spec should be filled up with consistant naming convention of
+lab id, experiment id, institutes, disciplines and developers
+details in <code>json</code> format
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-version_lab_specs" class="outline-4">
+<h4 id="version_lab_specs"><a id="sec-4-1-3" name="sec-4-1-3"></a><span class="section-number-4">4.1.3</span> Version controll lab spec file</h4>
+<div class="outline-text-4" id="text-version_lab_specs">
+
+<ul class="org-ul">
+<li>All the lab spec files has to be checked into the single git
+repository.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-parse_lab_specs" class="outline-4">
+<h4 id="parse_lab_specs"><a id="sec-4-1-4" name="sec-4-1-4"></a><span class="section-number-4">4.1.4</span> Parse lab spec files checked into git repo</h4>
+<div class="outline-text-4" id="text-parse_lab_specs">
+
+<ul class="org-ul">
+<li>A <code>web-hook</code> from Github repository will invoke the
+<code>lab-data-service</code> when changes made to lab specs.
+</li>
+<li><code>lab-data-service</code> has to parse the lab spec files and stored the
+data into the database.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-lab_spec_read_only" class="outline-4">
+<h4 id="lab_spec_read_only"><a id="sec-4-1-5" name="sec-4-1-5"></a><span class="section-number-4">4.1.5</span> All lab spec files in git repo are read only</h4>
+<div class="outline-text-4" id="text-lab_spec_read_only">
+
+<ul class="org-ul">
+<li>Only admin or group of authorized users of git repository has
+access to modify the lab spec files.
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2017-05-01 Friday]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-07-26 Wed 17:11</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

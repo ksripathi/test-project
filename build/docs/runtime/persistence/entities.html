@@ -1,0 +1,1394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Persistent Entities</title>
+<!-- 2017-07-26 Wed 17:11 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Persistent Entities</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Lab</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Test Lab</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Experiment</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Test Experiment</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Institute</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Test Institute</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Discipline</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Test Discipline</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Section</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Test Section</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Name</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-7-0-1">7.0.1. Test Name</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-8">8. Email</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-8-0-1">8.0.1. Test Email</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Developer</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-9-0-1">9.0.1. Test Developer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-10">10. HostingInfo</a>
+<ul>
+<li><a href="#sec-10-1">10.1. Test HostingInfo</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11. AssetType</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-11-0-1">11.0.1. Test AssetType</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-12">12. Asset</a>
+<ul>
+<li><a href="#sec-12-1">12.1. Test Asset</a></li>
+</ul>
+</li>
+<li><a href="#sec-13">13. IntegrationStatus</a>
+<ul>
+<li><a href="#sec-13-1">13.1. Test IntegrationStatus</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Persistence is added to all the entities defined in <a href="../objects/entities.html"><code>objects</code></a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Lab</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>Lab</code> is a class with an attribute <code>lab_name</code> of type alphabetic string and
+<code>lab_id</code> of alphabetic string.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_lab_association_Table"><span style="font-weight: bold; font-style: italic;">lab_experiments</span> = db.Table(<span style="font-style: italic;">'lab_experiments'</span>,
+                      db.Column(<span style="font-style: italic;">'labid'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'expid'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'experiment.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">lab_assets</span> = db.Table(<span style="font-style: italic;">'lab_assets'</span>,
+                 db.Column(<span style="font-style: italic;">'labid'</span>, db.Integer, 
+                       db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>)),
+                 db.Column(<span style="font-style: italic;">'assetid'</span>, db.Integer,
+                       db.ForeignKey(<span style="font-style: italic;">'asset.id'</span>)))
+                     
+<span style="font-weight: bold; font-style: italic;">lab_developers</span> = db.Table(<span style="font-style: italic;">'lab_developers'</span>,
+                      db.Column(<span style="font-style: italic;">'labid'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'developer_id'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'developer.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">lab_hosting_info</span> = db.Table(<span style="font-style: italic;">'lab_hosting_info'</span>,
+                 db.Column(<span style="font-style: italic;">'labid'</span>, db.Integer, 
+                       db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>)),
+                 db.Column(<span style="font-style: italic;">'hosting_infoid'</span>, db.Integer,
+                       db.ForeignKey(<span style="font-style: italic;">'hosting_info.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">labs_sections</span> = db.Table(<span style="font-style: italic;">'labs_sections'</span>,
+                      db.Column(<span style="font-style: italic;">'labid'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'section_id'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'section.id'</span>)))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Lab"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"lab"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"lab_id"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"lab_name"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, 
+                                       nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"overview"</span>: db.Column(db.String(1000), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, 
+                                       nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"experiments"</span>: db.relationship(<span style="font-style: italic;">'Experiment'</span>,
+                    secondary=lab_experiments, 
+                    backref=<span style="font-style: italic;">'labs'</span>),
+        <span style="font-style: italic;">"institute_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'institute.id'</span>), 
+                                      unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"discipline_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'discipline.id'</span>), 
+                                      unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+
+        <span style="font-style: italic;">"integration_status_id"</span>: db.Column(db.Integer,
+                                               db.ForeignKey\
+                                               (<span style="font-style: italic;">'integration_status.id'</span>),
+                                               unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"assets"</span>: db.relationship(<span style="font-style: italic;">'Asset'</span>,
+                    secondary=lab_assets, 
+                    backref=<span style="font-style: italic;">'labs'</span>),
+        <span style="font-style: italic;">"developers"</span>: db.relationship(<span style="font-style: italic;">'Developer'</span>,
+                    secondary=lab_developers, 
+                    backref=<span style="font-style: italic;">'labs'</span>),
+        <span style="font-style: italic;">"hosting_info"</span>: db.relationship(<span style="font-style: italic;">'HostingInfo'</span>,
+                    secondary=lab_hosting_info, 
+                    backref=<span style="font-style: italic;">'labs'</span>),
+        <span style="font-style: italic;">"sections"</span>: db.relationship(<span style="font-style: italic;">'Section'</span>,
+                    secondary=labs_sections, 
+                    backref=<span style="font-style: italic;">'labs'</span>)
+
+       }
+
+<span style="font-weight: bold; font-style: italic;">Lab</span> = ClassPersistenceTemplate.mk_persistent(Lab, [<span style="font-style: italic;">'lab_id'</span>],\
+                                                 **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Test Lab</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestLab"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentLab</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_lab</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_lab"</span>
+
+
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        asset_type1.save()
+
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/static/images/logo.png"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(path=path, asset_type=asset_type1)
+        asset.save()
+
+        <span style="font-weight: bold; font-style: italic;">institute_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">institute_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(institute_name=institute_name, 
+                             institute_id=institute_id, assets=[asset])
+        inst.save()
+
+        <span style="font-weight: bold; font-style: italic;">discipline_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline</span> = Discipline(discipline_name=discipline_name, discipline_id=discipline_id,
+                                    assets=[asset])
+        discipline.save()
+
+        <span style="font-weight: bold; font-style: italic;">integration_level</span> = 4
+        <span style="font-weight: bold; font-style: italic;">intstatus</span> = IntegrationStatus(integration_level=integration_level)
+        intstatus.save()
+
+        <span style="font-weight: bold; font-style: italic;">exp_name</span> = <span style="font-style: italic;">"Number Systems"</span>
+        <span style="font-weight: bold; font-style: italic;">exp_id</span> = <span style="font-style: italic;">"EE99777"</span>
+        <span style="font-weight: bold; font-style: italic;">overview</span> = <span style="font-style: italic;">"This is linked list experiment"</span>
+
+        <span style="font-weight: bold; font-style: italic;">dev_name</span> = Name(name=<span style="font-style: italic;">"Mohit Tahiliani"</span>)
+        dev_name.save()
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = Email(email=<span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>)
+        email_id.save()
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer(name=dev_name, email=email_id)
+        dev.save()
+
+        <span style="font-weight: bold; font-style: italic;">hosting_status</span> = <span style="font-style: italic;">"hosted"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_url</span> = <span style="font-style: italic;">"http://cse14-iiith.vlabs.ac.in"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_on</span> = <span style="font-style: italic;">"cloud"</span>
+        <span style="font-weight: bold; font-style: italic;">host</span> = HostingInfo(hosting_status=hosting_status,
+                               hosted_url=hosted_url, hosted_on=hosted_on)
+        host.save()
+
+        <span style="font-weight: bold; font-style: italic;">exp_name</span> = <span style="font-style: italic;">"Number Systems"</span>
+        <span style="font-weight: bold; font-style: italic;">exp_id</span> = <span style="font-style: italic;">"EE99777"</span>
+        <span style="font-weight: bold; font-style: italic;">overview</span> = <span style="font-style: italic;">"This is linked list experiment"</span>
+        <span style="font-weight: bold; font-style: italic;">experiment</span> = Experiment(exp_name=exp_name, exp_id=exp_id,
+                                    overview=overview, sections=[],
+                                    integration_status=intstatus, 
+                                    hosting_info=[host], assets=[asset], 
+                                    institute=inst, discipline=discipline, 
+                                    developers=[dev])
+        experiment.save()
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = <span style="font-style: italic;">"Theory"</span>
+        <span style="font-weight: bold; font-style: italic;">section</span> = Section(name=name)
+        section.save()
+
+        <span style="font-weight: bold; font-style: italic;">lab_name1</span>=<span style="font-style: italic;">"Computer Programming"</span>
+        <span style="font-weight: bold; font-style: italic;">lab_id1</span>=<span style="font-style: italic;">"CSE01"</span>
+        <span style="font-weight: bold; font-style: italic;">overview1</span> = <span style="font-style: italic;">"This is data structures lab which deals about array,stack"</span>
+        <span style="font-style: italic;">" and ques..etc"</span>
+        <span style="font-weight: bold; font-style: italic;">lab1</span> = Lab(lab_name=lab_name1, lab_id=lab_id1, overview=overview1,
+                       experiments=[experiment], institute=inst,
+                       integration_status=intstatus, sections=[section],
+                       assets=[asset], discipline=discipline, 
+                       developers=[dev], hosting_info=[host])
+        lab1.save()
+
+        <span style="font-weight: bold; font-style: italic;">lab_name2</span>=<span style="font-style: italic;">"Data Structures"</span>
+        <span style="font-weight: bold; font-style: italic;">lab_id2</span>=<span style="font-style: italic;">"CSE02"</span>
+        <span style="font-weight: bold; font-style: italic;">overview2</span> = <span style="font-style: italic;">"This is data structures lab which deals about"</span>
+        <span style="font-style: italic;">"array,stack and ques..etc"</span>
+
+        <span style="font-weight: bold; font-style: italic;">lab2</span> = Lab(lab_name=lab_name2, lab_id=lab_id2, overview=overview2,
+                       experiments=[], institute=inst, discipline=discipline, 
+                       developers=[], hosting_info=[host], assets=[asset],
+                       sections=[section], 
+                       integration_status=intstatus)
+        lab2.save()
+
+        <span style="font-weight: bold; font-style: italic;">lab1</span> = Lab.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">lab2</span> = Lab.get_by_id(2)
+        <span style="font-weight: bold; font-style: italic;">lab3</span> = Lab.get_by_id(3)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"lab_name"</span>), lab_name1)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"lab_id"</span>), lab_id1)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"overview"</span>), overview1)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"institute_name"</span>), 
+                             inst.get(<span style="font-style: italic;">"institute_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"discipline"</span>).get(<span style="font-style: italic;">"discipline_name"</span>), 
+                             discipline.get(<span style="font-style: italic;">"discipline_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"experiments"</span>)[0].get(<span style="font-style: italic;">"exp_name"</span>), 
+                             experiment.get(<span style="font-style: italic;">"exp_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"sections"</span>)[0].get(<span style="font-style: italic;">"name"</span>), 
+                             section.get(<span style="font-style: italic;">"name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"integration_status"</span>).\
+                             get(<span style="font-style: italic;">"integration_level"</span>), 
+                             intstatus.get(<span style="font-style: italic;">"integration_level"</span>))
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"developers"</span>)[0].get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>), 
+                             email_id.get(<span style="font-style: italic;">"email"</span>))
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab1.get(<span style="font-style: italic;">"hosting_info"</span>)[0].get(<span style="font-style: italic;">"hosting_status"</span>), 
+                             host.get(<span style="font-style: italic;">"hosting_status"</span>))
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"lab_name"</span>), lab_name2)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"lab_id"</span>), lab_id2)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"overview"</span>), overview2)
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"institute_name"</span>), 
+                             inst.get(<span style="font-style: italic;">"institute_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"discipline"</span>).get(<span style="font-style: italic;">"discipline_name"</span>), 
+                             discipline.get(<span style="font-style: italic;">"discipline_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"hosting_info"</span>)[0].get(<span style="font-style: italic;">"hosting_status"</span>), 
+                             host.get(<span style="font-style: italic;">"hosting_status"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"experiments"</span>), [])
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"integration_status"</span>).\
+                             get(<span style="font-style: italic;">"integration_level"</span>), 
+                             intstatus.get(<span style="font-style: italic;">"integration_level"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(lab2.get(<span style="font-style: italic;">"developers"</span>), [])
+
+        <span style="font-weight: bold;">self</span>.assertEqual(lab3, <span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Experiment</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>Experiment</code> is a class with attributes <code>exp_name</code> and <code>exp_id</code> of type <code>is_email_str</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_exp_association_Table"><span style="font-weight: bold; font-style: italic;">experiments_sections</span> = db.Table(<span style="font-style: italic;">'experiments_sections'</span>,
+                      db.Column(<span style="font-style: italic;">'experiment_id'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'experiment.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'section_id'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'section.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">experiments_assets</span> = db.Table(<span style="font-style: italic;">'experiments_assets'</span>,
+                 db.Column(<span style="font-style: italic;">'experimentid'</span>, db.Integer, 
+                       db.ForeignKey(<span style="font-style: italic;">'experiment.id'</span>)),
+                 db.Column(<span style="font-style: italic;">'assetid'</span>, db.Integer,
+                       db.ForeignKey(<span style="font-style: italic;">'asset.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">experiments_developers</span> = db.Table(<span style="font-style: italic;">'experiments_developers'</span>,
+                      db.Column(<span style="font-style: italic;">'experiment_id'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'experiment.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'developer_id'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'developer.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">experiments_hosting_info</span> = db.Table(<span style="font-style: italic;">'experiments_hosting_info'</span>,
+                 db.Column(<span style="font-style: italic;">'experimentid'</span>, db.Integer, 
+                       db.ForeignKey(<span style="font-style: italic;">'experiment.id'</span>)),
+                 db.Column(<span style="font-style: italic;">'hosting_infoid'</span>, db.Integer,
+                       db.ForeignKey(<span style="font-style: italic;">'hosting_info.id'</span>)))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Experiment"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"experiment"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"exp_name"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"exp_id"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"overview"</span>: db.Column(db.String(1000), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"intstatus_id"</span>: db.Column(db.Integer, db.ForeignKey\
+                                      (<span style="font-style: italic;">'integration_status.id'</span>),
+                                      unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"assets"</span>: db.relationship(<span style="font-style: italic;">'Asset'</span>,
+                    secondary=experiments_assets, 
+                    backref=<span style="font-style: italic;">'experiments'</span>),
+        <span style="font-style: italic;">"lb_id"</span>: db.Column(db.Integer, 
+                                db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>), 
+                                unique=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+
+        <span style="font-style: italic;">"sections"</span>: db.relationship(<span style="font-style: italic;">'Section'</span>,
+                    secondary=experiments_sections, 
+                    backref=<span style="font-style: italic;">'experiments'</span>),
+
+        <span style="font-style: italic;">"institute_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'institute.id'</span>), 
+                                      unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"discipline_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'discipline.id'</span>), 
+                                      unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+
+        <span style="font-style: italic;">"developers"</span>: db.relationship(<span style="font-style: italic;">'Developer'</span>,
+                    secondary=experiments_developers, 
+                    backref=<span style="font-style: italic;">'experiments'</span>),
+        <span style="font-style: italic;">"hosting_info"</span>: db.relationship(<span style="font-style: italic;">'HostingInfo'</span>,
+                    secondary=experiments_hosting_info, 
+                    backref=<span style="font-style: italic;">'experiments'</span>)
+        }
+
+<span style="font-weight: bold; font-style: italic;">Experiment</span> = ClassPersistenceTemplate.mk_persistent(Experiment, [<span style="font-style: italic;">'exp_id'</span>],
+                                                        **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Test Experiment</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestExperiment"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceExperiment</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_experiment</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistance_experiment"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        asset_type1.save()
+
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/static/images/logo.png"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(path=path, asset_type=asset_type1)
+        asset.save()
+
+        <span style="font-weight: bold; font-style: italic;">institute_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">institute_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(institute_name=institute_name,
+                             institute_id=institute_id, assets=[asset])
+        inst.save()
+
+        <span style="font-weight: bold; font-style: italic;">discipline_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline</span> = Discipline(discipline_name=discipline_name,
+                                    discipline_id=discipline_id,
+                                    assets=[asset])
+        discipline.save()      
+
+        <span style="font-weight: bold; font-style: italic;">dev_name</span> = Name(name=<span style="font-style: italic;">"Mohit Tahiliani"</span>)
+        dev_name.save()
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = Email(email=<span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>)
+        email_id.save()
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer(name=dev_name, email=email_id)
+        dev.save()
+
+        <span style="font-weight: bold; font-style: italic;">hosting_status</span> = <span style="font-style: italic;">"hosted"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_url</span> = <span style="font-style: italic;">"http://cse14-iiith.vlabs.ac.in"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_on</span> = <span style="font-style: italic;">"cloud"</span>
+        <span style="font-weight: bold; font-style: italic;">host</span> = HostingInfo(hosting_status=hosting_status,
+                               hosted_url=hosted_url, hosted_on=hosted_on)
+        host.save()
+
+        <span style="font-weight: bold; font-style: italic;">exp_name</span> = <span style="font-style: italic;">"Number Systems"</span>
+        <span style="font-weight: bold; font-style: italic;">exp_id</span> = <span style="font-style: italic;">"EE99777"</span>
+        <span style="font-weight: bold; font-style: italic;">overview</span> = <span style="font-style: italic;">"This is linked list experiment"</span>
+
+        <span style="font-weight: bold; font-style: italic;">integration_level</span> = 4
+        <span style="font-weight: bold; font-style: italic;">intstatus</span> = IntegrationStatus(integration_level=integration_level)
+        intstatus.save()
+
+        <span style="font-weight: bold; font-style: italic;">exp</span> = Experiment(exp_name=exp_name, exp_id=exp_id, overview=overview,
+                          integration_status=intstatus, assets=[asset], 
+                         sections=[], developers=[dev], hosting_info=[host],  
+                         institute=inst, discipline=discipline)
+        exp.save()
+
+        <span style="font-weight: bold; font-style: italic;">experiment</span> = Experiment.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">experiment1</span> = Experiment.get_by_id(2)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"exp_name"</span>), exp_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"exp_id"</span>), exp_id)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"overview"</span>), overview)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"institute_name"</span>), 
+                             inst.get(<span style="font-style: italic;">"institute_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"discipline"</span>).get(<span style="font-style: italic;">"discipline_name"</span>), 
+                             discipline.get(<span style="font-style: italic;">"discipline_name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"integration_status"</span>).\
+                             get(<span style="font-style: italic;">"integration_level"</span>), 
+                             intstatus.get(<span style="font-style: italic;">"integration_level"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>).\
+                             get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment1, <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"developers"</span>)[0].get(<span style="font-style: italic;">"email"</span>).\
+                             get(<span style="font-style: italic;">"email"</span>), email_id.get(<span style="font-style: italic;">"email"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(experiment.get(<span style="font-style: italic;">"hosting_info"</span>)[0].\
+                             get(<span style="font-style: italic;">"hosting_status"</span>), 
+                             host.get(<span style="font-style: italic;">"hosting_status"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Institute</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<code>Institute</code> is a class with attributes <code>institute_name</code> and <code>institute_id</code> of type <code>is_email_str</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_association_Table1"><span style="font-weight: bold; font-style: italic;">institutes_labs</span> = db.Table(<span style="font-style: italic;">'institutes_labs'</span>,
+                      db.Column(<span style="font-style: italic;">'institute_id'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'institute.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'lab_id'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'lab.id'</span>)))
+
+<span style="font-weight: bold; font-style: italic;">institutes_assets</span> = db.Table(<span style="font-style: italic;">'institutes_assets'</span>,
+                      db.Column(<span style="font-style: italic;">'institute_id'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'institute.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'assetid'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'asset.id'</span>)))
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Institute"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"institute"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"institute_name"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"institute_id"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"labs"</span>: db.relationship(<span style="font-style: italic;">'Lab'</span>, backref=db.backref(<span style="font-style: italic;">'institute'</span>)),
+        <span style="font-style: italic;">"experiments"</span>: db.relationship(<span style="font-style: italic;">'Experiment'</span>, backref=\
+                                           db.backref(<span style="font-style: italic;">'institute'</span>)),
+        <span style="font-style: italic;">"assets"</span>: db.relationship(<span style="font-style: italic;">'Asset'</span>, secondary=institutes_assets,
+                                      backref=<span style="font-style: italic;">'institutes'</span>)
+       }
+
+<span style="font-weight: bold; font-style: italic;">Institute</span> = ClassPersistenceTemplate.mk_persistent(Institute, [<span style="font-style: italic;">'institute_id'</span>],\
+                                                       **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Test Institute</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestInstitute"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceInstitute</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_institute</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistance_institute"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        asset_type1.save()
+
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/static/images/logo.png"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(path=path, asset_type=asset_type1)
+        asset.save()
+
+        <span style="font-weight: bold; font-style: italic;">institute_name</span> = <span style="font-style: italic;">"IIT Kanpur"</span>
+        <span style="font-weight: bold; font-style: italic;">institute_id</span> = <span style="font-style: italic;">"IITK"</span>
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(institute_name=institute_name,
+                             institute_id=institute_id, assets=[asset])
+        inst.save()
+        <span style="font-weight: bold; font-style: italic;">institute</span> = Institute.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">institute1</span> = Institute.get_by_id(2)
+        <span style="font-weight: bold;">self</span>.assertEqual(institute.get(<span style="font-style: italic;">"institute_name"</span>), institute_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(institute.get(<span style="font-style: italic;">"institute_id"</span>), institute_id)   
+        <span style="font-weight: bold;">self</span>.assertEqual(institute.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>).\
+                             get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))    
+        <span style="font-weight: bold;">self</span>.assertEqual(institute1, <span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Discipline</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<code>Discipline</code> is a class with attributes <code>discipline_name</code> and <code>discipline_id</code> of type
+<code>is_email_str</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_asset_association_Table"><span style="font-weight: bold; font-style: italic;">disciplines_assets</span> = db.Table(<span style="font-style: italic;">'disciplines_assets'</span>,
+                      db.Column(<span style="font-style: italic;">'discipline_id'</span>, db.Integer, 
+                            db.ForeignKey(<span style="font-style: italic;">'discipline.id'</span>)),
+                      db.Column(<span style="font-style: italic;">'assetid'</span>, db.Integer,
+                            db.ForeignKey(<span style="font-style: italic;">'asset.id'</span>)))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Discipline"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"discipline"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"discipline_name"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"discipline_id"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"labs"</span>: db.relationship(<span style="font-style: italic;">'Lab'</span>, backref=db.backref(<span style="font-style: italic;">'discipline'</span>)),
+        <span style="font-style: italic;">"experiments"</span>: db.relationship(<span style="font-style: italic;">'Experiment'</span>, backref=\
+                                           db.backref(<span style="font-style: italic;">'discipline'</span>)),
+        <span style="font-style: italic;">"assets"</span>: db.relationship(<span style="font-style: italic;">'Asset'</span>, secondary=disciplines_assets,
+                                      backref=<span style="font-style: italic;">'disciplines'</span>)
+        }
+
+<span style="font-weight: bold; font-style: italic;">Discipline</span> = ClassPersistenceTemplate.mk_persistent(Discipline, [<span style="font-style: italic;">'discipline_id'</span>],\
+                                                        **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Test Discipline</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestDiscipline"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceDiscipline</span>(TestCase):
+
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_discipline</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistance_discipline"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        asset_type1.save()
+
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/static/images/logo.png"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(path=path, asset_type=asset_type1)
+        asset.save()
+
+        <span style="font-weight: bold; font-style: italic;">discipline_name</span> = <span style="font-style: italic;">"IIT Delhi"</span>
+        <span style="font-weight: bold; font-style: italic;">discipline_id</span> = <span style="font-style: italic;">"ECE08"</span>
+        <span style="font-weight: bold; font-style: italic;">dis</span> = Discipline(discipline_name=discipline_name,
+                             discipline_id=discipline_id, assets=[asset])
+        dis.save()
+
+        <span style="font-weight: bold; font-style: italic;">discipline</span> = Discipline.get_by_id(1)
+        <span style="font-weight: bold;">self</span>.assertEqual(discipline.get(<span style="font-style: italic;">"discipline_name"</span>), discipline_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(discipline.get(<span style="font-style: italic;">"discipline_id"</span>), discipline_id)
+        <span style="font-weight: bold;">self</span>.assertEqual(discipline.get(<span style="font-style: italic;">"assets"</span>)[0].get(<span style="font-style: italic;">"asset_type"</span>).\
+                             get(<span style="font-style: italic;">"asset_type"</span>), 
+                             asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Section</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<code>Section</code> is a class with an attribute <code>name</code> of type alphabetic string 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Section"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"section"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"name"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+        }
+
+<span style="font-weight: bold; font-style: italic;">Section</span> = ClassPersistenceTemplate.mk_persistent(Section, [<span style="font-style: italic;">'name'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Test Section</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestSection"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentSection</span>(TestCase):
+
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_section</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_section"</span>
+        <span style="font-weight: bold; font-style: italic;">name</span> = <span style="font-style: italic;">"Theory"</span>
+        <span style="font-weight: bold; font-style: italic;">section</span> = Section(name=name)
+        section.save()
+        <span style="font-weight: bold; font-style: italic;">section1</span> = Section.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">section2</span> = Section.get_by_id(2)
+        <span style="font-weight: bold;">self</span>.assertEqual(section1.get(<span style="font-style: italic;">"name"</span>), name)
+        <span style="font-weight: bold;">self</span>.assertEqual(section2,<span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Name</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<code>Name</code> is a class with an attribute <code>name</code> of type alphabetic string.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Name"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"name"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"name"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>,
+                                       nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"developers"</span>: db.relationship(<span style="font-style: italic;">'Developer'</span>, 
+                                        backref=db.backref(<span style="font-style: italic;">'name'</span>))
+
+        }
+
+<span style="font-weight: bold; font-style: italic;">Name</span> = ClassPersistenceTemplate.mk_persistent(Name, [], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-7-0-1" class="outline-4">
+<h4 id="sec-7-0-1"><span class="section-number-4">7.0.1</span> Test Name</h4>
+<div class="outline-text-4" id="text-7-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestName"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentName</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_persistent_name</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_name"</span>
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = <span style="font-style: italic;">"Mohit tahiliani"</span>
+        <span style="font-weight: bold; font-style: italic;">name1</span> = Name(name=name)
+        name1.save()
+        
+        <span style="font-weight: bold; font-style: italic;">name1</span> = Name.get_by_id(1)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(name1.get(<span style="font-style: italic;">"name"</span>), name)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Email</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<code>Email</code> is a class with an attribute <code>email</code> of type alphabetic string.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Email"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"email"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"email"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"developers"</span>: db.relationship(<span style="font-style: italic;">'Developer'</span>, 
+                                        backref=db.backref(<span style="font-style: italic;">'email'</span>))
+        }
+
+<span style="font-weight: bold; font-style: italic;">Email</span> = ClassPersistenceTemplate.mk_persistent(Email, [<span style="font-style: italic;">'email'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-8-0-1" class="outline-4">
+<h4 id="sec-8-0-1"><span class="section-number-4">8.0.1</span> Test Email</h4>
+<div class="outline-text-4" id="text-8-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestEmail"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentEmail</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_email</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_email"</span>
+
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = <span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>
+        <span style="font-weight: bold; font-style: italic;">email1</span> = Email(email=email_id)
+        email1.save()
+        
+        <span style="font-weight: bold; font-style: italic;">email1</span> = Email.get_by_id(1)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(email1.get(<span style="font-style: italic;">"email"</span>), email_id)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Developer</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+<code>Developer</code> is a class with an attribute <code>name</code> of type alphabetic string and <code>email</code> of alphabetic string.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Developer"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"developer"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"name_id"</span>: db.Column(db.Integer, db.ForeignKey(<span style="font-style: italic;">'name.id'</span>),
+                                 nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"email_id"</span>: db.Column(db.Integer,db.ForeignKey(<span style="font-style: italic;">'email.id'</span>),
+                                 unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+        }
+
+<span style="font-weight: bold; font-style: italic;">Developer</span> = ClassPersistenceTemplate.mk_persistent(Developer, [], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-9-0-1" class="outline-4">
+<h4 id="sec-9-0-1"><span class="section-number-4">9.0.1</span> Test Developer</h4>
+<div class="outline-text-4" id="text-9-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestDeveloper"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentDeveloper</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_dev</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_dev"</span>
+
+        <span style="font-weight: bold; font-style: italic;">dev_name</span> = Name(name=<span style="font-style: italic;">"Mohit Tahiliani"</span>)
+        dev_name.save()
+        <span style="font-weight: bold; font-style: italic;">email_id</span> = Email(email=<span style="font-style: italic;">"mohit.tahiliani@gmail.com"</span>)
+        email_id.save()
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer(name=dev_name, email=email_id)
+        dev.save()
+        
+        <span style="font-weight: bold; font-style: italic;">dev</span> = Developer.get_by_id(1)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(dev.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>), dev_name.get(<span style="font-style: italic;">"name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(dev.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>), email_id.get(<span style="font-style: italic;">"email"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> HostingInfo</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+<code>HostingInfo</code> is a class with attributes <code>hosting_status</code> and <code>hosted_url</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_HostingInfo"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"hosting_info"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"hosting_status"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>,\
+                                        nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"hosted_url"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"hosted_on"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">False</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+       }
+
+<span style="font-weight: bold; font-style: italic;">HostingInfo</span> = ClassPersistenceTemplate.mk_persistent(HostingInfo,\
+                                                         [<span style="font-style: italic;">'hosted_url'</span>],\
+                                                         **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Test HostingInfo</h3>
+<div class="outline-text-3" id="text-10-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestHostingInfo"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceHostingInfo</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_hosting_info</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_hosting_info"</span>
+        <span style="font-weight: bold; font-style: italic;">hosting_status</span> = <span style="font-style: italic;">"hosted"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_url</span> = <span style="font-style: italic;">"http://cse14-iiith.vlabs.ac.in"</span>
+        <span style="font-weight: bold; font-style: italic;">hosted_on</span> = <span style="font-style: italic;">"cloud"</span>
+        <span style="font-weight: bold; font-style: italic;">host</span> = HostingInfo(hosting_status=hosting_status, hosted_url=hosted_url, hosted_on=hosted_on)
+        host.save()
+        <span style="font-weight: bold; font-style: italic;">hosting_info</span> = HostingInfo.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">hosting_info1</span> = HostingInfo.get_by_id(2)
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info.get(<span style="font-style: italic;">"hosting_status"</span>), hosting_status)
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info.get(<span style="font-style: italic;">"hosted_url"</span>), hosted_url)
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info.get(<span style="font-style: italic;">"hosted_on"</span>), hosted_on)
+        <span style="font-weight: bold;">self</span>.assertEqual(hosting_info1,<span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> AssetType</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<code>AssetType</code> is a class with an attribute <code>asset_type</code> of type string.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_AssetType"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"asset_type"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"asset_type"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"assets"</span>: db.relationship(<span style="font-style: italic;">'Asset'</span>, backref=db.backref(<span style="font-style: italic;">'asset_type'</span>))
+        }
+
+<span style="font-weight: bold; font-style: italic;">AssetType</span> = ClassPersistenceTemplate.mk_persistent(AssetType, [<span style="font-style: italic;">'asset_type'</span>],
+                                                       **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-11-0-1" class="outline-4">
+<h4 id="sec-11-0-1"><span class="section-number-4">11.0.1</span> Test AssetType</h4>
+<div class="outline-text-4" id="text-11-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestAssetType"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistentAssetType</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_asset_type</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistent_asset_type"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        asset_type1.save()
+        
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType.get_by_id(1)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(asset_type1.get(<span style="font-style: italic;">"asset_type"</span>),
+                             asset_type1.get(<span style="font-style: italic;">"asset_type"</span>))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Asset</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+<code>Asset</code> is a class with attributes <code>path</code> and <code>asset_type</code> of type <code>is_str</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_Asset"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"asset"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"asset_type_id"</span>: db.Column(db.Integer,db.ForeignKey(<span style="font-style: italic;">'asset_type.id'</span>),
+                                 unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"path"</span>: db.Column(db.String(255), unique=<span style="font-weight: bold; text-decoration: underline;">True</span>, nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+       }
+
+<span style="font-weight: bold; font-style: italic;">Asset</span> = ClassPersistenceTemplate.mk_persistent(Asset, [<span style="font-style: italic;">'path'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-12-1" class="outline-3">
+<h3 id="sec-12-1"><span class="section-number-3">12.1</span> Test Asset</h3>
+<div class="outline-text-3" id="text-12-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestAsset"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceAsset</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_asset</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistance_asset"</span>
+
+        <span style="font-weight: bold; font-style: italic;">path</span> = <span style="font-style: italic;">"vlabs.ac.in/static/images/logo.png"</span>
+
+        <span style="font-weight: bold; font-style: italic;">asset_type1</span> = AssetType(asset_type=<span style="font-style: italic;">"video"</span>)
+        asset_type1.save()
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = Asset(path=path, asset_type=asset_type1)
+        asset.save()
+
+        <span style="font-weight: bold; font-style: italic;">asset</span> = asset.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">asset1</span> = asset.get_by_id(2)
+        <span style="font-weight: bold;">self</span>.assertEqual(asset.get(<span style="font-style: italic;">"path"</span>), path)
+        <span style="font-weight: bold;">self</span>.assertEqual(asset.get(<span style="font-style: italic;">"asset_type"</span>).get(<span style="font-style: italic;">"asset_type"</span>),
+                             asset_type1.get(<span style="font-style: italic;">"asset_type"</span>))       
+        <span style="font-weight: bold;">self</span>.assertEqual(asset1,<span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> IntegrationStatus</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+<code>IntegrationStatus</code> is a class with attributes <code>integration_level</code> of type <code>is_int</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_IntegrationStatus"><span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"__tablename__"</span>: <span style="font-style: italic;">"integration_status"</span>,
+        <span style="font-style: italic;">"id"</span>: db.Column(db.Integer, primary_key=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+        <span style="font-style: italic;">"integration_level"</span>: db.Column(db.Integer, unique=<span style="font-weight: bold; text-decoration: underline;">True</span>,\
+                                           nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"labs"</span>: db.relationship(<span style="font-style: italic;">'Lab'</span>, backref=\
+                                    db.backref(<span style="font-style: italic;">'integration_status'</span>)), 
+        <span style="font-style: italic;">"experiments"</span>: db.relationship(<span style="font-style: italic;">'Experiment'</span>, backref=\
+                                           db.backref(<span style="font-style: italic;">'integration_status'</span>)), 
+        <span style="font-style: italic;">"integration_level"</span>: db.Column(db.Integer, unique=<span style="font-weight: bold; text-decoration: underline;">True</span>,
+                                           nullable=<span style="font-weight: bold; text-decoration: underline;">False</span>),
+        <span style="font-style: italic;">"labs"</span>: db.relationship(<span style="font-style: italic;">'Lab'</span>, backref=\
+                                    db.backref(<span style="font-style: italic;">'integration_status'</span>))
+       }
+
+<span style="font-weight: bold; font-style: italic;">IntegrationStatus</span> = ClassPersistenceTemplate.mk_persistent(IntegrationStatus,
+                                                [<span style="font-style: italic;">'integration_level'</span>], **args)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-13-1" class="outline-3">
+<h3 id="sec-13-1"><span class="section-number-3">13.1</span> Test IntegrationStatus</h3>
+<div class="outline-text-3" id="text-13-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="class_TestIntegrationStatus"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestPersistenceIntegrationStatus</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">create_app</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">app</span> = create_app(config)
+        <span style="font-weight: bold;">return</span> app
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        db.create_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        db.session.remove()
+        db.drop_all()
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_integration_status</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_persistance_integration_status"</span>
+        <span style="font-weight: bold; font-style: italic;">integration_level</span> = 4
+        <span style="font-weight: bold; font-style: italic;">intstatus</span> = IntegrationStatus(integration_level=integration_level)
+        intstatus.save()
+        <span style="font-weight: bold; font-style: italic;">integration_status</span> = IntegrationStatus.get_by_id(1)
+        <span style="font-weight: bold; font-style: italic;">integration_status1</span> = IntegrationStatus.get_by_id(2)
+        <span style="font-weight: bold;">self</span>.assertEqual(integration_status.get(<span style="font-style: italic;">"integration_level"</span>),\
+                             integration_level)
+        <span style="font-weight: bold;">self</span>.assertEqual(integration_status1,<span style="font-weight: bold; text-decoration: underline;">None</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-08-31 Wed]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-07-26 Wed 17:11</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

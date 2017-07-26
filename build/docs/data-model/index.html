@@ -1,0 +1,2482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Data Model for Lab Data Service</title>
+<!-- 2017-07-26 Wed 17:12 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../style/css/override.css" />
+<link rel="icon" type="image/png" href="../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../style/js/org-info.js">
+/**
+ *
+ * @source: ../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Data Model for Lab Data Service</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#notation">2. Notation</a>
+<ul>
+<li><a href="#sets_cardinality_and_relations">2.1. Sets, cardinality and relations</a></li>
+<li><a href="#relations_and_their_cardinality_type">2.2. Relations and their cardinality type</a></li>
+</ul>
+</li>
+<li><a href="#informal_abstraction_of_the_data_model">3. Informal abstraction of the data model</a>
+<ul>
+<li><a href="#abstract_entity_types">3.1. Abstract Entity Types</a>
+<ul>
+<li><a href="#entity_lab">3.1.1. Lab</a></li>
+<li><a href="#entity_experiment">3.1.2. Experiment</a></li>
+<li><a href="#entity_institute">3.1.3. Institute</a></li>
+<li><a href="#entity_discipline">3.1.4. Discipline</a></li>
+<li><a href="#entity_developer">3.1.5. Developer</a></li>
+<li><a href="#entity_section">3.1.6. Section</a></li>
+<li><a href="#entity_name">3.1.7. Name</a></li>
+<li><a href="#entity_email">3.1.8. Email</a></li>
+<li><a href="#entity_HostingInfo">3.1.9. HostingInfo</a></li>
+<li><a href="#entity_Asset">3.1.10. Asset</a></li>
+<li><a href="#entity_Integration_Status">3.1.11. IntegrationStatus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#cardinal_constraints">4. Relations and cardinality constraints over entity types</a>
+<ul>
+<li><a href="#relations">4.1. Relations</a></li>
+<li><a href="#diagrams">4.2. Diagrams</a></li>
+</ul>
+</li>
+<li><a href="#key">5. Keys</a></li>
+<li><a href="#sec-6">6. Assumptions</a></li>
+<li><a href="#system_state">7. System state</a>
+<ul>
+<li><a href="#primary_entity_sets">7.1. Primary Entity sets</a></li>
+<li><a href="#derived_entity_sets">7.2. Derived Entity sets</a></li>
+</ul>
+</li>
+<li><a href="#referential_integrity_relations">8. Referential Integrity over primary and derived entity sets</a></li>
+<li><a href="#operations">9. Operations</a>
+<ul>
+<li><a href="#add_lab">9.1. Add Lab</a>
+<ul>
+<li><a href="#parameters">9.1.1. Parameters</a></li>
+<li><a href="#actor_credentials">9.1.2. Actor credentials</a></li>
+<li><a href="#referential_integrity">9.1.3. Referential Integrity</a></li>
+<li><a href="#effect">9.1.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_experiment">9.2. Add Experiment</a>
+<ul>
+<li><a href="#add_experiment_parameters">9.2.1. Parameters</a></li>
+<li><a href="#add_experiment_actor_credentials">9.2.2. Actor credentials</a></li>
+<li><a href="#add_experiment_referentials_integrity">9.2.3. Referential Integrity</a></li>
+<li><a href="#add_experiment_effect">9.2.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_institure">9.3. Add Institute</a>
+<ul>
+<li><a href="#add_institute_parameters">9.3.1. Parameters</a></li>
+<li><a href="#add_institute_actor_credentials">9.3.2. Actor credentials</a></li>
+<li><a href="#add_institute_referential_integrity">9.3.3. Referential Integrity</a></li>
+<li><a href="#add_institute_effect">9.3.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_discipline">9.4. Add Discipline</a>
+<ul>
+<li><a href="#add_discipline_parameters">9.4.1. Parameters</a></li>
+<li><a href="#add_discipline_actor_credentials">9.4.2. Actor credentials</a></li>
+<li><a href="#add_discipline_referential_integrity">9.4.3. Referential Integrity</a></li>
+<li><a href="#add_discipline_effect">9.4.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_section">9.5. Add Section</a>
+<ul>
+<li><a href="#parameters">9.5.1. Parameters</a></li>
+<li><a href="#actor_credentials">9.5.2. Actor credentials</a></li>
+<li><a href="#referential_integrity">9.5.3. Referential Integrity</a></li>
+<li><a href="#effect">9.5.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_name">9.6. Add Name</a>
+<ul>
+<li><a href="#parameters">9.6.1. Parameters</a></li>
+<li><a href="#actor_credentials">9.6.2. Actor credentials</a></li>
+<li><a href="#referential_integrity">9.6.3. Referential Integrity</a></li>
+<li><a href="#effect">9.6.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_email">9.7. Add Email</a>
+<ul>
+<li><a href="#parameters">9.7.1. Parameters</a></li>
+<li><a href="#actor_credentials">9.7.2. Actor credentials</a></li>
+<li><a href="#referential_integrity">9.7.3. Referential Integrity</a></li>
+<li><a href="#effect">9.7.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_developer">9.8. Add Developer</a>
+<ul>
+<li><a href="#add_developer_parameters">9.8.1. Parameters</a></li>
+<li><a href="#add_developer_actor_credentials">9.8.2. Actor credentials</a></li>
+<li><a href="#add_developer_referential_integrity">9.8.3. Referential Integrity</a></li>
+<li><a href="#add_developer_effect">9.8.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_hostinginfo">9.9. Add HostingInfo</a>
+<ul>
+<li><a href="#add_hostinginfo_parameters">9.9.1. Parameters</a></li>
+<li><a href="#add_hostinginfo_actor_credentials">9.9.2. Actor credentials</a></li>
+<li><a href="#add_hostinginfo_referential_integrity">9.9.3. Referential Integrity</a></li>
+<li><a href="#add_hostinginfo_effect">9.9.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_asset">9.10. Add Asset</a>
+<ul>
+<li><a href="#add_asset_parameters">9.10.1. Parameters</a></li>
+<li><a href="#add_asset_actor_credentials">9.10.2. Actor credentials</a></li>
+<li><a href="#add_asset_referential_integrity">9.10.3. Referential Integrity</a></li>
+<li><a href="#add_asset_effect">9.10.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#add_integrationstatus">9.11. Add IntegrationStatus</a>
+<ul>
+<li><a href="#add_integrationstatus_parameters">9.11.1. Parameters</a></li>
+<li><a href="#add_integrationstatus_actor_credentials">9.11.2. Actor credentials</a></li>
+<li><a href="#add_integrationstatus_referential_integrity">9.11.3. Referential Integrity</a></li>
+<li><a href="#add_integrationstatus_effect">9.11.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_lab">9.12. Update Lab</a>
+<ul>
+<li><a href="#update_lab_parameters">9.12.1. Parameters</a></li>
+<li><a href="#update_lab_actor_credentials">9.12.2. Actor credentials</a></li>
+<li><a href="#update_lab_referential_integrity">9.12.3. Referential Integrity</a></li>
+<li><a href="#update_lab_effect">9.12.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_experiment">9.13. Update Experiment</a>
+<ul>
+<li><a href="#update_experiment_parameters">9.13.1. Parameters</a></li>
+<li><a href="#update_experiment_actor_credentials">9.13.2. Actor credentials</a></li>
+<li><a href="#update_experiment_referential_integrity">9.13.3. Referential Integrity</a></li>
+<li><a href="#update_experiment_effect">9.13.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_institute">9.14. Update Institute</a>
+<ul>
+<li><a href="#update_institute_parameters">9.14.1. Parameters</a></li>
+<li><a href="#update_institute_actor_credentials">9.14.2. Actor credentials</a></li>
+<li><a href="#update_institute_referential_integrity">9.14.3. Referential Integrity</a></li>
+<li><a href="#update_institute_effect">9.14.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_discipline">9.15. Update Discipline</a>
+<ul>
+<li><a href="#update_discipline_parameters">9.15.1. Parameters</a></li>
+<li><a href="#update_discipline_actor_credentials">9.15.2. Actor credentials</a></li>
+<li><a href="#update_discipline_referential_integrity">9.15.3. Referential Integrity</a></li>
+<li><a href="#update_discipline_effect">9.15.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_developer">9.16. Update Developer</a>
+<ul>
+<li><a href="#update_developer_parameters">9.16.1. Parameters</a></li>
+<li><a href="#update_developer_actor_credentials">9.16.2. Actor credentials</a></li>
+<li><a href="#update_developer_referential_integrity">9.16.3. Referential Integrity</a></li>
+<li><a href="#update_developer_effect">9.16.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_hostinginfo">9.17. Update HostingInfo</a>
+<ul>
+<li><a href="#update_hostinginfo_parameters">9.17.1. Parameters</a></li>
+<li><a href="#update_hostinginfo_actor_credentials">9.17.2. Actor credentials</a></li>
+<li><a href="#update_hostinginfo_referential_integrity">9.17.3. Referential Integrity</a></li>
+<li><a href="#update_hostinginfo_effect">9.17.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#update_asset">9.18. Update Asset</a>
+<ul>
+<li><a href="#update_asset_parameters">9.18.1. Parameters</a></li>
+<li><a href="#update_asset_actor_credentials">9.18.2. Actor credentials</a></li>
+<li><a href="#update_asset_referential_integrity">9.18.3. Referential Integrity</a></li>
+<li><a href="#update_asset_effect">9.18.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_lab">9.19. Delete Lab</a>
+<ul>
+<li><a href="#delete_lab_parameters">9.19.1. Parameters</a></li>
+<li><a href="#delete_lab_actor_credentials">9.19.2. Actor credentials</a></li>
+<li><a href="#delete_lab_referential_integrity">9.19.3. Referential Integrity</a></li>
+<li><a href="#delete_lab_effect">9.19.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_experiment">9.20. Delete Experiment</a>
+<ul>
+<li><a href="#delete_experiment_parameters">9.20.1. Parameters</a></li>
+<li><a href="#delete_experiment_actor_credentials">9.20.2. Actor credentials</a></li>
+<li><a href="#delete_experiment_referential_integrity">9.20.3. Referential Integrity</a></li>
+<li><a href="#delete_experiment_effect">9.20.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_institute">9.21. Delete Institute</a>
+<ul>
+<li><a href="#delete_institute_parameters">9.21.1. Parameters</a></li>
+<li><a href="#delete_institute_actor_credentials">9.21.2. Actor credentials</a></li>
+<li><a href="#delete_institute_referential_integrity">9.21.3. Referential Integrity</a></li>
+<li><a href="#delete_institute_effect">9.21.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_discipline">9.22. Delete Discipline</a>
+<ul>
+<li><a href="#delete_discipline_parameters">9.22.1. Parameters</a></li>
+<li><a href="#delete_discipline_actor_credentials">9.22.2. Actor credentials</a></li>
+<li><a href="#delete_discipline_referential_integrity">9.22.3. Referential Integrity</a></li>
+<li><a href="#delete_discipline_effect">9.22.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_section">9.23. Delete Section</a>
+<ul>
+<li><a href="#delete_lab_parameters">9.23.1. Parameters</a></li>
+<li><a href="#delete_section_actor_credentials">9.23.2. Actor credentials</a></li>
+<li><a href="#delete_section_referential_integrity">9.23.3. Referential Integrity</a></li>
+<li><a href="#delete_section_effect">9.23.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_name">9.24. Delete Name</a>
+<ul>
+<li><a href="#delete_name_parameters">9.24.1. Parameters</a></li>
+<li><a href="#delete_name_actor_credentials">9.24.2. Actor credentials</a></li>
+<li><a href="#delete_name_referential_integrity">9.24.3. Referential Integrity</a></li>
+<li><a href="#delete_name_effect">9.24.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_email">9.25. Delete Email</a>
+<ul>
+<li><a href="#delete_email_parameters">9.25.1. Parameters</a></li>
+<li><a href="#delete_email_actor_credentials">9.25.2. Actor credentials</a></li>
+<li><a href="#delete_email_referential_integrity">9.25.3. Referential Integrity</a></li>
+<li><a href="#delete_email_effect">9.25.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_developer">9.26. Delete Developer</a>
+<ul>
+<li><a href="#delete_developer_parameters">9.26.1. Parameters</a></li>
+<li><a href="#delete_developer_actor_credentials">9.26.2. Actor credentials</a></li>
+<li><a href="#delete_developer_referential_integrity">9.26.3. Referential Integrity</a></li>
+<li><a href="#delete_developer_effect">9.26.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_hostinginfo">9.27. Delete HostingInfo</a>
+<ul>
+<li><a href="#delete_hostinginfo_parameters">9.27.1. Parameters</a></li>
+<li><a href="#delete_hostinginfo_actor_credentials">9.27.2. Actor credentials</a></li>
+<li><a href="#delete_hostinginfo_referential_integrity">9.27.3. Referential Integrity</a></li>
+<li><a href="#delete_hostinginfo_effect">9.27.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_asset">9.28. Delete Asset</a>
+<ul>
+<li><a href="#delete_asset_parameters">9.28.1. Parameters</a></li>
+<li><a href="#delete_asset_actor_credentials">9.28.2. Actor credentials</a></li>
+<li><a href="#delete_asset_referential_integrity">9.28.3. Referential Integrity</a></li>
+<li><a href="#delete_asset_effect">9.28.4. Effect</a></li>
+</ul>
+</li>
+<li><a href="#delete_integrationstatus">9.29. Delete IntegrationStatus</a>
+<ul>
+<li><a href="#delete_integrationstatus_parameters">9.29.1. Parameters</a></li>
+<li><a href="#delete_integrationstatus_actor_credentials">9.29.2. Actor credentials</a></li>
+<li><a href="#delete_integrationstatus_referential_integrity">9.29.3. Referential Integrity</a></li>
+<li><a href="#delete_integrationstatus_effect">9.29.4. Effect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-introduction" class="outline-2">
+<h2 id="introduction"><a id="sec-1" name="sec-1"></a><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-introduction">
+<p>
+The application or the system is abstracted as the data model.  The model
+captures: the entities that comprise the system; relations and constraints
+between these entities; and operations that entail a change in the state of
+the system.
+</p>
+
+<p>
+The purpose of this document is to describe the expected behaviour of the lab
+data service. It is a specification for the requirements of this service.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-notation" class="outline-2">
+<h2 id="notation"><a id="sec-2" name="sec-2"></a><span class="section-number-2">2</span> Notation</h2>
+<div class="outline-text-2" id="text-notation">
+<p>
+The system is defined as the data model.  There is a certain notation that is
+used for defining the data model. 
+</p>
+</div>
+
+<div id="outline-container-sets_cardinality_and_relations" class="outline-3">
+<h3 id="sets_cardinality_and_relations"><a id="sec-2-1" name="sec-2-1"></a><span class="section-number-3">2.1</span> Sets, cardinality and relations</h3>
+<div class="outline-text-3" id="text-sets_cardinality_and_relations">
+
+<p>
+If <code>A</code> is a set, then
+</p>
+<ol class="org-ol">
+<li><code>A!</code> denotes exactly one element of <code>A</code>.
+</li>
+<li><code>A?</code> denotes at most one element of <code>A</code>.
+</li>
+<li><code>A+</code> denotes  one or more elements of <code>A</code>
+</li>
+<li><code>A*</code>  denotes at zero or more elements of <code>A</code>.  Often
+abbreviated as <code>A</code>.
+</li>
+
+<li><code>A &gt; B</code> denotes a relation <i>from</i> <code>A</code> <i>to</i> <code>B</code>.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-relations_and_their_cardinality_type" class="outline-3">
+<h3 id="relations_and_their_cardinality_type"><a id="sec-2-2" name="sec-2-2"></a><span class="section-number-3">2.2</span> Relations and their cardinality type</h3>
+<div class="outline-text-3" id="text-relations_and_their_cardinality_type">
+
+<p>
+A relation <code>r:A &gt; B</code> could relate each element of <code>A</code> to
+zero, one or more elements of <code>B</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Cardinality of B</th>
+<th scope="col" class="left">Notation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">at least zero elements of <code>B</code>.</td>
+<td class="left">r: A &gt; B</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">at most one element of <code>B</code></td>
+<td class="left">r: A &gt; B?</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">at least one element of <code>B</code></td>
+<td class="left">r: A &gt; B+</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">exactly one element of <code>B</code></td>
+<td class="left">r: A &gt; B!</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-informal_abstraction_of_the_data_model" class="outline-2">
+<h2 id="informal_abstraction_of_the_data_model"><a id="sec-3" name="sec-3"></a><span class="section-number-2">3</span> Informal abstraction of the data model</h2>
+<div class="outline-text-2" id="text-informal_abstraction_of_the_data_model">
+</div>
+<div id="outline-container-abstract_entity_types" class="outline-3">
+<h3 id="abstract_entity_types"><a id="sec-3-1" name="sec-3-1"></a><span class="section-number-3">3.1</span> Abstract Entity Types</h3>
+<div class="outline-text-3" id="text-abstract_entity_types">
+<p>
+The following are the abstract data types in our system.
+</p>
+</div>
+<div id="outline-container-entity_lab" class="outline-4">
+<h4 id="entity_lab"><a id="sec-3-1-1" name="sec-3-1-1"></a><span class="section-number-4">3.1.1</span> Lab</h4>
+<div class="outline-text-4" id="text-entity_lab">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Lab</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Lab
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_experiment" class="outline-4">
+<h4 id="entity_experiment"><a id="sec-3-1-2" name="sec-3-1-2"></a><span class="section-number-4">3.1.2</span> Experiment</h4>
+<div class="outline-text-4" id="text-entity_experiment">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Experiment</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Experiment
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_institute" class="outline-4">
+<h4 id="entity_institute"><a id="sec-3-1-3" name="sec-3-1-3"></a><span class="section-number-4">3.1.3</span> Institute</h4>
+<div class="outline-text-4" id="text-entity_institute">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Institute</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Institute
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_discipline" class="outline-4">
+<h4 id="entity_discipline"><a id="sec-3-1-4" name="sec-3-1-4"></a><span class="section-number-4">3.1.4</span> Discipline</h4>
+<div class="outline-text-4" id="text-entity_discipline">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Discipline</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Discipline
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_developer" class="outline-4">
+<h4 id="entity_developer"><a id="sec-3-1-5" name="sec-3-1-5"></a><span class="section-number-4">3.1.5</span> Developer</h4>
+<div class="outline-text-4" id="text-entity_developer">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Developer</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Developer
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_section" class="outline-4">
+<h4 id="entity_section"><a id="sec-3-1-6" name="sec-3-1-6"></a><span class="section-number-4">3.1.6</span> Section</h4>
+<div class="outline-text-4" id="text-entity_section">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req4">Section</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Section
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_name" class="outline-4">
+<h4 id="entity_name"><a id="sec-3-1-7" name="sec-3-1-7"></a><span class="section-number-4">3.1.7</span> Name</h4>
+<div class="outline-text-4" id="text-entity_name">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Name</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Name
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_email" class="outline-4">
+<h4 id="entity_email"><a id="sec-3-1-8" name="sec-3-1-8"></a><span class="section-number-4">3.1.8</span> Email</h4>
+<div class="outline-text-4" id="text-entity_email">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req1">Email</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Email
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_HostingInfo" class="outline-4">
+<h4 id="entity_HostingInfo"><a id="sec-3-1-9" name="sec-3-1-9"></a><span class="section-number-4">3.1.9</span> HostingInfo</h4>
+<div class="outline-text-4" id="text-entity_HostingInfo">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req6">HostingInfo</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE HostingInfo
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_Asset" class="outline-4">
+<h4 id="entity_Asset"><a id="sec-3-1-10" name="sec-3-1-10"></a><span class="section-number-4">3.1.10</span> Asset</h4>
+<div class="outline-text-4" id="text-entity_Asset">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req7">Asset</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE Asset
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-entity_Integration_Status" class="outline-4">
+<h4 id="entity_Integration_Status"><a id="sec-3-1-11" name="sec-3-1-11"></a><span class="section-number-4">3.1.11</span> IntegrationStatus</h4>
+<div class="outline-text-4" id="text-entity_Integration_Status">
+<p>
+Requirement satisfied: <a href="../requirements/index.html#req8">IntegrationStatus</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Entity Types
+TYPE IntegrationStatus
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-cardinal_constraints" class="outline-2">
+<h2 id="cardinal_constraints"><a id="sec-4" name="sec-4"></a><span class="section-number-2">4</span> Relations and cardinality constraints over entity types</h2>
+<div class="outline-text-2" id="text-cardinal_constraints">
+<p>
+The constraints are defined both in terms of formal notation and also in
+diagrams for visual clarity. 
+</p>
+</div>
+
+<div id="outline-container-relations" class="outline-3">
+<h3 id="relations"><a id="sec-4-1" name="sec-4-1"></a><span class="section-number-3">4.1</span> Relations</h3>
+<div class="outline-text-3" id="text-relations">
+<p>
+For each relation, we define its inverse next to it.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Relations with cardinality constraints
+
+[developer, lab]                 : Developer +  &gt; Lab +
+[discipline, lab]                : Discipline +  &gt; Lab +
+[institute, lab]                 : Institute !  &gt; Lab +
+[experiment, lab]                : Experiment +  &gt; Lab !
+[hostinginfo, lab]               : HostingInfo + &gt; Lab !
+[asset, lab]                     : Asset + &gt; Lab !
+[integrationstatus, lab]         : IntegrationStatus ! &gt; Lab *
+
+[discipline, experiment]         : Discipline + &gt; Experiment +
+[institute, experiment]          : Institute ! &gt; Experiment +
+[experiment, section]            : Experiment ! &gt; Section +
+[experiment, developer]          : Experiment + &gt; Developer +
+[experiment, hostinginfo]        : Experiment ! &gt; HostingInfo +
+[asset, experiment]              : Asset + &gt; Experiment !
+[experiment, integrationstatus]  : Experiment *  &gt; IntegrationStatus !
+
+[developer, name]                : Developer + &gt; Name !
+[developer, email]               : Developer ! &gt; Email !
+[developer, discipline]          : Developer + &gt; Discipline +
+[developer, institute]           : Developer + &gt; Institute !
+
+[asset, discipline]              : Asset + &gt; Discipline +
+[asset, institute]               : Asset + &gt; Institute !
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-diagrams" class="outline-3">
+<h3 id="diagrams"><a id="sec-4-2" name="sec-4-2"></a><span class="section-number-3">4.2</span> Diagrams</h3>
+<div class="outline-text-3" id="text-diagrams">
+<p>
+The following diagram summarizes all the cardinality constraints across all
+entities.
+</p>
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQX1QRUkVjjW4hjHaUowOevT6_boqdslQfR0_awXAZmLPSx_UL8Qh_P5fYDoiCCm-IXzPX8LHs2pvId/pub?w=960&h=720">
+<p align="center"> Lab Data Service Model </p>
+<p>
+To edit the Lab Data Service Model image click <a href="https://docs.google.com/a/vlabs.ac.in/drawings/d/1Pc5ywXvy3RC4lws4KwBiv_qpukm_Fz6JPH4wh_CYjMo/edit?usp=sharing">here</a>
+</p>
+
+
+<img src="https://docs.google.com/drawings/d/15lSVFck27vNzXQqCHLXpvZ-ReaLTWSsALFq40TtD3Q0/pub?w=1225&h=723">
+<p align="center"> Lab Data Service Model with respect to Lab </p>
+<p>
+To edit the Lab Data Service Model with respect to Lab image click <a href="https://docs.google.com/drawings/d/15lSVFck27vNzXQqCHLXpvZ-ReaLTWSsALFq40TtD3Q0/edit">here</a>
+</p>
+
+
+<img src="https://docs.google.com/drawings/d/11yPJmA2dU_RmXxQNcspOh6qrtGQLf8qGLm3swfoPOlU/pub?w=1230&h=724">
+<p align="center"> Lab Data Service Model with respect to Experiment </p>
+<p>
+To edit the Lab Data Service Model with respect to Experiment image click <a href="https://docs.google.com/drawings/d/11yPJmA2dU_RmXxQNcspOh6qrtGQLf8qGLm3swfoPOlU/edit">here</a>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-key" class="outline-2">
+<h2 id="key"><a id="sec-5" name="sec-5"></a><span class="section-number-2">5</span> Keys</h2>
+<div class="outline-text-2" id="text-key">
+
+<p>
+An entity <code>K</code> is called a <i>key for</i> an entity <code>A</code> if there
+is a relation <code>r: A? &gt; K!</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">&#xa0;</th>
+<th scope="col" class="left">Entity</th>
+<th scope="col" class="left">Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">1.</td>
+<td class="left">Institute</td>
+<td class="left">Name</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">2.</td>
+<td class="left">Discipline</td>
+<td class="left">Name</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="right">3.</td>
+<td class="left">Developer</td>
+<td class="left">Email</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Assumptions</h2>
+</div>
+
+
+<div id="outline-container-system_state" class="outline-2">
+<h2 id="system_state"><a id="sec-7" name="sec-7"></a><span class="section-number-2">7</span> System state</h2>
+<div class="outline-text-2" id="text-system_state">
+<p>
+The system's state is captured by a set of <i>state variables</i>.
+</p>
+</div>
+
+<div id="outline-container-primary_entity_sets" class="outline-3">
+<h3 id="primary_entity_sets"><a id="sec-7-1" name="sec-7-1"></a><span class="section-number-3">7.1</span> Primary Entity sets</h3>
+<div class="outline-text-3" id="text-primary_entity_sets">
+<div class="org-src-container">
+
+<pre class="src src-spec">;;; Primary state variables
+Sets
+  lab-set  : set[Lab]  ; set of all labs in the system
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-derived_entity_sets" class="outline-3">
+<h3 id="derived_entity_sets"><a id="sec-7-2" name="sec-7-2"></a><span class="section-number-3">7.2</span> Derived Entity sets</h3>
+<div class="outline-text-3" id="text-derived_entity_sets">
+<div class="org-src-container">
+
+<pre class="src src-spec">  experiment-set         : lab-set.experiment         ; set of experiments in the system
+  institute-set          : lab-set.institute          ; set of institutes in the system
+  discipline-set         : lab-set.discipline         ; set of disciplines in the system
+  developer-set          : lab-set.developer          ; set of developers in the system
+  hostinginfo-set        : lab-set.hostinginfo        ; set of hosting information in the system
+  asset-set              : lab-set.asset              ; set of assets in the system
+  integrationstatus-set  : lab-set.integrationstatus  ; set of integration status in the system
+
+  name-set        : developer-set.name         ; set of all names of developers in the system
+  email-set       : developer-set.email        ; set of all emails of developers in the system
+  lab-name-set    : lab-set.lab_name           ; set of all lab-names in the system
+  lab-id-set      : lab-set.lab_id             ; set of all lab_ids in the system
+  exp-name-set    : experiment-set.exp_name    ; set of all exp-names in the system
+  exp-id-set      : experiment-set.exp_id      ; set of all exp_ids in the system
+  section-set     : experiment-set.section     ; set of all sections in the system
+  inst-name-set   : institute-set.inst_name    ; set of all inst-names in the system
+  inst-id-set     : institute-set.inst_id      ; set of all inst_ids in the system
+  disc-name-set   : discipline-set.disc_name   ; set of all disc-names in the system
+  disc-id-set     : discipline-set.disc_id     ; set of all disc_ids in the system
+  hosting-status-set : hostinginfo-set.hosting_status ; set of all hosting_status in the system
+  hosted-url-set  : hostinginfo-set.hosted_url ; set of all hosted_urls in the system
+  hosted_on-set   : hostinginfo-set.hosted_on  ; set of sll hosted_on in the system
+  asset-type-set  : asset-set.asset_type       ; set of all assets_types in the system
+  asset-path-set  : asset-set.asset_path       ; set of all assets_paths in the system
+  integration-status-set : integrationstatus-set.level ; set of all levels in the system
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-referential_integrity_relations" class="outline-2">
+<h2 id="referential_integrity_relations"><a id="sec-8" name="sec-8"></a><span class="section-number-2">8</span> Referential Integrity over primary and derived entity sets</h2>
+<div class="outline-text-2" id="text-referential_integrity_relations">
+<div class="org-src-container">
+
+<pre class="src src-spec">[developers, labs]                :  lab-set + &gt; developer-set + 
+[discipline, labs]                :  lab-set + &gt; discipline-set +
+[institute, labs]                 :  lab-set + &gt; institute-set !
+[experiments, labs]               :  lab-set ! &gt; experiment-set +
+[hostinginfo, labs]               :  lab-set + &gt; hostinginfo-set +
+[asset, labs]                     :  lab-set ! &gt; asset-set +
+[integrationstatus, labs]         :  lab-set * &gt; integrationstatus-set !
+[discipline, experiments]         :  experiment-set + &gt; discipline-set +
+[institute, experiments]          :  experiment-set + &gt; institute-set !
+[experiments, sections]           :  section-set + &gt; experiment-set !
+[experiments, developers]         :  developer-set + &gt; experiment-set +
+[experiments, hostinginfos]       :  hostinginfo-set + &gt; experiment-set !
+[asset, experiments]              :  experiment-set ! &gt; asset-set +
+[experiments, integrationstatus]  :  integrationstatus-set !  &gt; experiment-set *
+[developer, name]                 :  name-set ! &gt; developer-set +
+[developer, email]                :  email-set ! &gt; developer-set !
+[developer, discipline]           :  discipline-set + &gt; developer-set +
+[developers, institutes]          :  institute-set ! &gt; developer-set + 
+[asset, discipline]               :  discipline-set + &gt; asset-set +
+[asset, institute]                :  institute-set ! &gt; asset-set +
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-operations" class="outline-2">
+<h2 id="operations"><a id="sec-9" name="sec-9"></a><span class="section-number-2">9</span> Operations</h2>
+<div class="outline-text-2" id="text-operations">
+
+<p>
+CRUD operations.  
+</p>
+
+<p>
+Each operation is performed on an entity instance or an
+entity-set.   The operation may take additional parameters.
+</p>
+
+<ul class="org-ul">
+<li>C  create a user      
+</li>
+<li>R  read from a user   
+</li>
+<li>U  update a user      
+</li>
+<li>D  delete a user      
+</li>
+</ul>
+</div>
+
+<div id="outline-container-add_lab" class="outline-3">
+<h3 id="add_lab"><a id="sec-9-1" name="sec-9-1"></a><span class="section-number-3">9.1</span> Add Lab</h3>
+<div class="outline-text-3" id="text-add_lab">
+</div>
+<div id="outline-container-parameters" class="outline-4">
+<h4 id="parameters"><a id="sec-9-1-1" name="sec-9-1-1"></a><span class="section-number-4">9.1.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l: Lab, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-actor_credentials" class="outline-4">
+<h4 id="actor_credentials"><a id="sec-9-1-2" name="sec-9-1-2"></a><span class="section-number-4">9.1.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-referential_integrity" class="outline-4">
+<h4 id="referential_integrity"><a id="sec-9-1-3" name="sec-9-1-3"></a><span class="section-number-4">9.1.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l: ~lab-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-effect" class="outline-4">
+<h4 id="effect"><a id="sec-9-1-4" name="sec-9-1-4"></a><span class="section-number-4">9.1.4</span> Effect</h4>
+<div class="outline-text-4" id="text-effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l = new lab
+    lab-set = lab-set U {l}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-add_experiment" class="outline-3">
+<h3 id="add_experiment"><a id="sec-9-2" name="sec-9-2"></a><span class="section-number-3">9.2</span> Add Experiment</h3>
+<div class="outline-text-3" id="text-add_experiment">
+</div>
+<div id="outline-container-add_experiment_parameters" class="outline-4">
+<h4 id="add_experiment_parameters"><a id="sec-9-2-1" name="sec-9-2-1"></a><span class="section-number-4">9.2.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_experiment_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e: Experimet, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_experiment_actor_credentials" class="outline-4">
+<h4 id="add_experiment_actor_credentials"><a id="sec-9-2-2" name="sec-9-2-2"></a><span class="section-number-4">9.2.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_experiment_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_experiment_referentials_integrity" class="outline-4">
+<h4 id="add_experiment_referentials_integrity"><a id="sec-9-2-3" name="sec-9-2-3"></a><span class="section-number-4">9.2.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_experiment_referentials_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e: ~experiment-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_experiment_effect" class="outline-4">
+<h4 id="add_experiment_effect"><a id="sec-9-2-4" name="sec-9-2-4"></a><span class="section-number-4">9.2.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_experiment_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e = new experiment
+    experiment-set = experiment-set U {e}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-add_institure" class="outline-3">
+<h3 id="add_institure"><a id="sec-9-3" name="sec-9-3"></a><span class="section-number-3">9.3</span> Add Institute</h3>
+<div class="outline-text-3" id="text-add_institure">
+</div>
+<div id="outline-container-add_institute_parameters" class="outline-4">
+<h4 id="add_institute_parameters"><a id="sec-9-3-1" name="sec-9-3-1"></a><span class="section-number-4">9.3.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_institute_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i: Institute, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_institute_actor_credentials" class="outline-4">
+<h4 id="add_institute_actor_credentials"><a id="sec-9-3-2" name="sec-9-3-2"></a><span class="section-number-4">9.3.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_institute_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_institute_referential_integrity" class="outline-4">
+<h4 id="add_institute_referential_integrity"><a id="sec-9-3-3" name="sec-9-3-3"></a><span class="section-number-4">9.3.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_institute_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i: ~institute-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_institute_effect" class="outline-4">
+<h4 id="add_institute_effect"><a id="sec-9-3-4" name="sec-9-3-4"></a><span class="section-number-4">9.3.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_institute_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i = new institute
+    institute-set = institute-set U {i}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-add_discipline" class="outline-3">
+<h3 id="add_discipline"><a id="sec-9-4" name="sec-9-4"></a><span class="section-number-3">9.4</span> Add Discipline</h3>
+<div class="outline-text-3" id="text-add_discipline">
+</div>
+<div id="outline-container-add_discipline_parameters" class="outline-4">
+<h4 id="add_discipline_parameters"><a id="sec-9-4-1" name="sec-9-4-1"></a><span class="section-number-4">9.4.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_discipline_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    d: Discipline, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_discipline_actor_credentials" class="outline-4">
+<h4 id="add_discipline_actor_credentials"><a id="sec-9-4-2" name="sec-9-4-2"></a><span class="section-number-4">9.4.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_discipline_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_discipline_referential_integrity" class="outline-4">
+<h4 id="add_discipline_referential_integrity"><a id="sec-9-4-3" name="sec-9-4-3"></a><span class="section-number-4">9.4.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_discipline_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    d: ~discipline-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_discipline_effect" class="outline-4">
+<h4 id="add_discipline_effect"><a id="sec-9-4-4" name="sec-9-4-4"></a><span class="section-number-4">9.4.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_discipline_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    d = new discipline
+    discipline-set = discipline-set U {d}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-add_section" class="outline-3">
+<h3 id="add_section"><a id="sec-9-5" name="sec-9-5"></a><span class="section-number-3">9.5</span> Add Section</h3>
+<div class="outline-text-3" id="text-add_section">
+</div>
+<div id="outline-container-parameters" class="outline-4">
+<h4 id="parameters"><a id="sec-9-5-1" name="sec-9-5-1"></a><span class="section-number-4">9.5.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    sec: Section, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-actor_credentials" class="outline-4">
+<h4 id="actor_credentials"><a id="sec-9-5-2" name="sec-9-5-2"></a><span class="section-number-4">9.5.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-referential_integrity" class="outline-4">
+<h4 id="referential_integrity"><a id="sec-9-5-3" name="sec-9-5-3"></a><span class="section-number-4">9.5.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    sec: ~section-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-effect" class="outline-4">
+<h4 id="effect"><a id="sec-9-5-4" name="sec-9-5-4"></a><span class="section-number-4">9.5.4</span> Effect</h4>
+<div class="outline-text-4" id="text-effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    sec = new section
+    section-set = section-set U {sec}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-add_name" class="outline-3">
+<h3 id="add_name"><a id="sec-9-6" name="sec-9-6"></a><span class="section-number-3">9.6</span> Add Name</h3>
+<div class="outline-text-3" id="text-add_name">
+</div>
+<div id="outline-container-parameters" class="outline-4">
+<h4 id="parameters"><a id="sec-9-6-1" name="sec-9-6-1"></a><span class="section-number-4">9.6.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: Name, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-actor_credentials" class="outline-4">
+<h4 id="actor_credentials"><a id="sec-9-6-2" name="sec-9-6-2"></a><span class="section-number-4">9.6.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-referential_integrity" class="outline-4">
+<h4 id="referential_integrity"><a id="sec-9-6-3" name="sec-9-6-3"></a><span class="section-number-4">9.6.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l: ~lab-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-effect" class="outline-4">
+<h4 id="effect"><a id="sec-9-6-4" name="sec-9-6-4"></a><span class="section-number-4">9.6.4</span> Effect</h4>
+<div class="outline-text-4" id="text-effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n = new name
+    name-set = name-set U {n}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-add_email" class="outline-3">
+<h3 id="add_email"><a id="sec-9-7" name="sec-9-7"></a><span class="section-number-3">9.7</span> Add Email</h3>
+<div class="outline-text-3" id="text-add_email">
+</div>
+<div id="outline-container-parameters" class="outline-4">
+<h4 id="parameters"><a id="sec-9-7-1" name="sec-9-7-1"></a><span class="section-number-4">9.7.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e: Email, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-actor_credentials" class="outline-4">
+<h4 id="actor_credentials"><a id="sec-9-7-2" name="sec-9-7-2"></a><span class="section-number-4">9.7.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-referential_integrity" class="outline-4">
+<h4 id="referential_integrity"><a id="sec-9-7-3" name="sec-9-7-3"></a><span class="section-number-4">9.7.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e: ~email-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-effect" class="outline-4">
+<h4 id="effect"><a id="sec-9-7-4" name="sec-9-7-4"></a><span class="section-number-4">9.7.4</span> Effect</h4>
+<div class="outline-text-4" id="text-effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e = new email
+    email-set = email-set U {e}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-add_developer" class="outline-3">
+<h3 id="add_developer"><a id="sec-9-8" name="sec-9-8"></a><span class="section-number-3">9.8</span> Add Developer</h3>
+<div class="outline-text-3" id="text-add_developer">
+</div>
+<div id="outline-container-add_developer_parameters" class="outline-4">
+<h4 id="add_developer_parameters"><a id="sec-9-8-1" name="sec-9-8-1"></a><span class="section-number-4">9.8.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_developer_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    r: Developer, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_developer_actor_credentials" class="outline-4">
+<h4 id="add_developer_actor_credentials"><a id="sec-9-8-2" name="sec-9-8-2"></a><span class="section-number-4">9.8.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_developer_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_developer_referential_integrity" class="outline-4">
+<h4 id="add_developer_referential_integrity"><a id="sec-9-8-3" name="sec-9-8-3"></a><span class="section-number-4">9.8.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_developer_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    r: ~developer-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_developer_effect" class="outline-4">
+<h4 id="add_developer_effect"><a id="sec-9-8-4" name="sec-9-8-4"></a><span class="section-number-4">9.8.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_developer_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    r = new developer
+    developer-set = developer-set U {r}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-add_hostinginfo" class="outline-3">
+<h3 id="add_hostinginfo"><a id="sec-9-9" name="sec-9-9"></a><span class="section-number-3">9.9</span> Add HostingInfo</h3>
+<div class="outline-text-3" id="text-add_hostinginfo">
+</div>
+<div id="outline-container-add_hostinginfo_parameters" class="outline-4">
+<h4 id="add_hostinginfo_parameters"><a id="sec-9-9-1" name="sec-9-9-1"></a><span class="section-number-4">9.9.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_hostinginfo_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    h: HostingInfo, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_hostinginfo_actor_credentials" class="outline-4">
+<h4 id="add_hostinginfo_actor_credentials"><a id="sec-9-9-2" name="sec-9-9-2"></a><span class="section-number-4">9.9.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_hostinginfo_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_hostinginfo_referential_integrity" class="outline-4">
+<h4 id="add_hostinginfo_referential_integrity"><a id="sec-9-9-3" name="sec-9-9-3"></a><span class="section-number-4">9.9.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_hostinginfo_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    h : ~hostinginfo-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_hostinginfo_effect" class="outline-4">
+<h4 id="add_hostinginfo_effect"><a id="sec-9-9-4" name="sec-9-9-4"></a><span class="section-number-4">9.9.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_hostinginfo_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    h = new hostinginfo
+    hostinginfo-set = hostinginfo-set U {h}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-add_asset" class="outline-3">
+<h3 id="add_asset"><a id="sec-9-10" name="sec-9-10"></a><span class="section-number-3">9.10</span> Add Asset</h3>
+<div class="outline-text-3" id="text-add_asset">
+</div>
+<div id="outline-container-add_asset_parameters" class="outline-4">
+<h4 id="add_asset_parameters"><a id="sec-9-10-1" name="sec-9-10-1"></a><span class="section-number-4">9.10.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_asset_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    a: Asset, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_asset_actor_credentials" class="outline-4">
+<h4 id="add_asset_actor_credentials"><a id="sec-9-10-2" name="sec-9-10-2"></a><span class="section-number-4">9.10.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_asset_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_asset_referential_integrity" class="outline-4">
+<h4 id="add_asset_referential_integrity"><a id="sec-9-10-3" name="sec-9-10-3"></a><span class="section-number-4">9.10.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_asset_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    a: ~asset-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_asset_effect" class="outline-4">
+<h4 id="add_asset_effect"><a id="sec-9-10-4" name="sec-9-10-4"></a><span class="section-number-4">9.10.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_asset_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    a = new asset    
+   asset-set = asset-set U {a}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-add_integrationstatus" class="outline-3">
+<h3 id="add_integrationstatus"><a id="sec-9-11" name="sec-9-11"></a><span class="section-number-3">9.11</span> Add IntegrationStatus</h3>
+<div class="outline-text-3" id="text-add_integrationstatus">
+</div>
+<div id="outline-container-add_integrationstatus_parameters" class="outline-4">
+<h4 id="add_integrationstatus_parameters"><a id="sec-9-11-1" name="sec-9-11-1"></a><span class="section-number-4">9.11.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-add_integrationstatus_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">   i: IntegrationStatus, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_integrationstatus_actor_credentials" class="outline-4">
+<h4 id="add_integrationstatus_actor_credentials"><a id="sec-9-11-2" name="sec-9-11-2"></a><span class="section-number-4">9.11.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-add_integrationstatus_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_integrationstatus_referential_integrity" class="outline-4">
+<h4 id="add_integrationstatus_referential_integrity"><a id="sec-9-11-3" name="sec-9-11-3"></a><span class="section-number-4">9.11.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-add_integrationstatus_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i: ~integrationstatus-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-add_integrationstatus_effect" class="outline-4">
+<h4 id="add_integrationstatus_effect"><a id="sec-9-11-4" name="sec-9-11-4"></a><span class="section-number-4">9.11.4</span> Effect</h4>
+<div class="outline-text-4" id="text-add_integrationstatus_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">   i = new integrationstatus
+   integrationstatus-set = integrationstatus-set U {i}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_lab" class="outline-3">
+<h3 id="update_lab"><a id="sec-9-12" name="sec-9-12"></a><span class="section-number-3">9.12</span> Update Lab</h3>
+<div class="outline-text-3" id="text-update_lab">
+</div>
+<div id="outline-container-update_lab_parameters" class="outline-4">
+<h4 id="update_lab_parameters"><a id="sec-9-12-1" name="sec-9-12-1"></a><span class="section-number-4">9.12.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_lab_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: lab_name, lid: lab_id, l: Lab, e: Experiment, i: Institute, d: Discipline, r: Developer, h: HostingInfo, a: Asset, is: IntegrationStatu, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_lab_actor_credentials" class="outline-4">
+<h4 id="update_lab_actor_credentials"><a id="sec-9-12-2" name="sec-9-12-2"></a><span class="section-number-4">9.12.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_lab_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_lab_referential_integrity" class="outline-4">
+<h4 id="update_lab_referential_integrity"><a id="sec-9-12-3" name="sec-9-12-3"></a><span class="section-number-4">9.12.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_lab_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l   : lab-set
+    s   : session-set
+    n   : lab-name-set
+    lid : ~lab-id-set
+    e   : experiment-set
+    i   : institute-set
+    d   : discipline-set
+    r   : developer-set
+    h   : hostinginfo-set
+    a   : asset-set
+    i   : integrationstatus-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_lab_effect" class="outline-4">
+<h4 id="update_lab_effect"><a id="sec-9-12-4" name="sec-9-12-4"></a><span class="section-number-4">9.12.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_lab_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The lab details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_experiment" class="outline-3">
+<h3 id="update_experiment"><a id="sec-9-13" name="sec-9-13"></a><span class="section-number-3">9.13</span> Update Experiment</h3>
+<div class="outline-text-3" id="text-update_experiment">
+</div>
+<div id="outline-container-update_experiment_parameters" class="outline-4">
+<h4 id="update_experiment_parameters"><a id="sec-9-13-1" name="sec-9-13-1"></a><span class="section-number-4">9.13.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_experiment_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: exp_name, eid: exp_id, e: Experiment, i: Institute, d: Discipline, r: Developer, h: HostingInfo, a: Asset, is: IntegrationStatu, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_experiment_actor_credentials" class="outline-4">
+<h4 id="update_experiment_actor_credentials"><a id="sec-9-13-2" name="sec-9-13-2"></a><span class="section-number-4">9.13.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_experiment_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_experiment_referential_integrity" class="outline-4">
+<h4 id="update_experiment_referential_integrity"><a id="sec-9-13-3" name="sec-9-13-3"></a><span class="section-number-4">9.13.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_experiment_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e   : experiment-set
+    s   : session-set
+    n   : ~exp-name-set
+    eid : ~exp-id-set
+    i   : institute-set
+    d   : discipline-set
+    r   : developer-set
+    h   : hostinginfo-set
+    a   : asset-set
+    is  : integrationstatus-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_experiment_effect" class="outline-4">
+<h4 id="update_experiment_effect"><a id="sec-9-13-4" name="sec-9-13-4"></a><span class="section-number-4">9.13.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_experiment_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The experiment details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_institute" class="outline-3">
+<h3 id="update_institute"><a id="sec-9-14" name="sec-9-14"></a><span class="section-number-3">9.14</span> Update Institute</h3>
+<div class="outline-text-3" id="text-update_institute">
+</div>
+<div id="outline-container-update_institute_parameters" class="outline-4">
+<h4 id="update_institute_parameters"><a id="sec-9-14-1" name="sec-9-14-1"></a><span class="section-number-4">9.14.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_institute_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: inst_name, iid: inst_id, i: Institute, a: Asset, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_institute_actor_credentials" class="outline-4">
+<h4 id="update_institute_actor_credentials"><a id="sec-9-14-2" name="sec-9-14-2"></a><span class="section-number-4">9.14.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_institute_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_institute_referential_integrity" class="outline-4">
+<h4 id="update_institute_referential_integrity"><a id="sec-9-14-3" name="sec-9-14-3"></a><span class="section-number-4">9.14.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_institute_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i   : institute-set
+    s   : session-set
+    n   : inst-name-set
+    iid : ~inst-id-set
+    a   : asset-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_institute_effect" class="outline-4">
+<h4 id="update_institute_effect"><a id="sec-9-14-4" name="sec-9-14-4"></a><span class="section-number-4">9.14.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_institute_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The institute details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_discipline" class="outline-3">
+<h3 id="update_discipline"><a id="sec-9-15" name="sec-9-15"></a><span class="section-number-3">9.15</span> Update Discipline</h3>
+<div class="outline-text-3" id="text-update_discipline">
+</div>
+<div id="outline-container-update_discipline_parameters" class="outline-4">
+<h4 id="update_discipline_parameters"><a id="sec-9-15-1" name="sec-9-15-1"></a><span class="section-number-4">9.15.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_discipline_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: disc_name, did: disc_id, d: Discipline, a: Asset, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_discipline_actor_credentials" class="outline-4">
+<h4 id="update_discipline_actor_credentials"><a id="sec-9-15-2" name="sec-9-15-2"></a><span class="section-number-4">9.15.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_discipline_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_discipline_referential_integrity" class="outline-4">
+<h4 id="update_discipline_referential_integrity"><a id="sec-9-15-3" name="sec-9-15-3"></a><span class="section-number-4">9.15.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_discipline_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    d  : discipline-set
+    s  : session-set
+    n  : disc-name-set
+    did: ~disc-id-set
+    a  : asset-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_discipline_effect" class="outline-4">
+<h4 id="update_discipline_effect"><a id="sec-9-15-4" name="sec-9-15-4"></a><span class="section-number-4">9.15.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_discipline_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The discipline details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_developer" class="outline-3">
+<h3 id="update_developer"><a id="sec-9-16" name="sec-9-16"></a><span class="section-number-3">9.16</span> Update Developer</h3>
+<div class="outline-text-3" id="text-update_developer">
+</div>
+<div id="outline-container-update_developer_parameters" class="outline-4">
+<h4 id="update_developer_parameters"><a id="sec-9-16-1" name="sec-9-16-1"></a><span class="section-number-4">9.16.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_developer_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: name, e: email_id, r: Developer, i: Institute, d: Discipline, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_developer_actor_credentials" class="outline-4">
+<h4 id="update_developer_actor_credentials"><a id="sec-9-16-2" name="sec-9-16-2"></a><span class="section-number-4">9.16.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_developer_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_developer_referential_integrity" class="outline-4">
+<h4 id="update_developer_referential_integrity"><a id="sec-9-16-3" name="sec-9-16-3"></a><span class="section-number-4">9.16.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_developer_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    r   : developer-set
+    n   : name-set
+    e   :~email-set
+    i   : institute-set
+    d   : discipline-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_developer_effect" class="outline-4">
+<h4 id="update_developer_effect"><a id="sec-9-16-4" name="sec-9-16-4"></a><span class="section-number-4">9.16.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_developer_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The developer details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_hostinginfo" class="outline-3">
+<h3 id="update_hostinginfo"><a id="sec-9-17" name="sec-9-17"></a><span class="section-number-3">9.17</span> Update HostingInfo</h3>
+<div class="outline-text-3" id="text-update_hostinginfo">
+</div>
+<div id="outline-container-update_hostinginfo_parameters" class="outline-4">
+<h4 id="update_hostinginfo_parameters"><a id="sec-9-17-1" name="sec-9-17-1"></a><span class="section-number-4">9.17.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_hostinginfo_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">   hs: hosting_status, hu: hosted_url, ho: hosted_on, h: HostingInfo , s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_hostinginfo_actor_credentials" class="outline-4">
+<h4 id="update_hostinginfo_actor_credentials"><a id="sec-9-17-2" name="sec-9-17-2"></a><span class="section-number-4">9.17.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_hostinginfo_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_hostinginfo_referential_integrity" class="outline-4">
+<h4 id="update_hostinginfo_referential_integrity"><a id="sec-9-17-3" name="sec-9-17-3"></a><span class="section-number-4">9.17.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_hostinginfo_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    h  : hostinginfo-set
+    s  : session-set
+    hs : hosting-status-set
+    hu : ~hosted-url-set
+    ho : hosted-on-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_hostinginfo_effect" class="outline-4">
+<h4 id="update_hostinginfo_effect"><a id="sec-9-17-4" name="sec-9-17-4"></a><span class="section-number-4">9.17.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_hostinginfo_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The HostingInfo details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-update_asset" class="outline-3">
+<h3 id="update_asset"><a id="sec-9-18" name="sec-9-18"></a><span class="section-number-3">9.18</span> Update Asset</h3>
+<div class="outline-text-3" id="text-update_asset">
+</div>
+<div id="outline-container-update_asset_parameters" class="outline-4">
+<h4 id="update_asset_parameters"><a id="sec-9-18-1" name="sec-9-18-1"></a><span class="section-number-4">9.18.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-update_asset_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    at: asset_type, ap: asset_path, a: Asset, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_asset_actor_credentials" class="outline-4">
+<h4 id="update_asset_actor_credentials"><a id="sec-9-18-2" name="sec-9-18-2"></a><span class="section-number-4">9.18.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-update_asset_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_asset_referential_integrity" class="outline-4">
+<h4 id="update_asset_referential_integrity"><a id="sec-9-18-3" name="sec-9-18-3"></a><span class="section-number-4">9.18.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-update_asset_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    a : asset-set
+    s : session-set
+    at: asset-type-set
+    ap: ~asset-path-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-update_asset_effect" class="outline-4">
+<h4 id="update_asset_effect"><a id="sec-9-18-4" name="sec-9-18-4"></a><span class="section-number-4">9.18.4</span> Effect</h4>
+<div class="outline-text-4" id="text-update_asset_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    The Asset details are updated.
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_lab" class="outline-3">
+<h3 id="delete_lab"><a id="sec-9-19" name="sec-9-19"></a><span class="section-number-3">9.19</span> Delete Lab</h3>
+<div class="outline-text-3" id="text-delete_lab">
+</div>
+<div id="outline-container-delete_lab_parameters" class="outline-4">
+<h4 id="delete_lab_parameters"><a id="sec-9-19-1" name="sec-9-19-1"></a><span class="section-number-4">9.19.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_lab_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l: Lab, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_lab_actor_credentials" class="outline-4">
+<h4 id="delete_lab_actor_credentials"><a id="sec-9-19-2" name="sec-9-19-2"></a><span class="section-number-4">9.19.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_lab_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_lab_referential_integrity" class="outline-4">
+<h4 id="delete_lab_referential_integrity"><a id="sec-9-19-3" name="sec-9-19-3"></a><span class="section-number-4">9.19.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_lab_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    l : lab-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_lab_effect" class="outline-4">
+<h4 id="delete_lab_effect"><a id="sec-9-19-4" name="sec-9-19-4"></a><span class="section-number-4">9.19.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_lab_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    lab-set = lab-set - {l}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_experiment" class="outline-3">
+<h3 id="delete_experiment"><a id="sec-9-20" name="sec-9-20"></a><span class="section-number-3">9.20</span> Delete Experiment</h3>
+<div class="outline-text-3" id="text-delete_experiment">
+</div>
+<div id="outline-container-delete_experiment_parameters" class="outline-4">
+<h4 id="delete_experiment_parameters"><a id="sec-9-20-1" name="sec-9-20-1"></a><span class="section-number-4">9.20.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_experiment_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e: Experiment, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_experiment_actor_credentials" class="outline-4">
+<h4 id="delete_experiment_actor_credentials"><a id="sec-9-20-2" name="sec-9-20-2"></a><span class="section-number-4">9.20.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_experiment_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_experiment_referential_integrity" class="outline-4">
+<h4 id="delete_experiment_referential_integrity"><a id="sec-9-20-3" name="sec-9-20-3"></a><span class="section-number-4">9.20.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_experiment_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e : experiment-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_experiment_effect" class="outline-4">
+<h4 id="delete_experiment_effect"><a id="sec-9-20-4" name="sec-9-20-4"></a><span class="section-number-4">9.20.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_experiment_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    experiment-set = experiment-set - {e}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_institute" class="outline-3">
+<h3 id="delete_institute"><a id="sec-9-21" name="sec-9-21"></a><span class="section-number-3">9.21</span> Delete Institute</h3>
+<div class="outline-text-3" id="text-delete_institute">
+</div>
+<div id="outline-container-delete_institute_parameters" class="outline-4">
+<h4 id="delete_institute_parameters"><a id="sec-9-21-1" name="sec-9-21-1"></a><span class="section-number-4">9.21.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_institute_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i: Institute, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_institute_actor_credentials" class="outline-4">
+<h4 id="delete_institute_actor_credentials"><a id="sec-9-21-2" name="sec-9-21-2"></a><span class="section-number-4">9.21.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_institute_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_institute_referential_integrity" class="outline-4">
+<h4 id="delete_institute_referential_integrity"><a id="sec-9-21-3" name="sec-9-21-3"></a><span class="section-number-4">9.21.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_institute_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    i : institute-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_institute_effect" class="outline-4">
+<h4 id="delete_institute_effect"><a id="sec-9-21-4" name="sec-9-21-4"></a><span class="section-number-4">9.21.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_institute_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    institute-set = institute-set - {i}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_discipline" class="outline-3">
+<h3 id="delete_discipline"><a id="sec-9-22" name="sec-9-22"></a><span class="section-number-3">9.22</span> Delete Discipline</h3>
+<div class="outline-text-3" id="text-delete_discipline">
+</div>
+<div id="outline-container-delete_discipline_parameters" class="outline-4">
+<h4 id="delete_discipline_parameters"><a id="sec-9-22-1" name="sec-9-22-1"></a><span class="section-number-4">9.22.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_discipline_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    d: Discipline, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_discipline_actor_credentials" class="outline-4">
+<h4 id="delete_discipline_actor_credentials"><a id="sec-9-22-2" name="sec-9-22-2"></a><span class="section-number-4">9.22.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_discipline_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_discipline_referential_integrity" class="outline-4">
+<h4 id="delete_discipline_referential_integrity"><a id="sec-9-22-3" name="sec-9-22-3"></a><span class="section-number-4">9.22.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_discipline_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    d : discipline-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-delete_discipline_effect" class="outline-4">
+<h4 id="delete_discipline_effect"><a id="sec-9-22-4" name="sec-9-22-4"></a><span class="section-number-4">9.22.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_discipline_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    discipline-set = discipline-set - {d}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_section" class="outline-3">
+<h3 id="delete_section"><a id="sec-9-23" name="sec-9-23"></a><span class="section-number-3">9.23</span> Delete Section</h3>
+<div class="outline-text-3" id="text-delete_section">
+</div>
+<div id="outline-container-delete_lab_parameters" class="outline-4">
+<h4 id="delete_lab_parameters"><a id="sec-9-23-1" name="sec-9-23-1"></a><span class="section-number-4">9.23.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_lab_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    sec: Section, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_section_actor_credentials" class="outline-4">
+<h4 id="delete_section_actor_credentials"><a id="sec-9-23-2" name="sec-9-23-2"></a><span class="section-number-4">9.23.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_section_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_section_referential_integrity" class="outline-4">
+<h4 id="delete_section_referential_integrity"><a id="sec-9-23-3" name="sec-9-23-3"></a><span class="section-number-4">9.23.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_section_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    sec : section-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_section_effect" class="outline-4">
+<h4 id="delete_section_effect"><a id="sec-9-23-4" name="sec-9-23-4"></a><span class="section-number-4">9.23.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_section_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    section-set = section-set - {sec}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_name" class="outline-3">
+<h3 id="delete_name"><a id="sec-9-24" name="sec-9-24"></a><span class="section-number-3">9.24</span> Delete Name</h3>
+<div class="outline-text-3" id="text-delete_name">
+</div>
+<div id="outline-container-delete_name_parameters" class="outline-4">
+<h4 id="delete_name_parameters"><a id="sec-9-24-1" name="sec-9-24-1"></a><span class="section-number-4">9.24.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_name_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n: Name, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_name_actor_credentials" class="outline-4">
+<h4 id="delete_name_actor_credentials"><a id="sec-9-24-2" name="sec-9-24-2"></a><span class="section-number-4">9.24.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_name_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_name_referential_integrity" class="outline-4">
+<h4 id="delete_name_referential_integrity"><a id="sec-9-24-3" name="sec-9-24-3"></a><span class="section-number-4">9.24.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_name_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    n : name-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_name_effect" class="outline-4">
+<h4 id="delete_name_effect"><a id="sec-9-24-4" name="sec-9-24-4"></a><span class="section-number-4">9.24.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_name_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    name-set = name-set - {n}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_email" class="outline-3">
+<h3 id="delete_email"><a id="sec-9-25" name="sec-9-25"></a><span class="section-number-3">9.25</span> Delete Email</h3>
+<div class="outline-text-3" id="text-delete_email">
+</div>
+<div id="outline-container-delete_email_parameters" class="outline-4">
+<h4 id="delete_email_parameters"><a id="sec-9-25-1" name="sec-9-25-1"></a><span class="section-number-4">9.25.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_email_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e: Email, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_email_actor_credentials" class="outline-4">
+<h4 id="delete_email_actor_credentials"><a id="sec-9-25-2" name="sec-9-25-2"></a><span class="section-number-4">9.25.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_email_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_email_referential_integrity" class="outline-4">
+<h4 id="delete_email_referential_integrity"><a id="sec-9-25-3" name="sec-9-25-3"></a><span class="section-number-4">9.25.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_email_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    e : email-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_email_effect" class="outline-4">
+<h4 id="delete_email_effect"><a id="sec-9-25-4" name="sec-9-25-4"></a><span class="section-number-4">9.25.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_email_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    email-set = email-set - {e}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_developer" class="outline-3">
+<h3 id="delete_developer"><a id="sec-9-26" name="sec-9-26"></a><span class="section-number-3">9.26</span> Delete Developer</h3>
+<div class="outline-text-3" id="text-delete_developer">
+</div>
+<div id="outline-container-delete_developer_parameters" class="outline-4">
+<h4 id="delete_developer_parameters"><a id="sec-9-26-1" name="sec-9-26-1"></a><span class="section-number-4">9.26.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_developer_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    r: Developer, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_developer_actor_credentials" class="outline-4">
+<h4 id="delete_developer_actor_credentials"><a id="sec-9-26-2" name="sec-9-26-2"></a><span class="section-number-4">9.26.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_developer_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_developer_referential_integrity" class="outline-4">
+<h4 id="delete_developer_referential_integrity"><a id="sec-9-26-3" name="sec-9-26-3"></a><span class="section-number-4">9.26.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_developer_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    r : developer-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_developer_effect" class="outline-4">
+<h4 id="delete_developer_effect"><a id="sec-9-26-4" name="sec-9-26-4"></a><span class="section-number-4">9.26.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_developer_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    developer-set = developer-set - {r}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_hostinginfo" class="outline-3">
+<h3 id="delete_hostinginfo"><a id="sec-9-27" name="sec-9-27"></a><span class="section-number-3">9.27</span> Delete HostingInfo</h3>
+<div class="outline-text-3" id="text-delete_hostinginfo">
+</div>
+<div id="outline-container-delete_hostinginfo_parameters" class="outline-4">
+<h4 id="delete_hostinginfo_parameters"><a id="sec-9-27-1" name="sec-9-27-1"></a><span class="section-number-4">9.27.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_hostinginfo_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    h: HostingInfo, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_hostinginfo_actor_credentials" class="outline-4">
+<h4 id="delete_hostinginfo_actor_credentials"><a id="sec-9-27-2" name="sec-9-27-2"></a><span class="section-number-4">9.27.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_hostinginfo_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_hostinginfo_referential_integrity" class="outline-4">
+<h4 id="delete_hostinginfo_referential_integrity"><a id="sec-9-27-3" name="sec-9-27-3"></a><span class="section-number-4">9.27.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_hostinginfo_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    h : hostinginfo-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_hostinginfo_effect" class="outline-4">
+<h4 id="delete_hostinginfo_effect"><a id="sec-9-27-4" name="sec-9-27-4"></a><span class="section-number-4">9.27.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_hostinginfo_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    hostinginfo-set = hostinginfo-set - {h}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_asset" class="outline-3">
+<h3 id="delete_asset"><a id="sec-9-28" name="sec-9-28"></a><span class="section-number-3">9.28</span> Delete Asset</h3>
+<div class="outline-text-3" id="text-delete_asset">
+</div>
+<div id="outline-container-delete_asset_parameters" class="outline-4">
+<h4 id="delete_asset_parameters"><a id="sec-9-28-1" name="sec-9-28-1"></a><span class="section-number-4">9.28.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_asset_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    a: Asset, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_asset_actor_credentials" class="outline-4">
+<h4 id="delete_asset_actor_credentials"><a id="sec-9-28-2" name="sec-9-28-2"></a><span class="section-number-4">9.28.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_asset_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_asset_referential_integrity" class="outline-4">
+<h4 id="delete_asset_referential_integrity"><a id="sec-9-28-3" name="sec-9-28-3"></a><span class="section-number-4">9.28.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_asset_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    a : asset-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_asset_effect" class="outline-4">
+<h4 id="delete_asset_effect"><a id="sec-9-28-4" name="sec-9-28-4"></a><span class="section-number-4">9.28.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_asset_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    asset-set = asset-set - {a}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-delete_integrationstatus" class="outline-3">
+<h3 id="delete_integrationstatus"><a id="sec-9-29" name="sec-9-29"></a><span class="section-number-3">9.29</span> Delete IntegrationStatus</h3>
+<div class="outline-text-3" id="text-delete_integrationstatus">
+</div>
+<div id="outline-container-delete_integrationstatus_parameters" class="outline-4">
+<h4 id="delete_integrationstatus_parameters"><a id="sec-9-29-1" name="sec-9-29-1"></a><span class="section-number-4">9.29.1</span> Parameters</h4>
+<div class="outline-text-4" id="text-delete_integrationstatus_parameters">
+<div class="org-src-container">
+
+<pre class="src src-spec">    is: IntegrationStatus, s: Session
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_integrationstatus_actor_credentials" class="outline-4">
+<h4 id="delete_integrationstatus_actor_credentials"><a id="sec-9-29-2" name="sec-9-29-2"></a><span class="section-number-4">9.29.2</span> Actor credentials</h4>
+<div class="outline-text-4" id="text-delete_integrationstatus_actor_credentials">
+<div class="org-src-container">
+
+<pre class="src src-spec">    s.key == system configured key
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_integrationstatus_referential_integrity" class="outline-4">
+<h4 id="delete_integrationstatus_referential_integrity"><a id="sec-9-29-3" name="sec-9-29-3"></a><span class="section-number-4">9.29.3</span> Referential Integrity</h4>
+<div class="outline-text-4" id="text-delete_integrationstatus_referential_integrity">
+<div class="org-src-container">
+
+<pre class="src src-spec">    is : integrationstatus-set
+    s : session-set
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-delete_integrationstatus_effect" class="outline-4">
+<h4 id="delete_integrationstatus_effect"><a id="sec-9-29-4" name="sec-9-29-4"></a><span class="section-number-4">9.29.4</span> Effect</h4>
+<div class="outline-text-4" id="text-delete_integrationstatus_effect">
+<div class="org-src-container">
+
+<pre class="src src-spec">    integrationstatus-set = integrationstatus-set - {i}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-11-30 Wed]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-07-26 Wed 17:12</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

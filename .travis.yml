@@ -1,0 +1,31 @@
+sudo: required
+
+language: python
+
+python:
+  - 2.7
+
+before_install:
+  - wget http://files.vlabs.ac.in/downloads/emacs.tar.gz
+  - tar -xvzf emacs.tar.gz
+  - cp -r emacs /home/travis/
+  - make build  
+ 
+install: 
+  - pip install oursql Flask Flask-SQLAlchemy requests flask-cors flask-testing pyyaml   
+  
+before_script:
+  - cd build/code
+  - export PYTHONPATH=$(pwd)
+  
+script:
+  - cd ../../
+  - chmod +x run_tests.sh
+  - ./run_tests.sh
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_KEY # Set in travis-ci.org dashboard
+  on:
+    branch: master
+

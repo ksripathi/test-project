@@ -1,0 +1,1667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Test System with object implementation for OutReach Portal 3.0</title>
+<!-- 2017-07-26 Wed 17:10 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="VLEAD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../../style/css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="../../style/css/override.css" />
+<link rel="icon" type="image/png" href="../../style/img/favicon/popl.png" />
+<script type="text/javascript" src="../../style/js/org-info.js">
+/**
+ *
+ * @source: ../../style/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in ../../style/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in ../../style/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "../../index.html");
+org_html_manager.set("LINK_UP", "../index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../../index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Test System with object implementation for OutReach Portal 3.0</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Test Constructor</a></li>
+<li><a href="#sec-2">2. Test Arity and Type Checks</a></li>
+<li><a href="#sec-3">3. Test AddUser</a></li>
+<li><a href="#sec-4">4. Test DeleteUser</a></li>
+<li><a href="#sec-5">5. Test UpdateUser</a></li>
+<li><a href="#sec-6">6. Test AddRole</a></li>
+<li><a href="#sec-7">7. Test login</a></li>
+<li><a href="#sec-8">8. Test logout</a></li>
+<li><a href="#sec-9">9. Test create_institute</a></li>
+<li><a href="#sec-10">10. Test create_oc</a></li>
+<li><a href="#sec-11">11. Test CreateNC</a></li>
+<li><a href="#sec-12">12. Test update_institute</a></li>
+<li><a href="#sec-13">13. Test CreateWorkshop</a></li>
+<li><a href="#sec-14">14. Test CancelWorkshop</a></li>
+<li><a href="#sec-15">15. Test RescheduleWorkshop</a></li>
+<li><a href="#sec-16">16. Test ConductWorkshop</a></li>
+<li><a href="#sec-17">17. Test UploadArtefact</a></li>
+<li><a href="#sec-18">18. Test ApproveWorkshop</a></li>
+<li><a href="#sec-19">19. Test RejectWorkshop</a></li>
+<li><a href="#sec-20">20. Test DeleteArtefact</a></li>
+<li><a href="#sec-21">21. ops_table</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Test Constructor</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_system_constructor"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestSystemConstructor</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+ 
+   
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_system_constructor</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_system_constructor"</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(System.delegate.user_set[0].get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>),
+                         Config.admin_name)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.delegate.user_set[0].get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>),
+                         <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.delegate.user_set[0].get(<span style="font-style: italic;">'roles'</span>)[0].get(<span style="font-style: italic;">'name'</span>),
+                         <span style="font-style: italic;">"admin"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_admin</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_admin"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_admin(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_OC</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_OCC"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,
+                          role=Role(name=<span style="font-style: italic;">"OCC"</span>,centre_oc=<span style="font-weight: bold; text-decoration: underline;">None</span>,centre_nc=<span style="font-weight: bold; text-decoration: underline;">None</span>))
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_OCC(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_NCC</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_NCC"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,
+                          role=Role(name=<span style="font-style: italic;">"NCC"</span>,centre_oc=<span style="font-weight: bold; text-decoration: underline;">None</span>,centre_nc=<span style="font-weight: bold; text-decoration: underline;">None</span>))
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_NCC(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_reviewer</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_reviewer"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.reviewer)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_reviewer(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_guest</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_guest"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.guest)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_guest(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_is_session_noc</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_is_session_noc"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.noc)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.is_session_noc(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_session_exists</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_session_exists"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user, role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.session_exists(session), <span style="font-weight: bold; text-decoration: underline;">True</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Test Arity and Type Checks</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_arity_and_types"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestSystemArityAndType</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_arity</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_arity"</span>
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(ArityError):
+            System.arity_check([1,2], 3)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_type_checks</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_type_checks"</span>
+        <span style="font-weight: bold; font-style: italic;">args</span> = {<span style="font-style: italic;">"name"</span>: Name(name=<span style="font-style: italic;">"Jimi Hendrix"</span>),
+                <span style="font-style: italic;">"email"</span>: Name(name=<span style="font-style: italic;">"Jimi Hendrix"</span>)
+                }
+
+        <span style="font-weight: bold; font-style: italic;">arg_types</span> = {<span style="font-style: italic;">"name"</span>: is_name,
+                     <span style="font-style: italic;">"email"</span>: is_email
+                     }
+
+        <span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.assertRaises(<span style="font-weight: bold; text-decoration: underline;">TypeError</span>):
+            System.type_check(args, arg_types)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Test AddUser</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_adduser"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestAddUser</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_user_by_admin</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_user_by_admin"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">user_name</span>=Name(name=<span style="font-style: italic;">"me"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_email</span>=Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=user_name, email= user_email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">u</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+
+        <span style="font-weight: bold; font-style: italic;">u</span> = System.delegate.user_set[1]
+        <span style="font-weight: bold;">self</span>.assertEqual(u.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>),<span style="font-style: italic;">"me"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_user_noc_by_admin</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_user_by_noc"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"nocuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>= Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">noc_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+
+        <span style="font-weight: bold; font-style: italic;">session_noc</span> = Session(user=noc_user,role=Role.noc)
+        System.session_set.append(session_noc)
+
+        <span style="font-weight: bold; font-style: italic;">u</span>=System.delegate.user_set[1]
+        <span style="font-weight: bold;">self</span>.assertEqual(u.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>),<span style="font-style: italic;">"nocuser"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_user_by_noc</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_user_by_noc"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"nocuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>= Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>) 
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">noc_user</span>=System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+
+        <span style="font-weight: bold; font-style: italic;">session_noc</span> = Session(user=noc_user, role=Role.noc)
+        System.session_set.append(session_noc)
+
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute, session=session,
+                        spokes=[], oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+
+        <span style="font-weight: bold; font-style: italic;">name1</span> = Name(name=<span style="font-style: italic;">"ocuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span> = Email(email=<span style="font-style: italic;">"mary@gmail.com"</span>)       
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name1, email= email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">oc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session_noc)
+
+        <span style="font-weight: bold; font-style: italic;">oc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"OCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_oc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> oc_role:
+            oc_user.append_role(oc_role[0])
+
+        <span style="font-weight: bold; font-style: italic;">u</span>=System.delegate.user_set[2]
+        <span style="font-weight: bold;">self</span>.assertEqual(u.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>),<span style="font-style: italic;">"ocuser"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Test DeleteUser</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_deleteuser"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestDeleteUser</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.delegate.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_admin_user</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_delete_user"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">user_name</span>=Name(name=<span style="font-style: italic;">"me"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_email</span>=Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=user_name, email= user_email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+
+        <span style="font-weight: bold; font-style: italic;">other_admin_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                                    session=session)
+
+        other_admin_user.append_role(Role.admin)
+        <span style="font-weight: bold; font-style: italic;">length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+        System.do(<span style="font-style: italic;">"delete_user"</span>, user=other_admin_user, session=session)
+        <span style="font-weight: bold;">self</span>.assertEqual(other_admin_user.get(<span style="font-style: italic;">"user_status"</span>),<span style="font-style: italic;">"inactive"</span>)
+
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_user_by_occ</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_delete_user_by_occ"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,session=session,
+                        spokes=[], oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+       
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"maryoc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(email=<span style="font-style: italic;">"mary@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">oc_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">oc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"OCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_oc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> oc_role:
+            oc_user.append_role(oc_role[0])
+
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+
+        <span style="font-weight: bold; font-style: italic;">name1</span> = Name(name=<span style="font-style: italic;">"xyznc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span> = Email(email=<span style="font-style: italic;">"xyz@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name1, email= email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                             session=session)
+
+        <span style="font-weight: bold; font-style: italic;">nc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"NCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_nc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> nc_role:
+            nc_user.append_role(nc_role[0])
+
+
+        <span style="font-weight: bold; font-style: italic;">oc_session</span> = Session(user=oc_user,role=oc_role[0])
+        System.session_set.append(oc_session)
+
+        <span style="font-weight: bold; font-style: italic;">length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+        System.do(<span style="font-style: italic;">"delete_user"</span>, user=nc_user, session=oc_session)
+       
+        <span style="font-weight: bold;">self</span>.assertEqual(nc_user.get(<span style="font-style: italic;">"user_status"</span>),<span style="font-style: italic;">"inactive"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_user_by_noc</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_delete_user_by_noc"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst,
+                               session=session)
+
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,session=session,
+                        spokes=[], oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+       
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"maryoc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span> = Email(email=<span style="font-style: italic;">"mary@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">oc_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">oc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"OCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_oc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> oc_role:
+            oc_user.append_role(oc_role[0])
+
+        <span style="font-weight: bold; font-style: italic;">name1</span>=Name(name=<span style="font-style: italic;">"xyznc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span>=Email(email=<span style="font-style: italic;">"xyz@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name1, email= email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">noc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                              session=session)
+
+        noc_user.append_role(Role.noc)
+
+       
+        <span style="font-weight: bold; font-style: italic;">noc_session</span> = Session(user=noc_user,role=Role.noc)
+        System.session_set.append(noc_session)
+
+        <span style="font-weight: bold; font-style: italic;">length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+        System.do(<span style="font-style: italic;">"delete_user"</span>, user=oc_user, session=noc_session)
+        
+        <span style="font-weight: bold;">self</span>.assertEqual(oc_user.get(<span style="font-style: italic;">"user_status"</span>),<span style="font-style: italic;">"inactive"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Test UpdateUser</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_updateuser"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestUpdateUser</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.delegate.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_user_by_admin</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_update_user_by_admin"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">user_name</span>=Name(name=<span style="font-style: italic;">"me"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_email</span>=Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=user_name, email= user_email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">other_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                               session=session)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = System.do(<span style="font-style: italic;">"update_user"</span>, name=Name(name=<span style="font-style: italic;">"john"</span>), user=other_user,
+                   session=session)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(user.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>), <span style="font-style: italic;">"john"</span>)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_user_by_occ</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_update_user_by_occ"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,session=session,
+                        spokes=[], oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+
+        <span style="font-weight: bold; font-style: italic;">name</span>=Name(name=<span style="font-style: italic;">"useroc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"useroc@gmail.com"</span>)       
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">oc_user</span>=System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+
+        <span style="font-weight: bold; font-style: italic;">oc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"OCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_oc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> oc_role:
+            oc_user.append_role(oc_role[0])
+        <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">create nc</span>
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+
+        <span style="font-weight: bold; font-style: italic;">name1</span>=Name(name=<span style="font-style: italic;">"usernc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span>=Email(email=<span style="font-style: italic;">"usernc@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name1, email=email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">nc_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                            session=session)
+
+        <span style="font-weight: bold; font-style: italic;">nc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"NCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_nc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> nc_role:
+            nc_user.append_role(nc_role[0])
+
+       
+        <span style="font-weight: bold; font-style: italic;">oc_session</span> = Session(user=oc_user,role=oc_role[0])
+        System.session_set.append(oc_session)
+
+        <span style="font-weight: bold; font-style: italic;">length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+        System.do(<span style="font-style: italic;">"update_user"</span>, name=Name(name=<span style="font-style: italic;">"jack"</span>), user=nc_user,
+                   session=oc_session)
+        <span style="font-weight: bold; font-style: italic;">new_length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(nc_user.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>), <span style="font-style: italic;">"jack"</span>)       
+
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_user_by_noc</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_update_user_by_noc"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+       
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Madras"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>,institute=inst,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute = institute, session = session,
+                        spokes = [], oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+       
+        <span style="font-weight: bold; font-style: italic;">name</span>=Name(name=<span style="font-style: italic;">"useroc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"useroc@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email=email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">oc_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user, session=session)
+
+        <span style="font-weight: bold; font-style: italic;">oc_role</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x:x.get(<span style="font-style: italic;">'name'</span>) == <span style="font-style: italic;">"OCC"</span> <span style="font-weight: bold;">and</span>
+                         x.get(<span style="font-style: italic;">'centre_oc'</span>).get(<span style="font-style: italic;">"institute"</span>).get(<span style="font-style: italic;">"name"</span>) ==
+                         institute.get(<span style="font-style: italic;">"name"</span>), System.delegate.role_set)
+        <span style="font-weight: bold;">if</span> oc_role:
+            oc_user.append_role(oc_role[0])
+
+        <span style="font-weight: bold; font-style: italic;">name1</span>=Name(name=<span style="font-style: italic;">"usernoc"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span>=Email(email=<span style="font-style: italic;">"usernoc@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name1, email=email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        <span style="font-weight: bold; font-style: italic;">noc_user</span>=System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                            session=session)
+
+        noc_user.append_role(Role.noc)
+       
+
+        <span style="font-weight: bold; font-style: italic;">noc_session</span> = Session(user=noc_user,role=Role.noc)
+        System.session_set.append(noc_session)
+
+        <span style="font-weight: bold; font-style: italic;">length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+        System.do(<span style="font-style: italic;">"update_user"</span>, name=Name(name=<span style="font-style: italic;">"jack"</span>), user=oc_user,
+                   session=noc_session)
+        <span style="font-weight: bold; font-style: italic;">new_length</span> = <span style="font-weight: bold;">len</span>(System.delegate.user_set)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(oc_user.get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>), <span style="font-style: italic;">"jack"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Test AddRole</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_AddRole"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestAddRole</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_add_role</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_add_role"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span> = System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+
+        <span style="font-weight: bold; font-style: italic;">user_name</span>=Name(name=<span style="font-style: italic;">"me"</span>)
+        <span style="font-weight: bold; font-style: italic;">user_email</span>=Email(email=<span style="font-style: italic;">"abc@gmail.com"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=user_name, email= user_email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">other_user</span>= System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                               session=session)
+
+        <span style="font-weight: bold; font-style: italic;">us</span> = System.do(<span style="font-style: italic;">"add_role"</span>, user=other_user, role=Role.noc, session=session)
+        <span style="font-weight: bold;">self</span>.assertTrue(<span style="font-weight: bold;">len</span>(us.get(<span style="font-style: italic;">'roles'</span>))==2)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Test login</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_login"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Testlogin</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_login</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_login"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        System.do(<span style="font-style: italic;">"login"</span>,user=login_user,role=login_role)
+        <span style="font-weight: bold; font-style: italic;">session</span>=System.session_set[0]
+        <span style="font-weight: bold;">self</span>.assertEqual(session.get(<span style="font-style: italic;">"user"</span>).get(<span style="font-style: italic;">"name"</span>).get(<span style="font-style: italic;">"name"</span>),<span style="font-style: italic;">"admin"</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(session.get(<span style="font-style: italic;">"user"</span>).get(<span style="font-style: italic;">'roles'</span>)[0].get(<span style="font-style: italic;">'name'</span>),
+                         <span style="font-style: italic;">"admin"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Test logout</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_logout"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Testlogout</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_logout</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_logout"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        <span style="font-weight: bold; font-style: italic;">sess</span> = System.do(<span style="font-style: italic;">"login"</span>,user=login_user,role=login_role)
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(System.session_set),1)
+        System.do(<span style="font-style: italic;">"logout"</span>,session=sess)
+        <span style="font-weight: bold;">self</span>.assertEqual(System.session_set,[])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Test create_institute</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_CreateInstitute"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCreateInstitute</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_institute</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_institute"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        <span style="font-weight: bold; font-style: italic;">sess</span> = System.do(<span style="font-style: italic;">"login"</span>,user=login_user,role=login_role)
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst, session=sess)
+        <span style="font-weight: bold;">self</span>.assertEqual(institute,System.delegate.institute_set[0])
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Test create_oc</h2>
+<div class="outline-text-2" id="text-10">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_CreateOC"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCreateOC</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_oc</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_oc"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        <span style="font-weight: bold; font-style: italic;">sess</span> = System.do(<span style="font-style: italic;">"login"</span>,user=login_user,role=login_role)
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst, session=sess)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=sess, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold;">self</span>.assertEqual(oc.get(<span style="font-style: italic;">'institute'</span>),institute)
+        <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">self.assertRaises(StateError,System.do,"create_oc",institute=institute,session=sess)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Test CreateNC</h2>
+<div class="outline-text-2" id="text-11">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_CreateNC"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCreateNC</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_nc</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_nc"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        <span style="font-weight: bold; font-style: italic;">sess</span> = System.do(<span style="font-style: italic;">"login"</span>,user=login_user,role=login_role)
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIT"</span>, address = <span style="font-style: italic;">"Delhi"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst, session=sess)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],session=sess,
+                        oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=sess,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold;">self</span>.assertEqual(nc.get(<span style="font-style: italic;">'institute'</span>),institute)
+        <span style="font-weight: bold;">self</span>.assertEqual(oc.get(<span style="font-style: italic;">'spokes'</span>)[0],nc)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Test update_institute</h2>
+<div class="outline-text-2" id="text-12">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_UpdateInstitute"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestUpdateInstitute</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.delegate.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_update_institute</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_update_institute"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span> = System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute=inst, session=session)
+        <span style="font-weight: bold; font-style: italic;">inst</span> = System.do(<span style="font-style: italic;">"update_institute"</span>,name=<span style="font-style: italic;">"NITK"</span>,institute=institute,
+                   session=session)
+        <span style="font-weight: bold;">self</span>.assertEqual(inst.get(<span style="font-style: italic;">"name"</span>),<span style="font-style: italic;">"NITK"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Test CreateWorkshop</h2>
+<div class="outline-text-2" id="text-13">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_CreateWorkshop"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCreateWorkshop</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_create_workshop</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_create_workshop"</span>
+        <span style="font-weight: bold; font-style: italic;">login_user</span> = System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">login_role</span> = System.delegate.role_set[0]
+        <span style="font-weight: bold; font-style: italic;">sess</span> = System.do(<span style="font-style: italic;">"login"</span>,user=login_user,role=login_role)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>,institute=inst1, session=sess)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = sess)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],session=sess,
+                        oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=sess,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date,
+                             oc_target = oc_target, wstargets = [])
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target )
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=login_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                             session = sess)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc))
+        System.session_set.append(nc_session)
+
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                 institute = workshop_institute,
+                                 name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                 ws_target = wstarget,
+                                 status = ws_status,
+                                 artefacts = [],
+                                 nc = nc,
+                                 session = nc_session)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">'institute'</span>),workshop_institute)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Test CancelWorkshop</h2>
+<div class="outline-text-2" id="text-14">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_CancelWorkshop"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestCancelWorkshop</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_cancel_workshop</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_cancel_workshop"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1, session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date,
+                             oc_target = oc_target, wstargets = [])
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user,
+                            session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                 institute = workshop_institute,
+                                 name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                 ws_target = wstarget, status = ws_status,
+                                 artefacts = [], nc = nc, session = nc_session) 
+        
+        <span style="font-weight: bold; font-style: italic;">workshop</span> = System.do(<span style="font-style: italic;">"cancel_workshop"</span>, workshop = new_workshop,
+                  session = nc_session)
+        <span style="font-weight: bold;">self</span>.assertEqual(workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>),
+                         Status.cancelled.get(<span style="font-style: italic;">"name"</span>))
+<span style="font-weight: bold; font-style: italic;">#        </span><span style="font-weight: bold; font-style: italic;">self.assertEqual(nc.get("workshops")[0].get("status").get("name"),</span>
+<span style="font-weight: bold; font-style: italic;">#                         </span><span style="font-weight: bold; font-style: italic;">Status.cancelled.get("name"))</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Test RescheduleWorkshop</h2>
+<div class="outline-text-2" id="text-15">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_RescheduleWorkshop"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestRescheduleWorkshop</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_reschedule_workshop</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_reschedule_workshop"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date,
+                             oc_target = oc_target, wstargets = [])
+        
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user,
+                             session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                 institute = workshop_institute,
+                                 name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                 ws_target = wstarget, status = ws_status,
+                                 artefacts = [], nc = nc, session = nc_session) 
+        
+        System.do(<span style="font-style: italic;">"cancel_workshop"</span>, workshop = new_workshop,
+                   session = nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"05-07-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">new_wstarget</span> = WSTarget(usage = 3000, participants = 200, experiments = 20,
+                                date = new_target_date, nc_target = nc_target)
+
+        System.do(<span style="font-style: italic;">"reschedule_workshop"</span>, workshop = new_workshop,
+                   session = nc_session, wstarget = new_wstarget)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>),
+                         Status.pending.get(<span style="font-style: italic;">"name"</span>))
+<span style="font-weight: bold; font-style: italic;">#        </span><span style="font-weight: bold; font-style: italic;">self.assertEqual(nc.get("workshops")[0].get("status").get("name"),</span>
+<span style="font-weight: bold; font-style: italic;">#                         </span><span style="font-weight: bold; font-style: italic;">Status.pending.get("name"))</span>
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"ws_target"</span>).get(<span style="font-style: italic;">"date"</span>),
+                         new_target_date)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Test ConductWorkshop</h2>
+<div class="outline-text-2" id="text-16">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_ConductWorkshop"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestConductWorkshop</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>, 
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_conduct_workshop</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_conduct_workshop"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date, wstargets = [],
+                             oc_target = oc_target)
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user,
+                             session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc,
+                             centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                  institute = workshop_institute,
+                                  name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                  ws_target = wstarget, status = ws_status,
+                                  artefacts = [], nc = nc,
+                                  session = nc_session) 
+        
+        System.do(<span style="font-style: italic;">"conduct_workshop"</span>, workshop = new_workshop,
+                   session = nc_session)
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>),
+                         Status.completed.get(<span style="font-style: italic;">"name"</span>))
+<span style="font-weight: bold; font-style: italic;">#        </span><span style="font-weight: bold; font-style: italic;">self.assertEqual(nc.get("workshops")[0].get("status").get("name"),</span>
+<span style="font-weight: bold; font-style: italic;">#                         </span><span style="font-weight: bold; font-style: italic;">Status.completed.get("name"))</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Test UploadArtefact</h2>
+<div class="outline-text-2" id="text-17">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_UploadArtefact"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestUploadArtefact</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_upload_artefact</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_upload_artefact"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date, wstargets = [],
+                             oc_target = oc_target)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user,
+                            session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc,
+                             centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                 institute = workshop_institute,
+                                 name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                 ws_target = wstarget, status = ws_status,
+                                 artefacts = [], nc = nc, session = nc_session) 
+        
+        System.do(<span style="font-style: italic;">"conduct_workshop"</span>, workshop = new_workshop,
+                   session = nc_session)
+        
+
+        <span style="font-weight: bold; font-style: italic;">new_artefact</span> = Artefact(name = <span style="font-style: italic;">"Photo"</span>, path = <span style="font-style: italic;">"/main/photos"</span>,
+                                a_type = Type.photo)
+
+        System.do(<span style="font-style: italic;">"upload_artefact"</span>, workshop = new_workshop,
+                  session = nc_session, artefact = new_artefact)
+        
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"artefacts"</span>)[0].get(<span style="font-style: italic;">"name"</span>),
+                         new_artefact.get(<span style="font-style: italic;">"name"</span>))
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>) ,
+                         Status.pending_approval.get(<span style="font-style: italic;">"name"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> Test ApproveWorkshop</h2>
+<div class="outline-text-2" id="text-18">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_ApproveWorkshop"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestApproveWorkshop</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>(<span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                       <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                       System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_approve_workshop</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_approve_workshop"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date,
+                             oc_target = oc_target, wstargets = [])
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                             session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc,
+                             centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">name1</span>=Name(name=<span style="font-style: italic;">"ocuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span>=Email(email=<span style="font-style: italic;">"ocuser@gmail.com"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">user1</span> = User(name=name1, email= email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+        
+        <span style="font-weight: bold; font-style: italic;">oc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user1,
+                             session = session)
+        oc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"OCC"</span>, centre_oc = oc, centre_nc = <span style="font-weight: bold; text-decoration: underline;">None</span>)])
+
+        <span style="font-weight: bold; font-style: italic;">oc_session</span> = Session(user = oc_user,
+                             role = Role(name = <span style="font-style: italic;">"OCC"</span>, centre_oc = oc,
+                             centre_nc = <span style="font-weight: bold; text-decoration: underline;">None</span>))
+        System.session_set.append(oc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                 institute = workshop_institute,
+                                 name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                 ws_target = wstarget, status = ws_status,
+                                 artefacts = [], nc = nc, session = nc_session) 
+
+        System.do(<span style="font-style: italic;">"conduct_workshop"</span>, workshop = new_workshop,
+                  session = nc_session)
+        <span style="font-weight: bold; font-style: italic;">new_artefact</span> = Artefact(name = <span style="font-style: italic;">"Photo"</span>, 
+                                path = <span style="font-style: italic;">"/main/photos"</span>, 
+                                a_type = Type.photo)
+
+        System.do(<span style="font-style: italic;">"upload_artefact"</span>, workshop = new_workshop,
+                  session = nc_session, artefact = new_artefact)
+        
+        System.do(<span style="font-style: italic;">"approve_workshop"</span>, workshop = new_workshop,
+                   session = oc_session)
+
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>),
+                         Status.approved.get(<span style="font-style: italic;">"name"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> Test RejectWorkshop</h2>
+<div class="outline-text-2" id="text-19">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_RejectWorkshop"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestRejectWorkshop</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_reject_workshop</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_reject_workshop"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                        session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date,
+                             oc_target = oc_target, wstargets = [])
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user,
+                             session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">name1</span> = Name(name=<span style="font-style: italic;">"ocuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email1</span> = Email(email=<span style="font-style: italic;">"ocuser@gmail.com"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">user1</span> = User(name=name1, email= email1, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">oc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>,user=user1,
+                             session = session)
+        oc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"OCC"</span>, centre_oc = oc, centre_nc = <span style="font-weight: bold; text-decoration: underline;">None</span>)])
+        <span style="font-weight: bold; font-style: italic;">oc_session</span> = Session(user = oc_user,
+                             role = Role(name = <span style="font-style: italic;">"OCC"</span>, centre_oc = oc, centre_nc = <span style="font-weight: bold; text-decoration: underline;">None</span>))
+        System.session_set.append(oc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                  institute = workshop_institute,
+                                  name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                  ws_target = wstarget, status = ws_status,
+                                  artefacts = [], nc = nc,
+                                  session = nc_session) 
+        System.do(<span style="font-style: italic;">"conduct_workshop"</span>, workshop = new_workshop,
+                   session = nc_session)
+        <span style="font-weight: bold; font-style: italic;">new_artefact</span> = Artefact(name = <span style="font-style: italic;">"Photo"</span>, path = <span style="font-style: italic;">"/main/photos"</span>,
+                                a_type = Type.photo)
+
+        System.do(<span style="font-style: italic;">"upload_artefact"</span>, workshop = new_workshop,
+                   session = nc_session, artefact = new_artefact)
+        
+        System.do(<span style="font-style: italic;">"reject_workshop"</span>, workshop = new_workshop,
+                   session = oc_session)
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>),
+                         Status.rejected.get(<span style="font-style: italic;">"name"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> Test DeleteArtefact</h2>
+<div class="outline-text-2" id="text-20">
+<div class="org-src-container">
+
+<pre class="src src-python" id="test_DeleteArtefact"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">TestDeleteArtefact</span>(TestCase):
+    <span style="font-weight: bold; font-style: italic;">TESTING</span> = <span style="font-weight: bold; text-decoration: underline;">True</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setUp</span>(<span style="font-weight: bold;">self</span>):
+        System.initialize_system(ObjectDelegate)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tearDown</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold; font-style: italic;">admin</span> = <span style="font-weight: bold;">filter</span>( <span style="font-weight: bold;">lambda</span> x: x.get(<span style="font-style: italic;">"email"</span>).get(<span style="font-style: italic;">"email"</span>) ==
+                        <span style="font-style: italic;">"app-admin@vlabs.ac.in"</span>,
+                        System.delegate.user_set)
+        <span style="font-weight: bold; font-style: italic;">System.user_set</span> = admin
+        <span style="font-weight: bold; font-style: italic;">System.session_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.institute_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.oc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.nc_set</span> = []
+        <span style="font-weight: bold; font-style: italic;">System.delegate.workshop_set</span> = []
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">test_delete_artefact</span>(<span style="font-weight: bold;">self</span>):
+        <span style="font-weight: bold;">print</span> <span style="font-style: italic;">"test_delete_artefact"</span>
+        <span style="font-weight: bold; font-style: italic;">admin_user</span>=System.delegate.user_set[0]
+        <span style="font-weight: bold; font-style: italic;">session</span> = Session(user=admin_user,role=Role.admin)
+        System.session_set.append(session)
+        <span style="font-weight: bold; font-style: italic;">inst1</span> = Institute(name = <span style="font-style: italic;">"IIIT"</span>, address = <span style="font-style: italic;">"Hyderabad"</span>)
+        <span style="font-weight: bold; font-style: italic;">institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst1,
+                               session=session)
+        <span style="font-weight: bold; font-style: italic;">inst2</span> = Institute(name = <span style="font-style: italic;">"NITK"</span>, address = <span style="font-style: italic;">"Surathkal"</span>)
+        <span style="font-weight: bold; font-style: italic;">workshop_institute</span> = System.do(<span style="font-style: italic;">"create_institute"</span>, institute = inst2,
+                                        session = session)
+        <span style="font-weight: bold; font-style: italic;">oc</span> = System.do(<span style="font-style: italic;">"create_oc"</span>,institute=institute,spokes=[],
+                       session=session, oc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>)
+        <span style="font-weight: bold; font-style: italic;">nc</span> = System.do(<span style="font-style: italic;">"create_nc"</span>,institute=institute,hub=oc,session=session,
+                        nc_target = <span style="font-weight: bold; text-decoration: underline;">None</span>, workshops = [])
+        <span style="font-weight: bold; font-style: italic;">target_date</span> = datetime.datetime.strptime(<span style="font-style: italic;">"30-06-2016"</span>, <span style="font-style: italic;">"%d-%m-%Y"</span>).date()
+        <span style="font-weight: bold; font-style: italic;">oc_target</span> = OCTarget(usage = 400, date = target_date, nctargets = [])
+        <span style="font-weight: bold; font-style: italic;">nc_target</span> = NCTarget(usage = 200, date = target_date,
+                             oc_target = oc_target, wstargets = [])
+        <span style="font-weight: bold; font-style: italic;">wstarget</span> = WSTarget(usage = 4000, participants = 200, experiments = 20,
+                            date = target_date, nc_target = nc_target)
+        
+        <span style="font-weight: bold; font-style: italic;">ws_status</span> = Status.pending
+
+        <span style="font-weight: bold; font-style: italic;">name</span> = Name(name=<span style="font-style: italic;">"ncuser"</span>)
+        <span style="font-weight: bold; font-style: italic;">email</span>=Email(email=<span style="font-style: italic;">"ncuser@gmail.com"</span>)
+        <span style="font-weight: bold; font-style: italic;">user</span> = User(name=name, email= email, roles= [Role.guest],
+                    user_status=<span style="font-style: italic;">"active"</span>)
+
+        <span style="font-weight: bold; font-style: italic;">nc_user</span> = System.do(<span style="font-style: italic;">"add_user"</span>, user=user,
+                            session = session)
+        nc_user.<span style="font-weight: bold;">set</span>(roles=[Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc)])
+        <span style="font-weight: bold; font-style: italic;">nc_session</span> = Session(user = nc_user,
+                             role = Role(name = <span style="font-style: italic;">"NCC"</span>, centre_oc = oc, centre_nc = nc))
+        System.session_set.append(nc_session)
+        
+        <span style="font-weight: bold; font-style: italic;">new_workshop</span> = System.do(<span style="font-style: italic;">"create_workshop"</span>,
+                                 institute = workshop_institute,
+                                 name = Name(name = <span style="font-style: italic;">"Lab Workshop"</span>),
+                                 ws_target = wstarget, status = ws_status,
+                                 artefacts = [], nc = nc, session = nc_session) 
+        
+        System.do(<span style="font-style: italic;">"conduct_workshop"</span>, workshop = new_workshop,
+                  session = nc_session)
+        
+
+        <span style="font-weight: bold; font-style: italic;">new_artefact</span> = Artefact(name = <span style="font-style: italic;">"Photo"</span>, path = <span style="font-style: italic;">"/main/photos"</span>,
+                                a_type = Type.photo)
+
+        System.do(<span style="font-style: italic;">"upload_artefact"</span>, workshop = new_workshop,
+                  session = nc_session, artefact = new_artefact)
+        
+        System.do(<span style="font-style: italic;">"delete_artefact"</span>, workshop = new_workshop,
+                  session = nc_session, artefact = new_artefact)
+        <span style="font-weight: bold;">self</span>.assertEqual(<span style="font-weight: bold;">len</span>(new_workshop.get(<span style="font-style: italic;">"artefacts"</span>)), 0)
+        <span style="font-weight: bold;">self</span>.assertEqual(new_workshop.get(<span style="font-style: italic;">"status"</span>).get(<span style="font-style: italic;">"name"</span>) ,
+                         Status.pending_approval.get(<span style="font-style: italic;">"name"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> ops_table</h2>
+<div class="outline-text-2" id="text-21">
+<div class="org-src-container">
+
+<pre class="src src-python" id="ops_table"><span style="font-weight: bold; font-style: italic;">ops_table</span> = {<span style="font-style: italic;">'add_user'</span> : AddUser, 
+             <span style="font-style: italic;">'login'</span>: login, 
+             <span style="font-style: italic;">'delete_user'</span>: DeleteUser,
+             <span style="font-style: italic;">'logout'</span>: logout, 
+             <span style="font-style: italic;">'create_institute'</span>: CreateInstitute, 
+             <span style="font-style: italic;">'create_oc'</span>: CreateOC, 
+             <span style="font-style: italic;">'create_nc'</span>: CreateNC, 
+             <span style="font-style: italic;">'update_user'</span>: UpdateUser, 
+             <span style="font-style: italic;">'update_institute'</span>: UpdateInstitute, 
+             <span style="font-style: italic;">'add_role'</span>: AddRole,
+             <span style="font-style: italic;">'create_workshop'</span> : CreateWorkshop, 
+             <span style="font-style: italic;">'cancel_workshop'</span> : CancelWorkshop, 
+             <span style="font-style: italic;">'reschedule_workshop'</span> : RescheduleWorkshop, 
+             <span style="font-style: italic;">'conduct_workshop'</span> : ConductWorkshop, 
+             <span style="font-style: italic;">'upload_artefact'</span> : UploadArtefact,
+             <span style="font-style: italic;">'approve_workshop'</span> : ApproveWorkshop,
+             <span style="font-style: italic;">'reject_workshop'</span> : RejectWorkshop,
+             <span style="font-style: italic;">'delete_artefact'</span> : DeleteArtefact
+             }
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">[2016-06-07 Tue]</span></span></p>
+<p class="author">Author: VLEAD</p>
+<p class="date">Created: 2017-07-26 Wed 17:10</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
