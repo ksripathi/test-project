@@ -10,6 +10,10 @@ before_install:
   - tar -xvzf emacs.tar.gz
   - cp -r emacs /home/travis/
   - make build  
+  - openssl aes-256-cbc -K $encrypted_d94e2007530f_key -iv $encrypted_d94e2007530f_iv
+    -in deploy_rsa.enc -out deploy_rsa -d
+  - chmod 600 deploy_rsa
+
  
 install: 
   - pip install oursql Flask Flask-SQLAlchemy requests flask-cors flask-testing pyyaml   
@@ -22,10 +26,9 @@ script:
   - cd ../../
   - chmod +x run_tests.sh
   - ./run_tests.sh
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_KEY # Set in travis-ci.org dashboard
-  on:
-    branch: master
+  - rsync -e "ssh -p 22 -i deploy_rsa -o 'StrictHostKeyChecking no'" -avz makefile sripathi@ssh-tunnel.vlabs.ac.in:/tmp/file_to_upload
+
+
+
+
 
