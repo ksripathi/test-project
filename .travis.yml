@@ -5,9 +5,6 @@ language: python
 python:
   - 2.7
 
-services:
-  - mysql
-
 before_install:
   - wget http://files.vlabs.ac.in/downloads/emacs.tar.gz
   - tar -xvzf emacs.tar.gz
@@ -25,7 +22,5 @@ script:
   - cd ../../
   - chmod +x run_tests.sh
   - ./run_tests.sh
-  
-after_success:
-  - cat /etc/issue
+
 
