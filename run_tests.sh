@@ -1,7 +1,7 @@
 #!/bin/sh
 
 status=0
-for f in $(find . -name '*test_*.py')
+#for f in $(find . -name '*test_*.py')
 do 
     python "$f"
      if [ $? -ne  0 ];
