@@ -4,19 +4,24 @@ language: python
 
 python:
   - 2.7
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "JEix5iujDEezOyiUcDCrWEwJ9QdWFRPM4ALu7IW7kGP1F45oBy49HX2Xn2uLKMIEol8XAOzoG2ZxVW5430dc9zRzANg9Aug10iXh5R+id61JrMIGRhZvoXM96f0uMvZw239Wnj0bMZsP94dV2Ddpa4Dp2nTxLYUwSSwcPYesrslyRedwHfiLw15AdO/+w5AYfdyETJHpB6huf5/vcr+Sq1jVfkmo9FTcuU/Iac8j51I7ONWGrzLOSOWjsrVFd6EQVeutdU97SObOXoOfLD5guFL7bQvrvSOuev/pvwWcfPGF4lQnVFl+17qTg8l9Zz7AFa15AIig9SiV3DEn0J1T2ZNFpgTz7KBz6oUg4yJMBNe0WWBnCpd5j14MU15F+L3wAyb0SO4wyA6EgSYiBLWJXB3trtfbellAtAjVLg8VXsaU+ZxapjE+ReGf5dZzByPE96eAW5htP92izCNZofVM2VLaYCJeAO0MW+1bGuCScKAxHgudnsz/d4SrvIlMp3aE2/CpuvkaFdQ+K8/aIjmVfD3eF+d69sYZLWjw6KYHP2NKnsE6DkImpE+jIgdrIahU0igEisV5giQ8Ru3ubm/fZB4U5eiz53XjOXxoulgxnCzrBa+lih/Gamw7IE9FuVLjwM3UglexBnm8l8V/FthS4pSMfOj/4rKzVmtV8BxsrXc="
 
 before_install:
-  - wget http://files.vlabs.ac.in/downloads/emacs.tar.gz
-  - tar -xvzf emacs.tar.gz
-  - cp -r emacs /home/travis/
-  - make build  
- 
-install: 
-  - pip install oursql Flask Flask-SQLAlchemy requests flask-cors flask-testing pyyaml   
-  
-before_script:
-  - cd build/code
-  - export PYTHONPATH=$(pwd)
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "ksripathi/test-project"
+      description: "Your project description here"
+    notification_email: kammari.sripathi@gmail.com
+    build_command_prepend: "make"
+    build_command: "make"
+    branch_pattern: coverity
   
 script:
   - cd ../../
